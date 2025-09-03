@@ -1,0 +1,520 @@
+:root {
+    --color-background: #ffffff;
+    --color-surface: #f9f9f9;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #555555;
+
+    --accent-main: #b08d57;
+    /* dorado elegante */
+    --accent-dark: #6b3e26;
+    /* marrón profundo */
+
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --border-soft: 1px solid rgba(0, 0, 0, 0.1);
+
+    --font-title: "Helvetica", sans-serif;
+    --font-body: "Inter", sans-serif;
+
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --transition: 0.3s ease;
+
+    --nav-h: 60px;
+}
+
+/* --- GENERALES --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+.card-title,
+.navbar-brand {
+    font-family: var(--font-title);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: -0.5px;
+    color: var(--color-text-primary);
+}
+
+p,
+.nav-link,
+.dropdown-item,
+.btn {
+    font-family: var(--font-body);
+}
+
+/* --- NAVBAR --- */
+
+.brand-logo {
+    display: block;
+    height: auto;
+    width: auto;
+    max-height: 40px;
+    max-width: 180px;
+}
+
+
+.primary-nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: var(--border-soft);
+    box-shadow: var(--shadow-soft);
+    height: var(--nav-h);
+}
+
+.primary-nav .nav-link {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: color var(--transition);
+}
+
+.primary-nav .nav-link:hover {
+    color: var(--accent-main);
+}
+
+
+/* PARALLAX */
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - var(--nav-h));
+    position: relative;
+}
+
+.parallax-1 {
+    background-image: url('/img/fondo.jpg');
+    background-position: center center;
+}
+
+/* HERO sección */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hero-content h1,
+.hero-content p {
+    color: var(--color-text-primary);
+}
+
+#frescura {
+    scroll-margin-top: calc(var(--nav-h) + 28px);
+}
+
+/* Flecha scroll */
+.scroll-down-arrow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    z-index: 3;
+    animation: bounce 2s infinite;
+    text-decoration: none;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    40% {
+        transform: translate(-50%, -10px);
+    }
+
+    60% {
+        transform: translate(-50%, -5px);
+    }
+}
+
+/* --- CARDS --- */
+.card {
+    background: var(--color-surface);
+    border: var(--border-soft);
+    border-radius: var(--radius-s);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-soft);
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.card .btn-add-cart {
+    background: var(--accent-main);
+    color: #fff;
+    font-weight: 500;
+    border-radius: var(--radius-s);
+    border: none;
+    transition: background var(--transition);
+}
+
+.card .btn-add-cart:hover {
+    background: var(--accent-dark);
+}
+
+/* ======= VIDEO HERO FULL BLEED ======= */
+/* Sección en pantalla completa, sin márgenes */
+.video-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* ocupa toda la pantalla */
+    overflow: hidden;
+    /* Si viene después de un .container, no hace falta hack de “full-bleed”.
+     Pero si alguna vez lo metes dentro de un container, usa:
+     margin-left: calc(50% - 50vw);
+     margin-right: calc(50% - 50vw);
+  */
+}
+
+/* El video cubre todo el contenedor como una imagen de fondo */
+.video-hero-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* recorta para cubrir */
+    object-position: center;
+}
+
+/* Texto centrado sobre el video (opcional) */
+.video-hero-caption {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding: 0 1rem;
+}
+
+/* Sutil overlay para legibilidad del texto (si lo quieres) */
+.video-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .25));
+    z-index: 1;
+}
+
+.video-hero-caption h2 {
+    font-weight: 600;
+    letter-spacing: .2px;
+    margin-bottom: .25rem;
+}
+
+.video-hero-caption p {
+    opacity: .9;
+    margin: 0;
+}
+
+/* --- FOOTER --- */
+footer {
+    border-top: var(--border-soft);
+    background: var(--color-surface);
+    padding: 1.5rem 0;
+}
+
+footer .nav-link {
+    color: var(--color-text-secondary);
+}
+
+footer .nav-link:hover {
+    color: var(--accent-main);
+}
+
+footer .bi {
+    transition: color var(--transition);
+}
+
+footer .bi:hover {
+    color: var(--accent-main);
+}
+
+/* --- ESTILOS POR PÁGINA --- */
+
+/* Página de Productos (Categorías) */
+.category-icon {
+    font-size: 2rem;
+    color: var(--color-accent-blue);
+    text-shadow: 0 0 10px var(--color-accent-blue);
+}
+
+.category-card ul li a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.category-card ul li a:hover {
+    color: var(--color-accent-neon);
+    padding-left: 5px;
+}
+
+/* Página Nosotros */
+.mission-vision-icon {
+    font-size: 3rem;
+    color: var(--color-accent-blue);
+    text-shadow: 0 0 15px var(--color-accent-blue);
+}
+
+/* Página de Blog */
+.blog-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: var(--color-accent-blue);
+    color: var(--color-text-primary);
+    align-self: flex-start;
+}
+
+.blog-card .card-img-top {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* Formularios (Contacto, Login, Registro) */
+.contact-hr {
+    border-color: rgba(30, 144, 255, 0.3);
+}
+
+.form-control,
+.form-select {
+    background-color: #1a1a1a;
+    color: var(--color-text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #1a1a1a;
+    color: var(--color-text-primary);
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+.map-iframe {
+    border-radius: 5px;
+    filter: invert(100%) grayscale(80%) brightness(95%) contrast(100%);
+}
+
+.form-text {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+}
+
+.form-text:hover {
+    color: var(--color-accent-blue);
+}
+
+.form-check-input {
+    background-color: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-accent-neon);
+    border-color: var(--color-accent-neon);
+}
+
+.special-offer-card {
+    border-color: var(--color-accent-neon);
+    background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.1), transparent 80%);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.divider:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.divider:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-light:hover {
+    border-color: var(--color-accent-blue);
+    background-color: rgba(30, 144, 255, 0.1);
+    color: var(--color-text-primary);
+    box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+}
+
+/* Página de Carrito de Compras */
+.cart-item-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-price {
+    text-align: right;
+}
+
+.quantity-selector {
+    display: flex;
+    width: 120px;
+}
+
+.quantity-selector .form-control {
+    border-radius: 0;
+}
+
+.quantity-selector .btn {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-secondary);
+}
+
+.btn-remove-item {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 1.2rem;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.btn-remove-item:hover {
+    color: #dc3545;
+}
+
+.cart-hr {
+    border-color: rgba(30, 144, 255, 0.2);
+    margin: 1.5rem 0;
+}
+
+/* Página de Producto Detalle */
+.breadcrumb-item a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--color-accent-neon);
+}
+
+.breadcrumb-item.active {
+    color: var(--color-text-primary);
+}
+
+.product-title {
+    font-size: 3rem;
+}
+
+.price-highlight {
+    color: var(--color-accent-neon);
+}
+
+.product-thumbnail {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-width: 2px;
+}
+
+.product-thumbnail:hover,
+.product-thumbnail.active {
+    opacity: 1;
+    border-color: var(--color-accent-blue);
+}
+
+.btn-social {
+    color: var(--color-text-secondary);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-social:hover {
+    color: var(--color-accent-blue);
+    transform: scale(1.2);
+}
+
+.nav-tabs .nav-link {
+    background-color: transparent;
+    border-color: rgba(30, 144, 255, 0.3);
+    color: var(--color-text-secondary);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: rgba(30, 144, 255, 0.1);
+    border-color: var(--color-accent-blue);
+    color: var(--color-text-primary);
+}
