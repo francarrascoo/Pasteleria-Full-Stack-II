@@ -20,20 +20,18 @@
 <body>
 
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg primary-nav">
+        <nav class="navbar navbar-expand-lg primary-nav px-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"> <img src="img/logo_titulo.png" alt="Pastelería Mil Sabores"
+                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
                         class="brand-logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="productos.html" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="categorias.html" id="navbarDropdown">
                                 CATEGORÍAS
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -72,6 +70,7 @@
                         <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
                     </div>
                 </div>
+
             </div>
         </nav>
     </header>
@@ -143,7 +142,7 @@
         </div>
     </section>
 
-    <footer class="container-fluid py-3 mt-5">
+    <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
                 <a class="navbar-brand" href="index.html"> <img src="img/logo_titulo.png" alt="Pastelería Mil Sabores"
@@ -167,33 +166,34 @@
     <script>
         const section = document.querySelector('.parallax-1');
         let current = 0, target = 0;
-        const speed = 0.08;  // suavidad
-        const factor = 0.5; // cuanto se mueve (menor = menos movimiento, centro más estable)
+        const speed = 0.08;   // suavidad
+        const factor = 0.5;   // cuanto se mueve
 
         function lerp(a, b, t) { return a + (b - a) * t; }
 
-        function tick() {
+        // calcular target solo al hacer scroll
+        function updateTarget() {
             const rect = section.getBoundingClientRect();
             const viewportH = window.innerHeight;
 
-            // progreso [-1,1] relativo al centro de la sección
             const progress = (viewportH / 2 - (rect.top + rect.height / 2)) / viewportH;
-
-            // offset calculado, pero pequeño para no sacar el centro
             target = progress * 100 * factor;
+        }
 
+        // loop suave
+        function tick() {
             current = lerp(current, target, speed);
-
-            // el 50% es el centro → sumamos/restamos un poquito
             section.style.backgroundPosition = `50% ${55 + current}%`;
-
             requestAnimationFrame(tick);
         }
 
+        window.addEventListener("scroll", updateTarget, { passive: true });
+        window.addEventListener("resize", updateTarget, { passive: true });
+
+        // inicio
+        updateTarget();
         requestAnimationFrame(tick);
     </script>
-
-
 
 </body>
 
