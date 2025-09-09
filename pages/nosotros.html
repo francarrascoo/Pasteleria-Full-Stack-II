@@ -19,8 +19,9 @@
 
 <body>
 
+
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg primary-nav px-4">
+        <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
                         class="brand-logo"></a>
@@ -31,39 +32,49 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="categorias.html" id="navbarDropdown">
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
                                 CATEGORÍAS
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="productos.html#tortas-cuadradas">Tortas Cuadradas</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
+                                        Cuadradas</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#tortas-circulares">Tortas
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
                                         Circulares</a></li>
-                                <li><a class="dropdown-item" href="productos.html#postres-individuales">Postres
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
                                         Individuales</a></li>
-                                <li><a class="dropdown-item" href="productos.html#sin-azucar">Productos Sin Azúcar</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
+                                        Azúcar</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#tradicional">Pastelería
+                                <li><a class="dropdown-item"
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
                                         Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html#sin-gluten">Productos sin gluten</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#vegana">Productos Vegana</a></li>
-                                <li><a class="dropdown-item" href="productos.html#especiales">Tortas Especiales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
+                                        Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
+                                        Especiales</a></li>
                             </ul>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" href="nosotros.html">NOSOTROS</a></li>
-                        <li class="nav-item"><a class="nav-link" href="blogs.html">BLOGS</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacto.html">CONTACTO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">NOSOTROS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">BLOGS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">CONTACTO</a></li>
                     </ul>
 
                     <div class="d-flex align-items-center">
-                        <div class="nav-item dropdown ms-3">
+                        <div class="nav-item dropdown account-dropdown ms-3">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle fs-4"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+                                <li>
+                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        Iniciar sesión
+                                    </button>
+                                </li>
                                 <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
                             </ul>
                         </div>
