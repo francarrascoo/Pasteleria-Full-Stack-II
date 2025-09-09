@@ -77,73 +77,27 @@
         </nav>
     </header>
 
-    <div class="categorias-var container">
-        <button class="scroll-btn left">❮</button>
-        <nav class="horizontal-menu container-fluid">
-            <ul class="menu-list p-0">
-                <li><a href="productos.html#tortas-cuadradas">TORTAS CUADRADAS</a></li>
-                <li><a href="productos.html#tortas-circulares">TORTAS CIRCULARES</a></li>
-                <li><a href="productos.html#tortas-especiales">TORTAS ESPECIALES</a></li>
-                <li><a href="productos.html#postres-individuales">POSTRES INDIVIDUALES</a></li>
-                <li><a href="productos.html#sin-azucar">PRODUCTOS SIN AZÚCAR</a></li>
-                <li><a href="productos.html#sin-gluten">PRODUCTOS SIN GLUTEN</a></li>
-                <li><a href="productos.html#pasteleria-tradicional">PASTELERÍA TRADICIONAL</a></li>
-                <li><a href="productos.html#vegana">PRODUCTOS VEGANOS</a></li>
-            </ul>
-        </nav>
-        <button class="scroll-btn right">❯</button>
+<main class="container py-4">
+    <h1 class="h3 mb-3">Productos</h1>
+
+    <!-- Filtros -->
+    <div class="filters mb-4">
+      <div class="btn-group flex-wrap" role="group" aria-label="Filtros de categorías">
+        <button id="todosBtn" class="btn btn-outline-secondary">Todos</button>
+        <button id="tortasCuadradasBtn" class="btn btn-outline-primary">Tortas Cuadradas</button>
+        <button id="tortasCircularesBtn" class="btn btn-outline-primary">Tortas Circulares</button>
+        <button id="postresIndividualesBtn" class="btn btn-outline-primary">Postres Individuales</button>
+        <button id="sinAzucarBtn" class="btn btn-outline-primary">Sin Azúcar</button>
+        <button id="tradicionalBtn" class="btn btn-outline-primary">Pastelería Tradicional</button>
+        <button id="sinGlutenBtn" class="btn btn-outline-primary">Sin Gluten</button>
+        <button id="veganosBtn" class="btn btn-outline-primary">Veganos</button>
+        <button id="tortasEspecialesBtn" class="btn btn-outline-primary">Tortas Especiales</button>
+      </div>
     </div>
 
-    <div class="container mb-4">
-        <div class="container d-flex justify-content-between align-items-end my-2 p-0 title-cat">
-            <h2>POSTRES INDIVIDUALES</h2>
-            <a href="productos.html#tortas-cuadradas" class="text-decoration-none">VER TODAS</a>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <div class="col">
-                <div class="card-cat">
-                    <img src="/img/torta-cuadrada-1.jpg" class="card-img-top-cat" alt="Torta Cuadrada de Chocolate">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title-cat">TORTA DE CHOCOLATE</h5>
-                        <p class="card-text">$45.000</p>
-                        <a href="#" class="btn btn-add-cart"><i class="bi bi-cart-plus-fill me-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-cat">
-                    <img src="/img/torta-cuadrada-2.jpg" class="card-img-top-cat" alt="Torta Cuadrada de Berries">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title-cat">TORTA DE BERRIES</h5>
-                        <p class="card-text">$45.000</p>
-                        <a href="#" class="btn btn-add-cart"><i class="bi bi-cart-plus-fill me-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-cat">
-                    <img src="/img/torta-cuadrada-3.jpg" class="card-img-top-cat" alt="Brownie Sin Gluten">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title-cat">TORTA DE MANGO</h5>
-                        <p class="card-text">$45.000</p>
-                        <a href="#" class="btn btn-add-cart"><i class="bi bi-cart-plus-fill me-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card-cat">
-                    <img src="/img/torta-cuadrada-4.png" class="card-img-top-cat" alt="Cheesecake Sin Azúcar">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title-cat">TORTA DE TRUFA</h5>
-                        <p class="card-text">$45.000</p>
-                        <a href="#" class="btn btn-add-cart"><i class="bi bi-cart-plus-fill me-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Grid de productos -->
+    <div id="shopContent"></div>
+  </main>
 
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -166,6 +120,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/productos.js"></script>
 
 </body>
 

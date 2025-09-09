@@ -631,3 +631,81 @@ footer .bi:hover {
         box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
     }
 }
+
+
+.filters .btn {
+    margin: .25rem;
+    color: var(--color-text-secondary);
+    border: var(--accent-main) 0.5px solid;
+}
+
+.filters .btn:hover,
+.filters .btn.active {
+    background: var(--accent-main);
+    color: var(--color-background);
+    font-weight: 600;
+}
+
+#shopContent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.card-products {
+    border: 1px solid #e9ecef;
+    border-radius: .75rem;
+    overflow: hidden;
+    background: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    transition: transform .12s ease;
+}
+
+.card-products:hover {
+    transform: translateY(-2px);
+}
+
+.card-products img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: #f8f9fa;
+}
+
+.card-products h3 {
+    font-size: 1rem;
+    margin: .5rem 0 0;
+    padding: 0 1rem;
+    min-height: 2.5rem;
+}
+
+.card-products .code {
+    padding: 0 1rem;
+    margin: .25rem 0 .5rem;
+    font-size: .85rem;
+    color: #6c757d;
+}
+
+.card-products .price {
+    padding: 0 1rem;
+    margin: 0 0 .75rem;
+    font-weight: 700;
+    color: #212529;
+    /* precio NO verde */
+}
+
+.card-products button {
+    margin: 0 1rem 1rem;
+    border: 0;
+    border-radius: .5rem;
+    padding: .6rem .8rem;
+    background: var(--accent-main);
+    color: #fff;
+    font-weight: 600;
+}
+
+.card-products button:hover {
+    background: var(--accent-dark);
+}
