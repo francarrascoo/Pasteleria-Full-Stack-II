@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastelería Mil Sabores</title>
-
+    <title>Detalle Producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,8 +16,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-
+<body>
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
@@ -57,7 +55,6 @@
                                         Especiales</a></li>
                             </ul>
                         </li>
-
                         <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">NOSOTROS</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">BLOGS</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">CONTACTO</a></li>
@@ -80,105 +77,53 @@
                         <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
                     </div>
                 </div>
-
             </div>
         </nav>
+
     </header>
-
-    <div class="categorias-var container">
-        <button class="scroll-btn left">❮</button>
-        <nav class="horizontal-menu container-fluid">
-            <ul class="menu-list p-0">
-                <li><a href="productos.html#tortas-cuadradas">TORTAS CUADRADAS</a></li>
-                <li><a href="productos.html#tortas-circulares">TORTAS CIRCULARES</a></li>
-                <li><a href="productos.html#tortas-especiales">TORTAS ESPECIALES</a></li>
-                <li><a href="productos.html#postres-individuales">POSTRES INDIVIDUALES</a></li>
-                <li><a href="productos.html#sin-azucar">PRODUCTOS SIN AZÚCAR</a></li>
-                <li><a href="productos.html#sin-gluten">PRODUCTOS SIN GLUTEN</a></li>
-                <li><a href="productos.html#pasteleria-tradicional">PASTELERÍA TRADICIONAL</a></li>
-                <li><a href="productos.html#vegana">PRODUCTOS VEGANOS</a></li>
-            </ul>
-        </nav>
-        <button class="scroll-btn right">❯</button>
-    </div>
-
-    <main class="container flex-grow-1">
-        <section class="container my-4">
-            <div class="cat-mosaic">
-                <!-- Tile: Ver todas las categorías -->
-                <a class="cat-tile tile-all" href="productos.html?filtro=todosBtn"
-                    aria-label="Ver todas las categorías">
-                    <img src="/img/fondo.jpg" alt="Todas las categorías"> <!-- opcional; puede ser una textura -->
-                    <div class="cat-overlay">
-                        <h3>Ver todas las categorías</h3>
-                        <span class="see-more">explorar todo</span>
-                    </div>
-                </a>
-
-                <!-- Izquierda: grande -->
-                <a class="cat-tile tile-a" href="productos.html?filtro=sinAzucarBtn">
-                    <img src="/img/sin-azucar-cheesecake.jpg" alt="Productos sin azúcar">
-                    <div class="cat-overlay">
-                        <h3>Sin azúcar</h3>
-                        <span class="see-more">ver más</span>
-                    </div>
-                </a>
-
-                <!-- Centro arriba: chica -->
-                <a class="cat-tile tile-b" href="productos.html?filtro=veganosBtn">
-                    <img src="/img/vegana-chocolate.jpg" alt="Productos Veganos">
-                    <div class="cat-overlay">
-                        <h3>Veganos</h3>
-                        <span class="see-more">ver más</span>
-                    </div>
-                </a>
-
-                <!-- Derecha: grande -->
-                <a class="cat-tile tile-c" href="productos.html?filtro=sinGlutenBtn">
-                    <img src="/img/sin-gluten-brownie.jpg" alt="Productos sin gluten">
-                    <div class="cat-overlay">
-                        <h3>Sin gluten</h3>
-                        <span class="see-more">ver más</span>
-                    </div>
-                </a>
-
-                <!-- Centro abajo: chica -->
-                <a class="cat-tile tile-d" href="productos.html?filtro=tortasEspecialesBtn">
-                    <img src="/img/especial-cumpleaños.png" alt="Tortas especiales">
-                    <div class="cat-overlay">
-                        <h3>Tortas especiales</h3>
-                        <span class="see-more">ver más</span>
-                    </div>
-                </a>
+    <main class="container py-4">
+        <div class="row g-4" id="detalle-layout">
+            <!-- IZQUIERDA: imagen -->
+            <div class="col-lg-4 text-center">
+                <img id="imagen" src="" alt="Imagen del producto" class="img-fluid rounded shadow" />
             </div>
-        </section>
 
-    </main>
-    <footer class="container-fluid py-3">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <div class="mb-3 mb-md-0">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                        height="40"></a>
+            <!-- CENTRO: especificaciones -->
+            <div class="col-lg-4">
+                <div class="border rounded p-3 h-100">
+                    <h1 class="h4" id="titulo"></h1>
+                    <div id="badgesDetalle" class="d-flex gap-1 flex-wrap mb-3"></div>
+                    <p id="descripcion" class="small text-muted"></p>
+                    <h2 class="h6 mt-3">Especificaciones principales</h2>
+                    <ul class="list-unstyled small" id="specs"></ul>
+                </div>
             </div>
-            <div class="nav mb-3 mb-md-0">
-                <a class="nav-link" href="productos.html">CATEGORÍAS</a>
-                <a class="nav-link" href="nosotros.html">NOSOTROS</a>
-                <a class="nav-link" href="blogs.html">BLOGS</a>
-                <a class="nav-link" href="contacto.html">CONTACTO</a>
-            </div>
-            <div class="d-flex gap-3">
-                <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
+
+            <!-- DERECHA: compra -->
+            <div class="col-lg-4">
+                <div class="border rounded p-3 h-100">
+                    <span class="h4 d-block mb-2" id="precio"></span>
+
+                    <div class="mt-3 d-flex align-items-center gap-2">
+                        <button class="btn btn-outline-secondary" id="menos">−</button>
+                        <input id="qty" type="number" class="form-control text-center" style="max-width:80px" value="1"
+                            min="1" />
+                        <button class="btn btn-outline-secondary" id="mas">+</button>
+                    </div>
+
+                    <button id="addCart" class="btn btn-dark w-100 mt-3">
+                        <i class="bi bi-bag-plus"></i> Agregar al Carro
+                    </button>
+                </div>
             </div>
         </div>
-    </footer>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/barra_horizontal.js"></script>
+    <script src="/js/productos.js"></script>
     <script src="/js/detalle.js"></script>
-    <script src="/js/card_nav.js"></script>
 
+    </script>
 </body>
 
 </html>

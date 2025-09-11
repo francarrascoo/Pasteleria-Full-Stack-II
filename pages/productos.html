@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
 
     <header class="sticky-top">
-
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
@@ -29,75 +29,116 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="categorias.html" id="navbarDropdown">
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
                                 CATEGORÍAS
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="productos.html#tortas-cuadradas">Tortas Cuadradas</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
+                                        Cuadradas</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#tortas-circulares">Tortas
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
                                         Circulares</a></li>
-                                <li><a class="dropdown-item" href="productos.html#postres-individuales">Postres
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
                                         Individuales</a></li>
-                                <li><a class="dropdown-item" href="productos.html#sin-azucar">Productos Sin Azúcar</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
+                                        Azúcar</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#tradicional">Pastelería
+                                <li><a class="dropdown-item"
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
                                         Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html#sin-gluten">Productos sin gluten</a>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a>
                                 </li>
-                                <li><a class="dropdown-item" href="productos.html#vegana">Productos Vegana</a></li>
-                                <li><a class="dropdown-item" href="productos.html#especiales">Tortas Especiales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
+                                        Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
+                                        Especiales</a></li>
                             </ul>
                         </li>
 
-
-                        <li class="nav-item"><a class="nav-link" href="nosotros.html">NOSOTROS</a></li>
-                        <li class="nav-item"><a class="nav-link" href="blogs.html">BLOGS</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacto.html">CONTACTO</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">NOSOTROS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">BLOGS</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">CONTACTO</a></li>
                     </ul>
 
                     <div class="d-flex align-items-center">
-                        <div class="nav-item dropdown ms-3">
+                        <div class="nav-item dropdown account-dropdown ms-3">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle fs-4"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+                                <li>
+                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        Iniciar sesión
+                                    </button>
+                                </li>
                                 <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
                             </ul>
                         </div>
                         <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
                     </div>
                 </div>
+
             </div>
         </nav>
     </header>
 
-<main class="container py-4">
-    <h1 class="h3 mb-3">Productos</h1>
+    <main class="container py-4 flex-grow-1">
+        <div class="row g-3">
+            <!-- Filtros -->
+            <aside class="col-md-2 d-none d-md-block px-3">
+                <h2 class="h6 mb-3">Filtros</h2>
+                <div class="d-grid gap-2 filters">
+                    <button id="todosBtn" class="btn btn-outline-secondary btn-sm text-start py-1 px-2">Todos</button>
+                    <button id="tortasCuadradasBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Tortas
+                        Cuadradas</button>
+                    <button id="tortasCircularesBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Tortas
+                        Circulares</button>
+                    <button id="postresIndividualesBtn"
+                        class="btn btn-outline-primary btn-sm text-start py-1 px-2">Postres Individuales</button>
+                    <button id="sinAzucarBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Sin
+                        Azúcar</button>
+                    <button id="tradicionalBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Pastelería
+                        Tradicional</button>
+                    <button id="sinGlutenBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Sin
+                        Gluten</button>
+                    <button id="veganosBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Veganos</button>
+                    <button id="tortasEspecialesBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Tortas
+                        Especiales</button>
+                </div>
+            </aside>
 
-    <!-- Filtros -->
-    <div class="filters mb-4">
-      <div class="btn-group flex-wrap" role="group" aria-label="Filtros de categorías">
-        <button id="todosBtn" class="btn btn-outline-secondary">Todos</button>
-        <button id="tortasCuadradasBtn" class="btn btn-outline-primary">Tortas Cuadradas</button>
-        <button id="tortasCircularesBtn" class="btn btn-outline-primary">Tortas Circulares</button>
-        <button id="postresIndividualesBtn" class="btn btn-outline-primary">Postres Individuales</button>
-        <button id="sinAzucarBtn" class="btn btn-outline-primary">Sin Azúcar</button>
-        <button id="tradicionalBtn" class="btn btn-outline-primary">Pastelería Tradicional</button>
-        <button id="sinGlutenBtn" class="btn btn-outline-primary">Sin Gluten</button>
-        <button id="veganosBtn" class="btn btn-outline-primary">Veganos</button>
-        <button id="tortasEspecialesBtn" class="btn btn-outline-primary">Tortas Especiales</button>
-      </div>
-    </div>
+            <!-- Productos -->
+            <section class="col-12 col-md-10">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h1 class="h3 mb-0">Productos</h1>
 
-    <!-- Grid de productos -->
-    <div id="shopContent"></div>
-  </main>
+                    <!-- Desplegable móvil -->
+                    <div class="d-md-none" style="min-width: 220px;">
+                        <select id="mobileFilter" class="form-select form-select-sm">
+                            <option value="" selected>Filtrar por categoría…</option>
+                            <option value="todosBtn">Todos</option>
+                            <option value="tortasCuadradasBtn">Tortas Cuadradas</option>
+                            <option value="tortasCircularesBtn">Tortas Circulares</option>
+                            <option value="postresIndividualesBtn">Postres Individuales</option>
+                            <option value="sinAzucarBtn">Sin Azúcar</option>
+                            <option value="tradicionalBtn">Pastelería Tradicional</option>
+                            <option value="sinGlutenBtn">Sin Gluten</option>
+                            <option value="veganosBtn">Veganos</option>
+                            <option value="tortasEspecialesBtn">Tortas Especiales</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="shopContent" class="row g-3"></div>
+            </section>
+        </div>
+    </main>
+
+
 
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -119,9 +160,57 @@
         </div>
     </footer>
 
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4"
+                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
+                                required>
+                            <div class="invalid-feedback">Ingresa un correo válido.</div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="loginPass" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
+                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordarme</label>
+                            </div>
+                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+
+                    <p class="text-center small mt-3 mb-0">
+                        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/productos.js"></script>
+    <script>
 
+
+    </script>
 </body>
 
 </html>
