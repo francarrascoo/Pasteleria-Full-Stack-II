@@ -13,7 +13,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -22,8 +21,9 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                        class="brand-logo"></a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,21 +37,18 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
-                                        Cuadradas</a>
-                                </li>
+                                        Cuadradas</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
                                         Circulares</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
                                         Individuales</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
-                                        Azúcar</a>
-                                </li>
+                                        Azúcar</a></li>
                                 <li><a class="dropdown-item"
-                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
-                                        Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
-                                        gluten</a>
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
                                 </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
                                         Veganos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
@@ -87,7 +84,7 @@
     <main class="container py-4 flex-grow-1">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <section class="card shadow-sm p-4">
+                <section class="card-registro shadow-sm p-4">
                     <h2 class="mb-4 text-center">Registro</h2>
 
                     <form id="signupForm" novalidate>
@@ -99,10 +96,29 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="lastname" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="lastname" placeholder="Ingresa tu apellido"
+                                required>
+                            <div class="invalid-feedback">Por favor ingresa tu apellido.</div>
+                        </div>
+
+
+                        <div class="mb-3">
                             <label for="email" class="form-label">Correo</label>
                             <input type="email" class="form-control" id="email" placeholder="Ingresa un correo"
                                 required>
                             <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="birthdate" required>
+                            <div class="invalid-feedback">Por favor ingresa tu fecha de nacimiento.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Código de descuento (opcional)</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="Ej: FELICES50">
                         </div>
 
                         <div class="mb-3">
@@ -123,20 +139,21 @@
                             <button type="submit" class="btn btn-primary">Registrarse</button>
                         </div>
                     </form>
+
                     <p class="text-center mb-0">
-                        ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+                        ¿Ya tienes una cuenta? <a href="index.html#loginModal">Inicia sesión</a>
                     </p>
                 </section>
             </div>
         </div>
     </main>
 
-
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                        height="40"></a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40">
+                </a>
             </div>
             <div class="nav mb-3 mb-md-0">
                 <a class="nav-link" href="productos.html">Categorias</a>
@@ -214,42 +231,9 @@
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const section = document.querySelector('.parallax-1');
-        let current = 0, target = 0;
-        const speed = 0.08;   // suavidad
-        const factor = 0.5;   // cuanto se mueve
-
-        function lerp(a, b, t) { return a + (b - a) * t; }
-
-        // calcular target solo al hacer scroll
-        function updateTarget() {
-            const rect = section.getBoundingClientRect();
-            const viewportH = window.innerHeight;
-
-            const progress = (viewportH / 2 - (rect.top + rect.height / 2)) / viewportH;
-            target = progress * 100 * factor;
-        }
-
-        // loop suave
-        function tick() {
-            current = lerp(current, target, speed);
-            section.style.backgroundPosition = `50% ${55 + current}%`;
-            requestAnimationFrame(tick);
-        }
-
-        window.addEventListener("scroll", updateTarget, { passive: true });
-        window.addEventListener("resize", updateTarget, { passive: true });
-
-        // inicio
-        updateTarget();
-        requestAnimationFrame(tick);
-    </script>
     <script src="/js/user_store.js"></script>
     <script src="/js/registro.js"></script>
-
 
 </body>
 
