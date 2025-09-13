@@ -1,5 +1,5 @@
 // —— Productos del catálogo (CLP, categorías reales) ——
-const products = [
+var products = [
     {
         code: "TC001", productName: "Torta Cuadrada de Chocolate", price: 45000, img: "/img/torta-cuadrada-chocolate.png", category: "tortas-cuadradas",
         desc: "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales."
@@ -208,28 +208,44 @@ function bindMobileFilter() {
     });
 }
 
-// === INICIO: sincronía con localStorage.catalogo ===
+// === INICIO: sincronía con localStorage.catalogo (REEMPLAZO) ===
 function ensureSharedCatalog() {
     const KEY = "catalogo";
     try {
         let cat = JSON.parse(localStorage.getItem(KEY) || "null");
+
+        // Si no existe catálogo, sembrar desde la semilla actual (products)
         if (!Array.isArray(cat) || cat.length === 0) {
-            // 1ª vez: clonar arreglo products → agregar stock y stockCritico por defecto
-            cat = (Array.isArray(window.products) ? window.products : []).map(p => ({
+            const seed = Array.isArray(products) ? products : [];
+            cat = seed.map(p => ({
                 ...p,
-                stock: Number.isFinite(p.stock) ? p.stock : 10,         // default
-                stockCritico: Number.isFinite(p.stockCritico) ? p.stockCritico : 5
+                // defaults de inventario/producción si no existen
+                stock: Number.isFinite(p.stock) ? p.stock : 10,
+                stockCritico: Number.isFinite(p.stockCritico) ? p.stockCritico : 5,
+                capacidadDiaria: Number.isFinite(p.capacidadDiaria) ? p.capacidadDiaria : 20,
+            }));
+            localStorage.setItem(KEY, JSON.stringify(cat));
+        } else {
+            // Normaliza campos que puedan faltar en cat persistido
+            cat = cat.map(p => ({
+                ...p,
+                stock: Number.isFinite(p.stock) ? p.stock : 10,
+                stockCritico: Number.isFinite(p.stockCritico) ? p.stockCritico : 5,
+                capacidadDiaria: Number.isFinite(p.capacidadDiaria) ? p.capacidadDiaria : 20,
             }));
             localStorage.setItem(KEY, JSON.stringify(cat));
         }
-        // Reemplaza la fuente global para que tienda/detalle lean del mismo lugar
-        window.products = cat;
-        return cat;
+
+        // 👈 PUNTO CLAVE: ahora la “fuente activa” es el catálogo persistido
+        products = cat;
+        return products;
     } catch {
-        return Array.isArray(window.products) ? window.products : [];
+        // Si algo falla, al menos usa la semilla en memoria
+        return Array.isArray(products) ? products : [];
     }
 }
-// === FIN: sincronía con localStorage.catalogo ===
+// === FIN: sincronía con localStorage.catalogo (REEMPLAZO) ===
+
 
 
 // Init

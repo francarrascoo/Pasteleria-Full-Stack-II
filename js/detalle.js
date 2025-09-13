@@ -28,3 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("precio").textContent =
         `$${producto.price.toLocaleString("es-CL")}`;
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    // FUENTE: usa products si existe; si no, lee localStorage.catalogo
+    let fuente = (Array.isArray(window.products) && window.products.length)
+        ? window.products
+        : JSON.parse(localStorage.getItem("catalogo") || "[]");
+
+    const producto = (fuente || []).find(p => p.code === code);
+
+    // ... resto igual
+});
+
