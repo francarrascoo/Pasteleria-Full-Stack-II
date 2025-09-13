@@ -208,8 +208,35 @@ function bindMobileFilter() {
     });
 }
 
+// === INICIO: sincronía con localStorage.catalogo ===
+function ensureSharedCatalog() {
+    const KEY = "catalogo";
+    try {
+        let cat = JSON.parse(localStorage.getItem(KEY) || "null");
+        if (!Array.isArray(cat) || cat.length === 0) {
+            // 1ª vez: clonar arreglo products → agregar stock y stockCritico por defecto
+            cat = (Array.isArray(window.products) ? window.products : []).map(p => ({
+                ...p,
+                stock: Number.isFinite(p.stock) ? p.stock : 10,         // default
+                stockCritico: Number.isFinite(p.stockCritico) ? p.stockCritico : 5
+            }));
+            localStorage.setItem(KEY, JSON.stringify(cat));
+        }
+        // Reemplaza la fuente global para que tienda/detalle lean del mismo lugar
+        window.products = cat;
+        return cat;
+    } catch {
+        return Array.isArray(window.products) ? window.products : [];
+    }
+}
+// === FIN: sincronía con localStorage.catalogo ===
+
+
 // Init
 document.addEventListener("DOMContentLoaded", () => {
+    // (NUEVO) Asegura fuente única de datos
+    ensureSharedCatalog();
+
     // Render inicial (todos)
     displayProducts(products);
 
