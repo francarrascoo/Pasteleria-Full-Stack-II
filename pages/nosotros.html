@@ -18,16 +18,16 @@
 </head>
 
 <body>
-
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                        class="brand-logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
@@ -37,21 +37,18 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
-                                        Cuadradas</a>
-                                </li>
+                                        Cuadradas</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
                                         Circulares</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
                                         Individuales</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
-                                        Azúcar</a>
-                                </li>
+                                        Azúcar</a></li>
                                 <li><a class="dropdown-item"
-                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
-                                        Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
-                                        gluten</a>
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
                                 </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
                                         Veganos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
@@ -68,21 +65,18 @@
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle fs-4"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        Iniciar sesión
-                                    </button>
-                                </li>
-                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
+                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                            <i class="bi bi-cart fs-4"></i>
+                            <span id="cart-count"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </nav>
-
     </header>
 
     <div class="parallax parallax-1">
@@ -171,39 +165,53 @@
             </div>
         </div>
     </footer>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4"
+                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
 
+                <div class="modal-body pt-0">
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
+                                required>
+                            <div class="invalid-feedback">Ingresa un correo válido.</div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="loginPass" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
+                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordarme</label>
+                            </div>
+                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+
+                    <p class="text-center small mt-3 mb-0">
+                        ¿No tienes cuenta? <a href="/pages/registro.html">Regístrate</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const section = document.querySelector('.parallax-1');
-        let current = 0, target = 0;
-        const speed = 0.08;   // suavidad
-        const factor = 0.5;   // cuanto se mueve
-
-        function lerp(a, b, t) { return a + (b - a) * t; }
-
-        // calcular target solo al hacer scroll
-        function updateTarget() {
-            const rect = section.getBoundingClientRect();
-            const viewportH = window.innerHeight;
-
-            const progress = (viewportH / 2 - (rect.top + rect.height / 2)) / viewportH;
-            target = progress * 100 * factor;
-        }
-
-        // loop suave
-        function tick() {
-            current = lerp(current, target, speed);
-            section.style.backgroundPosition = `50% ${55 + current}%`;
-            requestAnimationFrame(tick);
-        }
-
-        window.addEventListener("scroll", updateTarget, { passive: true });
-        window.addEventListener("resize", updateTarget, { passive: true });
-
-        // inicio
-        updateTarget();
-        requestAnimationFrame(tick);
-    </script>
+    <script src="/js/user_store.js"></script>
+    <script src="/js/navbar_sesion.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/carrito.js"></script>
 
 </body>
 

@@ -6,34 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Carrito | Pastelería Mil Sabores</title>
 
-    <!-- Bootstrap & Icons -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Tu CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- ====== Navbar ====== -->
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg primary-nav bg-white">
+        <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
-                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo"
-                        style="height:40px" />
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir navegación">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html"
-                                id="navbarDropdown">Productos</a>
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
+                                Productos
+                            </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
@@ -61,203 +67,116 @@
                     </ul>
 
                     <div class="d-flex align-items-center">
-                        <!-- Saludo/beneficios -->
-                        <span id="user-info" class="me-3 small"></span>
-
-                        <!-- Carrito -->
-                        <a href="carrito.html" class="btn btn-outline-secondary position-relative">
-                            <i class="bi bi-cart"></i>
+                        <div class="nav-item dropdown account-dropdown ms-3">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle fs-4"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
+                            </ul>
+                        </div>
+                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                            <i class="bi bi-cart fs-4"></i>
                             <span id="cart-count"
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         </a>
-
-                        <!-- Cuenta -->
-                        <div class="nav-item dropdown account-dropdown ms-3">
-                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle fs-5"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        Iniciar sesión
-                                    </button>
-                                </li>
-                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
+
     <!-- ====== Main ====== -->
-    <main class="container py-4">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Carrito</li>
-            </ol>
-        </nav>
+    <main class="container py-4 flex-grow-1">
+        <h2 class="mb-4">Carrito de Compras</h2>
 
-        <h1 class="h3 mb-4">Tu carrito</h1>
+        <!-- Lista de productos -->
+        <ul id="carrito-lista" class="list-group mb-3"></ul>
 
-        <div class="row g-4">
-            <!-- Tabla del carrito -->
-            <div class="col-12 col-lg-8">
-                <div class="card shadow-sm">
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table align-middle mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th style="width:80px">Imagen</th>
-                                        <th>Producto</th>
-                                        <th>Precio</th>
-                                        <th style="width:110px">Cantidad</th>
-                                        <th class="text-end">Subtotal</th>
-                                        <th class="text-end" style="width:80px">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cart-items">
-                                    <!-- CartAPI.renderCart() inserta filas aquí -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="productos.html" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Seguir comprando
-                        </a>
-                        <button class="btn btn-outline-danger" id="btnClearCart">
-                            <i class="bi bi-trash me-1"></i> Vaciar carrito
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Resumen -->
-            <div class="col-12 col-lg-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="h5 mb-3">Resumen</h2>
-                        <div id="cart-summary" class="mb-3">
-                            <!-- CartAPI.renderCart() inserta resumen aquí -->
-                        </div>
-                        <button class="btn btn-primary w-100" id="btnCheckout">
-                            <i class="bi bi-credit-card me-1"></i> Proceder al pago
-                        </button>
-                        <small class="text-muted d-block mt-2">El descuento de tu cuenta se aplica
-                            automáticamente.</small>
-                    </div>
-                </div>
-            </div>
+        <!-- Total -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Total:</h4>
+            <h4 id="carrito-total">$0</h4>
         </div>
+
+        <!-- Botones -->
+        <div class="mt-4 d-flex gap-2 flex-wrap">
+            <a href="productos.html" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Seguir comprando
+            </a>
+            <button id="btnVaciar" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Vaciar carrito
+            </button>
+            <a href="checkout.html" class="btn btn-primary ms-auto">
+                <i class="bi bi-credit-card"></i> Proceder al pago
+            </a>
+        </div>
+
+
     </main>
 
     <!-- ====== Footer ====== -->
-    <footer class="container-fluid py-4 mt-5 border-top">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <a class="navbar-brand mb-3 mb-md-0" href="index.html">
-                <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40">
-            </a>
+    <footer class="container-fluid py-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40" />
+                </a>
+            </div>
             <div class="nav mb-3 mb-md-0">
                 <a class="nav-link" href="productos.html">Categorias</a>
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
                 <a class="nav-link" href="blogs.html">Blogs</a>
                 <a class="nav-link" href="contacto.html">Contacto</a>
+                <a class="nav-link" href="admin.html">Admin</a>
             </div>
             <div class="d-flex gap-3">
-                <a href="#" class="nav-link fs-5"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="nav-link fs-5"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="nav-link fs-5"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- ====== Modales ====== -->
-    <!-- Modal Login (opcional si lo usas en todas las páginas) -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
+    <!-- Toasts container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="cart-toast-msg">Producto agregado al carrito</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Cerrar"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Confirmar acción</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-
-                <div class="modal-body pt-0">
-                    <form id="loginForm" novalidate>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
-                                required>
-                            <div class="invalid-feedback">Ingresa un correo válido.</div>
-                        </div>
-                        <div class="mb-2">
-                            <label for="loginPass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
-                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordarme</label>
-                            </div>
-                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                    </form>
-
-                    <p class="text-center small mt-3 mb-0">
-                        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
-                    </p>
+                <div class="modal-body" id="confirmModalMsg">
+                    ¿Estás seguro que deseas continuar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, continuar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ====== Scripts (orden correcto) ====== -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Núcleo usuarios/sesión -->
+    <!-- Lógica carrito -->
     <script src="/js/user_store.js"></script>
-
-    <!-- Carrito (API + badge + render) -->
-    <script src="/js/cart.js"></script>
-
-    <!-- UI de sesión (saludo/beneficios, reabrir login) -->
-    <script src="/js/session_ui.js"></script>
-
-    <!-- (Opcional) login.js si manejas login aquí también -->
-    <!-- <script src="/js/login.js"></script> -->
-
-    <!-- Init de carrito en esta página -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (window.CartAPI?.renderCart) {
-                CartAPI.renderCart("#cart-items", "#cart-summary");
-            }
-            const btnClear = document.getElementById("btnClearCart");
-            btnClear?.addEventListener("click", () => {
-                if (confirm("¿Deseas vaciar el carrito?")) {
-                    CartAPI.clearCart();
-                    CartAPI.renderCart("#cart-items", "#cart-summary");
-                }
-            });
-
-            const btnPay = document.getElementById("btnCheckout");
-            btnPay?.addEventListener("click", () => {
-                const { cart, total } = CartAPI.computeTotals();
-                if (!cart.length) {
-                    alert("Tu carrito está vacío.");
-                    return;
-                }
-                alert(`(Demo) Ir a pago por ${total.toLocaleString("es-CL", { style: "currency", currency: "CLP" })}`);
-                // Aquí luego integras tu flujo de pago real
-            });
-        });
-    </script>
+    <script src="/js/navbar_sesion.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/carrito.js"></script>
 </body>
 
 </html>

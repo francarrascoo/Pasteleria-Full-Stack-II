@@ -2,24 +2,7 @@
 (() => {
     'use strict';
 
-    // ====== FIX robusto del dropdown (por si el auto-init falla) ======
-    document.addEventListener('DOMContentLoaded', () => {
-        const account = document.querySelector('.account-dropdown');
-        if (account && window.bootstrap) {
-            const toggle = account.querySelector('.nav-link[role="button"]') || account.querySelector('.nav-link');
-            const menu = account.querySelector('.dropdown-menu');
-            if (toggle && menu) {
-                toggle.classList.add('dropdown-toggle');
-                toggle.setAttribute('data-bs-toggle', 'dropdown');
-                if (!toggle.hasAttribute('aria-expanded')) toggle.setAttribute('aria-expanded', 'false');
-                const dd = bootstrap.Dropdown.getOrCreateInstance(toggle);
-                toggle.addEventListener('click', (ev) => {
-                    ev.preventDefault();
-                    dd.toggle();
-                }, { capture: true });
-            }
-        }
-    });
+
 
     // ====== Validación de formulario Contacto ======
     const form = document.getElementById('contactoForm');
