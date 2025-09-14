@@ -172,3 +172,111 @@ function leerSesion() {
         return null;
     }
 }
+
+// === User Store – utilidades de roles/segmento y Vendedor ===
+(() => {
+    'use strict';
+
+    const LSK_USUARIOS = 'usuarios';
+
+    function getUsuarios() {
+        try { return JSON.parse(localStorage.getItem(LSK_USUARIOS)) || []; }
+        catch { return []; }
+    }
+    function setUsuarios(lista) {
+        localStorage.setItem(LSK_USUARIOS, JSON.stringify(lista));
+    }
+
+    // Normaliza todos (asegura .rol y .segmento)
+    function ensureUsuariosNormalizados() {
+        const lista = getUsuarios().map(u =>
+            (window.UserSegmentation ? window.UserSegmentation.normalizeUser(u) : u)
+        );
+        setUsuarios(lista);
+        return lista;
+    }
+
+    function findByEmail(email) {
+        const e = String(email || '').toLowerCase();
+        return getUsuarios().find(u => String(u.correo || '').toLowerCase() === e) || null;
+    }
+
+    // --- Validaciones básicas ---
+    function validarEmailPermitido(email) {
+        const e = String(email || '').toLowerCase();
+        // Reglas de la guía: duoc/profesor/gmail
+        return ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'].some(dom => e.endsWith(dom));
+    }
+
+    // RUT Chile (sin puntos ni guion, con dígito verificador 0-9/K)
+    function limpiarRut(rut) { return String(rut || '').trim().toUpperCase().replace(/[^0-9K]/g, ''); }
+    function dvRut(numero) {
+        let M = 0, S = 1;
+        for (; numero; numero = Math.floor(numero / 10)) {
+            S = (S + numero % 10 * (9 - M++ % 6)) % 11;
+        }
+        return S ? String(S - 1) : 'K';
+    }
+    function validarRut(rut) {
+        const r = limpiarRut(rut);
+        if (r.length < 7 || r.length > 9) return false;
+        const cuerpo = r.slice(0, -1);
+        const dv = r.slice(-1);
+        if (!/^\d+$/.test(cuerpo)) return false;
+        return dvRut(Number(cuerpo)) === dv;
+    }
+
+    // --- Crear Vendedor (rut, nombre, correo) ---
+    function crearVendedor({ rut, nombre, correo, password }) {
+        // Validaciones
+        function limpiarRut(rut) { return String(rut || '').trim().toUpperCase().replace(/[^0-9K]/g, '') }
+        function dvRut(numero) { let M = 0, S = 1; for (; numero; numero = Math.floor(numero / 10))S = (S + numero % 10 * (9 - M++ % 6)) % 11; return S ? String(S - 1) : 'K' }
+        function validarRut(rut) { const r = limpiarRut(rut); if (r.length < 7 || r.length > 9) return false; const c = r.slice(0, -1), dv = r.slice(-1); if (!/^\d+$/.test(c)) return false; return dvRut(Number(c)) === dv }
+        function validarEmailPermitido(email) { const e = String(email || '').toLowerCase(); return ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'].some(dom => e.endsWith(dom)) }
+        function getUsuarios() { try { return JSON.parse(localStorage.getItem('usuarios')) || [] } catch { return [] } }
+        function setUsuarios(lista) { localStorage.setItem('usuarios', JSON.stringify(lista)) }
+        function findByEmail(email) { const e = String(email || '').toLowerCase(); return getUsuarios().find(u => String(u.correo || '').toLowerCase() === e) || null }
+
+        if (!rut || !validarRut(rut)) throw new Error('RUN inválido. Ej: 19011022K (sin puntos ni guión).');
+        if (!nombre || nombre.trim().length === 0 || nombre.length > 50) throw new Error('Nombre requerido (máx 50).');
+        if (!correo || !validarEmailPermitido(correo)) throw new Error('Correo no permitido. Usa @duoc.cl, @profesor.duoc.cl o @gmail.com.');
+        if (findByEmail(correo)) throw new Error('Ya existe un usuario con ese correo.');
+        if (!password || password.length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres.');
+
+        const hoy = new Date().toISOString();
+        const lista = getUsuarios();
+
+        const nuevo = {
+            id: Date.now(),
+            rut: limpiarRut(rut),
+            nombre: nombre.trim(),
+            apellido: '',
+            correo: String(correo).toLowerCase(),
+            password: String(password),   // *** se guarda tal cual (mockup)
+            fechaNacimiento: null,
+            rol: 'Vendedor',
+            bloqueado: false,
+            creadoEn: hoy,
+            protegido: false,
+        };
+
+        lista.push(nuevo);
+        setUsuarios(lista);
+        return nuevo;
+    }
+
+    // expón de nuevo si usas objeto
+    window.UserStore = window.UserStore || {};
+    window.UserStore.crearVendedor = crearVendedor;
+
+
+    // Exponer en window para usar desde admin.js/login.js
+    window.UserStore = {
+        getUsuarios, setUsuarios, ensureUsuariosNormalizados,
+        findByEmail, crearVendedor,
+        validarRut, validarEmailPermitido
+    };
+
+    // Normalizar inmediatamente (por si ya había data vieja)
+    try { ensureUsuariosNormalizados(); } catch { }
+})();

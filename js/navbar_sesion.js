@@ -1,33 +1,39 @@
 (() => {
   'use strict';
 
+  // ===== Sesión
   function getSesion() {
     try { if (typeof leerSesion === 'function') return leerSesion(); } catch { }
     try {
-      const raw = localStorage.getItem('usuarioActivo');
+      // Lee primero tu clave habitual y cae a 'sesion' por compatibilidad
+      const raw = localStorage.getItem('usuarioActivo') || localStorage.getItem('sesion');
       return raw ? JSON.parse(raw) : null;
     } catch {
       return null;
     }
   }
 
+  // ===== Cerrar sesión (UNIFICADO + REDIRECCIÓN)
   function logout() {
     try {
       if (typeof limpiarSesion === 'function') limpiarSesion();
-      else localStorage.removeItem('usuarioActivo');
-    } catch {
-      localStorage.removeItem('usuarioActivo');
-    }
-    // 🔹 limpiar carrito al cerrar sesión
-    localStorage.removeItem("carrito");
-    if (typeof updateCartCount === "function") updateCartCount();
+    } catch { }
 
-    if (window.location.pathname.includes("carrito.html")) {
-      window.location.href = "productos.html";
-    }
+    // Claves de sesión (ambas por compatibilidad)
+    localStorage.removeItem('usuarioActivo');
+    localStorage.removeItem('sesion');
+    sessionStorage.removeItem('usuarioActivo');
+    sessionStorage.removeItem('sesion');
+
+    // Limpia carrito
+    localStorage.removeItem('carrito');
+    if (typeof updateCartCount === 'function') updateCartCount();
+
+    // Redirige SIEMPRE al home (ruta absoluta)
+    window.location.href = '/pages/index.html';
   }
 
-  // ===== Modal de confirmación (se crea si no existe) =====
+  // ===== Modal de confirmación (se crea si no existe)
   function ensureLogoutConfirmModal() {
     let el = document.getElementById('logoutConfirmModal');
     if (el) return el;
@@ -57,7 +63,7 @@
     return el;
   }
 
-  // ===== Render principal (navbar) =====
+  // ===== Render principal (navbar)
   function renderNavbarSession() {
     const sesion = getSesion();
     const accountDropdown = document.querySelector('.account-dropdown');
@@ -105,7 +111,7 @@
         <li><button class="dropdown-item text-danger" type="button" id="btn-cerrar-sesion">Cerrar sesión</button></li>
       `;
 
-      // Evento logout
+      // Evento logout con modal de confirmación
       menu.querySelector('#btn-cerrar-sesion')?.addEventListener('click', () => {
         const modalEl = ensureLogoutConfirmModal();
         const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
@@ -113,9 +119,8 @@
 
         const confirmBtn = modalEl.querySelector('#confirmLogoutBtn');
         confirmBtn.onclick = () => {
-          logout();
-          modal.hide();
-          renderNavbarSession(); // refrescar navbar
+          logout(); // <- limpia y REDIRIGE a /index.html
+          // (tras redirect no se ejecuta nada más)
         };
       });
     } else {
@@ -129,14 +134,14 @@
       `;
     }
 
-    // 👇 siempre actualizar contador del carrito
-    if (typeof updateCartCount === "function") updateCartCount();
+    // Actualiza contador del carrito
+    if (typeof updateCartCount === 'function') updateCartCount();
   }
 
-  // Exponer para refrescar manualmente si lo necesitas
+  // Exponer por si lo necesitas
   window.renderNavbarSession = renderNavbarSession;
 
-  // ===== Init =====
+  // ===== Init
   document.addEventListener('DOMContentLoaded', () => {
     renderNavbarSession();
 
@@ -145,7 +150,7 @@
 
     // Cambios en otra pestaña
     window.addEventListener('storage', (e) => {
-      if (e.key === 'usuarioActivo') renderNavbarSession();
+      if (e.key === 'usuarioActivo' || e.key === 'sesion') renderNavbarSession();
     });
   });
 })();
