@@ -44,24 +44,29 @@
     el.tabIndex = -1;
     el.setAttribute('aria-hidden', 'true');
     el.innerHTML = `
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow rounded-4">
-          <div class="modal-header border-0 bg-warning">
-            <h5 class="modal-title">Cerrar sesión</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            ¿Seguro que deseas cerrar tu sesión?
-          </div>
-          <div class="modal-footer border-0">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" id="confirmLogoutBtn">Cerrar sesión</button>
-          </div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow rounded-4">
+        <div class="modal-header">
+          <h5 class="modal-title">Cerrar sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-      </div>`;
+        <div class="modal-body">
+          ¿Seguro que deseas cerrar tu sesión?
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-confirm" id="confirmLogoutBtn">
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </div>`;
     document.body.appendChild(el);
     return el;
   }
+
 
   // ===== Render principal (navbar)
   function renderNavbarSession() {
@@ -102,7 +107,7 @@
     if (sesion) {
       menu.innerHTML = `
         <li><span class="dropdown-item-text text-muted">
-          Conectado como<br><strong>${sesion.correo}</strong>
+          Conectado como<br><strong>${sesion.nombre} ${sesion.apellido}</strong>
         </span></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="/pages/perfil.html">Mis datos</a></li>

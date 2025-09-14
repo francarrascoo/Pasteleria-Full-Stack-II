@@ -1,25 +1,21 @@
 :root {
     --color-background: #ffffff;
-    --color-surface: #f9f9f9;
     --color-text-primary: #1a1a1a;
     --color-text-secondary: #555555;
 
     --accent-main: #b08d57;
-    /* dorado elegante */
     --accent-dark: #6b3e26;
-    /* marrón profundo */
 
     --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
     --border-soft: 1px solid rgba(0, 0, 0, 0.1);
 
-    --font-title: "Helvetica", sans-serif;
-    --font-body: "Inter", sans-serif;
+    --font-main: "Segoe UI", sans-serif;
 
     --radius-s: 6px;
     --radius-m: 10px;
     --transition: 0.3s ease;
 
-    --nav-h: 60px;
+    --nav-h: 65px;
 }
 
 /* --- GENERALES --- */
@@ -29,28 +25,8 @@ html {
 
 body {
     background: var(--color-background);
-    color: var(--color-text-primary);
-    font-family: var(--font-body);
-    font-size: 16px;
+    font-family: var(--font-main);
     line-height: 1.6;
-}
-
-
-h3,
-.card-title,
-.navbar-brand {
-    font-family: var(--font-title);
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: -0.5px;
-    color: var(--color-text-primary);
-}
-
-p,
-.nav-link,
-.dropdown-item,
-.btn {
-    font-family: var(--font-body);
 }
 
 /* --- NAVBAR --- */
@@ -64,14 +40,14 @@ p,
 }
 
 .primary-nav {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(12px);
     border-bottom: var(--border-soft);
     height: var(--nav-h);
 }
 
 .primary-nav .nav-link {
-    font-weight: 200;
+    font-weight: 300;
     font-size: 1rem;
     color: var(--color-text-primary);
     transition: color var(--transition);
@@ -90,25 +66,110 @@ p,
     box-shadow: none !important;
 }
 
-/* Hover solo para los dropdowns dentro del listado central */
 @media (min-width: 992px) {
     .navbar-nav .dropdown:hover>.dropdown-menu {
         display: block;
     }
 }
 
-/* Fijar posición del dropdown del usuario, sin afectar CATEGORÍAS */
-.account-dropdown .dropdown-menu {
-    top: 100%;
-    right: 0;
-    left: auto;
-    margin-top: .25rem;
+/* --- FOOTER --- */
+footer {
+    border-top: var(--border-soft);
+    background: var(--color-background);
+    padding: 1.5rem 0;
 }
 
-/* Evita que Popper mueva el menú del usuario al hacer click */
-.account-dropdown .dropdown-menu.show {
-    transform: none !important;
+footer .nav-link,
+footer .bi {
+    color: var(--color-text-secondary);
+    transition: color var(--transition);
 }
+
+footer .nav-link:hover,
+footer .bi:hover {
+    color: var(--accent-main);
+}
+
+/* --- MODAL LOGIN ---*/
+#loginModal .modal-content {
+    background: color-mix(in oklab, var(--color-background) 92%, transparent);
+    backdrop-filter: blur(6px);
+}
+
+/* Botón principal */
+#loginModal .btn-primary {
+    background: var(--accent-main);
+    border: none;
+}
+
+#loginModal .btn-primary:hover {
+    background: var(--accent-dark);
+}
+
+#loginModal a {
+    color: var(--accent-main);
+}
+
+#loginModal a:hover {
+    color: var(--accent-dark);
+}
+
+#loginModal .form-check-input {
+    border-color: rgba(0, 0, 0, .25);
+    background-color: var(--color-background);
+}
+
+#loginModal .form-check-input:checked {
+    background-color: var(--accent-main);
+    border-color: var(--accent-main);
+}
+
+.dropdown-item:focus,
+.dropdown-item:active {
+    background-color: var(--accent-main) !important;
+    color: var(--color-background) !important;
+}
+
+/* ===== MODAL LOGOUT ===== */
+#logoutConfirmModal .modal-content {
+    background: color-mix(in oklab, var(--color-background) 92%, transparent);
+    backdrop-filter: blur(6px);
+}
+
+#logoutConfirmModal .modal-header {
+    border-bottom: 1px solid var(--accent-main);
+}
+
+#logoutConfirmModal .modal-title {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+#logoutConfirmModal .btn-cancel {
+    border: 1px solid var(--accent-main);
+    background: var(--color-background);
+    color: var(--accent-main);
+    transition: all var(--transition);
+}
+
+#logoutConfirmModal .btn-cancel:hover {
+    background: var(--accent-main);
+    color: var(--color-background);
+}
+
+#logoutConfirmModal .btn-confirm {
+    background: var(--accent-main);
+    border: none;
+    color: var(--color-background);
+    transition: background var(--transition);
+}
+
+#logoutConfirmModal .btn-confirm:hover {
+    background: var(--accent-dark);
+}
+
+
+/* --- INDEX --- */
 
 /* PARALLAX */
 
@@ -126,7 +187,7 @@ p,
     background-position: center center;
 }
 
-/* HERO sección */
+/* HERO */
 
 .hero-content {
     position: relative;
@@ -179,9 +240,9 @@ p,
     }
 }
 
-/* --- CARDS --- */
+/* CARDS */
 .card {
-    background: var(--color-surface);
+    background: var(--color-background);
     border: var(--border-soft);
     border-radius: var(--radius-s);
     transition: transform var(--transition), box-shadow var(--transition);
@@ -208,7 +269,7 @@ p,
     color: var(--color-text-secondary);
 }
 
-/* --- VIDEO --- */
+/* VIDEO */
 
 /* Sección en pantalla completa, sin márgenes */
 .video-hero {
@@ -269,418 +330,7 @@ p,
     margin: 0;
 }
 
-/* --- FOOTER --- */
-footer {
-    border-top: var(--border-soft);
-    background: var(--color-surface);
-    padding: 1.5rem 0;
-}
-
-footer .nav-link {
-    color: var(--color-text-secondary);
-}
-
-footer .nav-link:hover {
-    color: var(--accent-main);
-}
-
-footer .bi {
-    transition: color var(--transition);
-}
-
-footer .bi:hover {
-    color: var(--accent-main);
-}
-
-/* --- ESTILOS POR PÁGINA --- */
-
-/* Categorías */
-
-/* menú horizontal */
-.horizontal-menu .menu-list {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    margin: 0;
-    list-style: none;
-    gap: 1rem;
-    scrollbar-width: none;
-}
-
-.horizontal-menu .menu-list::-webkit-scrollbar {
-    display: none;
-}
-
-/* links */
-.horizontal-menu a {
-    text-decoration: none;
-    color: var(--accent-main);
-    font-weight: 500;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    /* evita que se rompa el texto */
-    padding: 0.5rem 0.8rem;
-    border-radius: 0.4rem;
-    transition: background 0.3s, color 0.3s;
-}
-
-.categorias-var {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.categorias-var .menu-list li a:hover {
-    font-weight: 700;
-    color: var(--color-text-primary)
-}
-
-.horizontal-menu a:hover,
-.horizontal-menu a.active {
-    color: var(--accent-main);
-}
-
-.scroll-btn {
-    background: var(--color-background);
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--color-text-primary);
-}
-
-/* Categorias de productos */
-
-/* Card compacta */
-.card-cat {
-    background: var(--color-surface);
-    border: var(--border-soft);
-    border-radius: var(--radius-s);
-    transition: transform var(--transition), box-shadow var(--transition);
-    overflow: hidden;
-
-    /* Layout interno para que el botón quede dentro y al fondo si hace falta */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Imagen menos alta (puedes bajar a 160px si quieres aún más compacto) */
-.card-img-top-cat {
-    height: 200px;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-top-left-radius: var(--radius-s);
-    border-top-right-radius: var(--radius-s);
-}
-
-/* Contenido interno más apretado */
-.card-cat .card-body {
-    padding: .75rem .875rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .35rem;
-}
-
-/* Hover sutil */
-.card-cat:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-soft);
-}
-
-/* Títulos de sección compactos */
-.title-cat h2 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin: 0;
-}
-
-.title-cat a {
-    font-size: .9rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-}
-
-/* Tipografías de la card más pequeñas */
-.card-title-cat {
-    font-size: .95rem;
-    font-weight: 500;
-    margin: .25rem 0 0;
-}
-
-.card-cat .card-text {
-    font-size: .95rem;
-    margin: 0;
-}
-
-/* BOTÓN: sin márgenes que lo saquen, ancho fluido y padding cómodo */
-.card-cat .btn-add-cart {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: .45rem 1rem;
-    background: var(--accent-main);
-    color: var(--color-background);
-    font-weight: 500;
-    font-size: .9rem;
-    border-radius: var(--radius-s);
-    border: none;
-    transition: background var(--transition), transform var(--transition);
-    margin: .5rem auto 0;
-}
-
-.card-cat .btn-add-cart i {
-    font-style: normal !important;
-}
-
-/* Hover del botón (corrige selector) */
-.card-cat .btn-add-cart:hover {
-    background: var(--accent-dark);
-    transform: translateY(-1px);
-}
-
-/* Página Nosotros */
-.mission-vision-icon {
-    font-size: 3rem;
-    color: var(--color-accent-blue);
-    text-shadow: 0 0 15px var(--color-accent-blue);
-}
-
-/* Página de Blog */
-.blog-tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 5px;
-    background-color: var(--color-accent-blue);
-    color: var(--color-text-primary);
-    align-self: flex-start;
-}
-
-.blog-card .card-img-top {
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-}
-
-/* Formularios (Contacto, Login, Registro) */
-.contact-hr {
-    border-color: rgba(30, 144, 255, 0.3);
-}
-
-.form-control,
-.form-select {
-    background-color: #fff !important;
-    color: var(--color-text-primary) !important;
-    border: 1px solid #ccc !important;
-}
-
-.form-control:focus,
-.form-select:focus {
-    background-color: #fff !important;
-    color: var(--color-text-primary);
-    border-color: var(--accent-main);
-    box-shadow: 0 0 6px rgba(176, 141, 87, 0.4);
-}
-
-.form-text {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-}
-
-.form-text:hover {
-    color: var(--color-accent-blue);
-}
-
-.form-check-input {
-    background-color: #1a1a1a;
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.form-check-input:checked {
-    background-color: var(--color-accent-neon);
-    border-color: var(--color-accent-neon);
-}
-
-.special-offer-card {
-    border-color: var(--color-accent-neon);
-    background: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.1), transparent 80%);
-}
-
-.divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: var(--color-text-secondary);
-}
-
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.divider:not(:empty)::before {
-    margin-right: .5em;
-}
-
-.divider:not(:empty)::after {
-    margin-left: .5em;
-}
-
-.btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.btn-outline-light:hover {
-    border-color: var(--color-accent-blue);
-    background-color: rgba(30, 144, 255, 0.1);
-    color: var(--color-text-primary);
-    box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
-}
-
-/* Página de Carrito de Compras */
-.cart-item-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.cart-item-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.cart-item-details {
-    flex-grow: 1;
-}
-
-.cart-item-price {
-    text-align: right;
-}
-
-.quantity-selector {
-    display: flex;
-    width: 120px;
-}
-
-.quantity-selector .form-control {
-    border-radius: 0;
-}
-
-.quantity-selector .btn {
-    border-color: rgba(255, 255, 255, 0.1);
-    color: var(--color-text-secondary);
-}
-
-.btn-remove-item {
-    background: none;
-    border: none;
-    color: var(--color-text-secondary);
-    font-size: 1.2rem;
-    padding: 0;
-    transition: color 0.2s ease-in-out;
-}
-
-.btn-remove-item:hover {
-    color: #dc3545;
-}
-
-.cart-hr {
-    border-color: rgba(30, 144, 255, 0.2);
-    margin: 1.5rem 0;
-}
-
-/* Página de Producto Detalle */
-.breadcrumb-item a {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-}
-
-.breadcrumb-item a:hover {
-    color: var(--color-accent-neon);
-}
-
-.breadcrumb-item.active {
-    color: var(--color-text-primary);
-}
-
-.product-title {
-    font-size: 3rem;
-}
-
-.price-highlight {
-    color: var(--color-accent-neon);
-}
-
-.product-thumbnail {
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    opacity: 0.6;
-    transition: all 0.2s ease;
-    border-width: 2px;
-}
-
-.product-thumbnail:hover,
-.product-thumbnail.active {
-    opacity: 1;
-    border-color: var(--color-accent-blue);
-}
-
-.btn-social {
-    color: var(--color-text-secondary);
-    font-size: 1.5rem;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.btn-social:hover {
-    color: var(--color-accent-blue);
-    transform: scale(1.2);
-}
-
-.nav-tabs .nav-link {
-    background-color: transparent;
-    border-color: rgba(30, 144, 255, 0.3);
-    color: var(--color-text-secondary);
-}
-
-.nav-tabs .nav-link.active {
-    background-color: rgba(30, 144, 255, 0.1);
-    border-color: var(--color-accent-blue);
-    color: var(--color-text-primary);
-}
-
-/* —— Contacto —— */
-.contact-card {
-    background: var(--color-surface);
-    border: var(--border-soft);
-    border-radius: var(--radius-m);
-    box-shadow: var(--shadow-soft);
-}
-
-.social-row .btn-social {
-    font-size: 1.5rem;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .contact-card {
-        transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .contact-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
-    }
-}
+/* --- PRODUCTOS --- */
 
 .filters .btn {
     color: var(--color-text-secondary);
@@ -692,7 +342,6 @@ footer .bi:hover {
 .filters .btn.active {
     background: var(--accent-main);
     color: var(--color-background);
-    font-weight: 300;
 }
 
 #shopContent {
@@ -721,28 +370,26 @@ footer .bi:hover {
     width: 100%;
     height: 160px;
     object-fit: cover;
-    background: #f8f9fa;
 }
 
 .card-products h3 {
     font-size: 1rem;
     margin: .5rem 0 0;
     padding: 0 1rem;
-    min-height: 2.5rem;
+    font-weight: 500;
 }
 
 .card-products .code {
     padding: 0 1rem;
     margin: .25rem 0 .5rem;
     font-size: .85rem;
-    color: #6c757d;
+    color: var(--color-text-secondary);
 }
 
 .card-products .price {
     padding: 0 1rem;
     margin: 0 0 .75rem;
-    font-weight: 700;
-    color: #212529;
+    font-weight: 500;
 }
 
 .card-products button {
@@ -751,56 +398,13 @@ footer .bi:hover {
     border-radius: .5rem;
     padding: .6rem .8rem;
     background: var(--accent-main);
-    color: #fff;
+    color: var(--color-background);
     font-weight: 600;
 }
 
 .card-products button:hover {
     background: var(--accent-dark);
 }
-
-/* Fondo modal */
-#loginModal .modal-content {
-    background: color-mix(in oklab, var(--color-background) 92%, transparent);
-    backdrop-filter: blur(6px);
-}
-
-/* Botón principal */
-#loginModal .btn-primary {
-    background: var(--accent-main);
-    border: none;
-}
-
-#loginModal .btn-primary:hover {
-    background: var(--accent-dark);
-}
-
-/* Links */
-#loginModal a {
-    color: var(--accent-main);
-}
-
-#loginModal a:hover {
-    color: var(--accent-dark);
-}
-
-/* Checkbox */
-#loginModal .form-check-input {
-    border-color: rgba(0, 0, 0, .25);
-    background-color: #fff;
-}
-
-#loginModal .form-check-input:checked {
-    background-color: var(--accent-main);
-    border-color: var(--accent-main);
-}
-
-.dropdown-item:focus,
-.dropdown-item:active {
-    background-color: var(--accent-main) !important;
-    color: var(--color-background) !important;
-}
-
 
 /* --- DETALLE DE PRODUCTO --- */
 #producto-detalle {
@@ -826,7 +430,6 @@ footer .bi:hover {
 }
 
 #producto-detalle p {
-    font-family: var(--font-body, "Inter", sans-serif);
     font-size: 1rem;
     color: var(--color-text-secondary, #555);
     margin-bottom: 1rem;
@@ -868,27 +471,22 @@ footer .bi:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
 }
 
-/* ====== Mosaico de categorías (CTA arriba) ====== */
+/* --- CATEGORIAS --- */
 .cat-mosaic {
     display: grid;
     gap: 16px;
     grid-template-columns: 2fr 1.2fr 1.6fr;
     grid-template-areas:
         "E E E"
-        /* Ver todas arriba */
         "A B C"
         "A D C";
 }
 
-/* Tiles base */
 .cat-tile {
     position: relative;
     display: block;
     overflow: hidden;
     border-radius: 16px;
-    background: #f6f6f6;
-    color: inherit;
-    text-decoration: none;
     box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
 }
 
@@ -906,7 +504,6 @@ footer .bi:hover {
     transform: scale(1.04);
 }
 
-/* Áreas + alturas responsivas con tope */
 .tile-a {
     grid-area: A;
     min-height: clamp(280px, 42vw, 520px);
@@ -1006,32 +603,7 @@ footer .bi:hover {
     }
 }
 
-
-
-
-
-
-
-/* ===========================
-   Variables y utilidades suaves
-   =========================== */
-:root {
-    --nav-h: 64px;
-    --radius-md: 12px;
-    --shadow-sm: 0 2px 10px rgba(0, 0, 0, .06);
-    --shadow-md: 0 6px 22px rgba(0, 0, 0, .10);
-}
-
-/* Nav primaria (reutilizable en todo el sitio) */
-.primary-nav {
-    background: #fff;
-    box-shadow: var(--shadow-sm);
-}
-
-.primary-nav .brand-logo {
-    height: 40px;
-    width: auto;
-}
+/* --- BLOG --- */
 
 /* Hero genérico con imagen (reutilizable) */
 .hero-blog {
