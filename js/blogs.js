@@ -11,7 +11,6 @@ const POSTS = [
         imagen: "/img/blog/torta_chocolate.jpg",
         fecha: "2025-09-01",
         autor: "Pastelería Mil Sabores",
-        // si ya tienes detalle.html, puedes enlazar con un query param
         link: "/pages/detalle.html?id=torta-chocolate&type=blog"
     },
     {
@@ -68,9 +67,6 @@ function plantillaCard(post) {
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("lista-blogs");
     if (!root) return;
-
-    // Si prefieres cargar desde un JSON externo:
-    // fetch("/data/blogs.json").then(r => r.json()).then(data => render(data.posts));
 
     render(POSTS);
 

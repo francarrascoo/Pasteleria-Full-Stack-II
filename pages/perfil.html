@@ -2,28 +2,23 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito | Pastelería Mil Sabores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastelería Mil Sabores</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
-
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet">
 
-    <!-- Estilos -->
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body>
 
-    <!-- ====== Navbar ====== -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
@@ -85,35 +80,20 @@
         </nav>
     </header>
 
-
     <!-- ====== Main ====== -->
     <main class="container py-4 flex-grow-1">
-        <h2 class="mb-4">Carrito de Compras</h2>
+        <h1 class="mb-4">Mi Perfil</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Información del Usuario</h5>
+                <p class="card-text"><strong>Nombre:</strong> <span id="user-name"></span></p>
+                <p class="card-text"><strong>Email:</strong> <span id="user-email   "></span></p>
+                <p class="card-text"><strong>Dirección:</strong> <span id="user-address"></span></p>
+                <button class="btn btn-primary" id="edit-profile-btn">Editar Perfil</button>
+            </div>
 
-        <!-- Lista de productos -->
-        <ul id="carrito-lista" class="list-group mb-3"></ul>
-
-        <!-- Total -->
-        <div class="d-flex justify-content-between align-items-center">
-            <h4>Total:</h4>
-            <h4 id="carrito-total">$0</h4>
-        </div>
-
-        <!-- Botones -->
-        <div class="mt-4 d-flex gap-2 flex-wrap">
-            <a href="productos.html" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Seguir comprando
-            </a>
-            <button id="btnVaciar" class="btn btn-danger">
-                <i class="bi bi-trash"></i> Vaciar carrito
-            </button>
-            <a href="checkout.html" class="btn btn-primary ms-auto">
-                <i class="bi bi-credit-card"></i> Proceder al pago
-            </a>
-        </div>
     </main>
 
-    <!-- ====== Footer ====== -->
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
@@ -135,89 +115,13 @@
             </div>
         </div>
     </footer>
-
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4"
-                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-
-                <div class="modal-body pt-0">
-                    <form id="loginForm" novalidate>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
-                                required>
-                            <div class="invalid-feedback">Ingresa un correo válido.</div>
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="loginPass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
-                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordarme</label>
-                            </div>
-                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                    </form>
-
-                    <p class="text-center small mt-3 mb-0">
-                        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toasts container -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
-            aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body" id="cart-toast-msg">Producto agregado al carrito</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Cerrar"></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de confirmación -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-warning">
-                    <h5 class="modal-title">Confirmar acción</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body" id="confirmModalMsg">
-                    ¿Estás seguro que deseas continuar?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, continuar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Lógica carrito -->
     <script src="/js/user_store.js"></script>
     <script src="/js/navbar_sesion.js"></script>
     <script src="/js/login.js"></script>
+    <script src="/js/index.js"></script>
     <script src="/js/carrito.js"></script>
+
 </body>
 
 </html>
