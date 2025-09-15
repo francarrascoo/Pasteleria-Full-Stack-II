@@ -22,13 +22,12 @@
                 <div class="col-md-8">
                     <label class="form-label">Producto</label>
                     <select class="form-select" id="selectProducto" required>
-                        ${
-                            productos.length
-                                ? productos.map(p =>
-                                    `<option value="${p.code || p.id || ''}">${p.productName || p.nombre || '(Sin nombre)'}</option>`
-                                  ).join('')
-                                : '<option disabled selected>No hay productos en el catálogo</option>'
-                        }
+                        ${productos.length
+                ? productos.map(p =>
+                    `<option value="${p.code || p.id || ''}">${p.productName || p.nombre || '(Sin nombre)'}</option>`
+                ).join('')
+                : '<option disabled selected>No hay productos en el catálogo</option>'
+            }
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -89,15 +88,14 @@
                         <div class="col-12">
                             <label class="form-label">Producto</label>
                             <select class="form-select" id="selectEditarProducto" required>
-                                ${
-                                    productos.length
-                                        ? productos.map(p =>
-                                            `<option value="${p.code || p.id || ''}" data-img="${p.img || ''}">
+                                ${productos.length
+                ? productos.map(p =>
+                    `<option value="${p.code || p.id || ''}" data-img="${p.img || ''}">
                                                 ${p.productName || p.nombre || '(Sin nombre)'}
                                             </option>`
-                                          ).join('')
-                                        : '<option disabled selected>No hay productos en el catálogo</option>'
-                                }
+                ).join('')
+                : '<option disabled selected>No hay productos en el catálogo</option>'
+            }
                             </select>
                         </div>
                         <div class="col-12">
@@ -236,19 +234,17 @@
                     <label class="form-label">Producto</label>
                     <div class="input-group">
                         <select class="form-select" id="selectEliminarProducto" required>
-                            ${
-                                productos.length
-                                    ? productos.map(p =>
-                                        `<option value="${p.code || p.id || ''}" data-stock="${p.stock != null ? p.stock : ''}">
+                            ${productos.length
+                ? productos.map(p =>
+                    `<option value="${p.code || p.id || ''}" data-stock="${p.stock != null ? p.stock : ''}">
                                             ${p.productName || p.nombre || '(Sin nombre)'}
                                         </option>`
-                                      ).join('')
-                                    : '<option disabled selected>No hay productos en el catálogo</option>'
-                            }
+                ).join('')
+                : '<option disabled selected>No hay productos en el catálogo</option>'
+            }
                         </select>
-                        <span class="input-group-text" id="stockEliminarProducto">Stock: ${
-                            productos.length && productos[0].stock != null ? productos[0].stock : '—'
-                        }</span>
+                        <span class="input-group-text" id="stockEliminarProducto">Stock: ${productos.length && productos[0].stock != null ? productos[0].stock : '—'
+            }</span>
                     </div>
                 </div>
                 <div class="col-md-4 d-flex align-items-end">
