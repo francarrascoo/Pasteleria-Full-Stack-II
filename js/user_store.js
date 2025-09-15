@@ -1,3 +1,20 @@
+// ===== Cálculo de beneficios reutilizable =====
+function calcularBeneficiosUsuario({ correo, nacimiento, codigo }) {
+    let beneficios = { descuento: 0, tortaGratisCumple: false };
+    const hoy = new Date();
+    const fechaNac = nacimiento ? new Date(nacimiento) : null;
+    const edad = fechaNac ? hoy.getFullYear() - fechaNac.getFullYear() : 0;
+    const cumple = !!(fechaNac && hoy.getMonth() === fechaNac.getMonth() && hoy.getDate() === fechaNac.getDate());
+    if (edad >= 50) beneficios.descuento = 50;
+    if (codigo && String(codigo).trim().toUpperCase() === "FELICES50") {
+        beneficios.descuento = Math.max(beneficios.descuento, 10);
+    }
+    const cl = String(correo || "").toLowerCase();
+    if (cl.endsWith("@duoc.cl") || cl.endsWith("@profesor.duoc.cl")) {
+        beneficios.tortaGratisCumple = true;
+    }
+    return beneficios;
+}
 // ===== Claves de almacenamiento =====
 const LSK_USUARIOS = "usuarios";
 const LSK_SESION = "usuarioActivo";
@@ -41,6 +58,7 @@ function setUsuarios(lista) {
  * - Beneficios (edad 50+, código FELICES50, correos Duoc)
  */
 function crearUsuario({
+    run,
     nombre,
     apellido = "",
     correo,
@@ -49,7 +67,24 @@ function crearUsuario({
     codigo,
     rol = "Cliente",
 }) {
+    // Formatear el RUN antes de validar y guardar
+    if (typeof formatearRun === 'function') {
+        run = formatearRun(run);
+    } else {
+        // Fallback mínimo si no está la función
+        run = String(run || "").replace(/[^0-9kK]/g, "").toUpperCase().trim();
+        let cuerpo = run.slice(0, -1);
+        let dv = run.slice(-1);
+        if (cuerpo.length === 7)
+            cuerpo = cuerpo.replace(/(\d{1})(\d{3})(\d{3})/, "$1.$2.$3");
+        else if (cuerpo.length === 8)
+            cuerpo = cuerpo.replace(/(\d{2})(\d{3})(\d{3})/, "$1.$2.$3");
+        run = cuerpo && dv ? cuerpo + "-" + dv : cuerpo;
+    }
     // Validaciones
+    if (!run || typeof run !== "string" || !/^([0-9]{1,2})\.[0-9]{3}\.[0-9]{3}-[0-9Kk]$/.test(run)) {
+        return { ok: false, error: "El RUT es obligatorio y debe tener formato 12.345.678-9." };
+    }
     if (!emailLargoOK(correo)) {
         return { ok: false, error: "El correo debe tener como máximo 100 caracteres." };
     }
@@ -64,36 +99,21 @@ function crearUsuario({
     }
 
     const lista = getUsuarios();
-    const existe = lista.some(
+    const existeCorreo = lista.some(
         (u) => u.correo.toLowerCase() === String(correo).toLowerCase()
     );
-    if (existe) return { ok: false, error: "El correo ya está registrado." };
+    if (existeCorreo) return { ok: false, error: "El correo ya está registrado." };
+    const existeRun = lista.some(
+        (u) => u.run && u.run.toUpperCase() === String(run).toUpperCase()
+    );
+    if (existeRun) return { ok: false, error: "El RUT ya está registrado." };
 
     // Beneficios extra
     const hoy = new Date();
-    const fechaNac = nacimiento ? new Date(nacimiento) : null;
-    const edad = fechaNac ? hoy.getFullYear() - fechaNac.getFullYear() : 0;
-    const cumple =
-        !!(fechaNac &&
-            hoy.getMonth() === fechaNac.getMonth() &&
-            hoy.getDate() === fechaNac.getDate());
-
-    let beneficios = { descuento: 0, tortaGratisCumple: false };
-
-    if (edad >= 50) beneficios.descuento = 50; // 50% si tiene 50+
-    if (codigo && String(codigo).trim().toUpperCase() === "FELICES50") {
-        beneficios.descuento = Math.max(beneficios.descuento, 10); // 10% de por vida
-    }
-    const cl = String(correo || "").toLowerCase();
-    if (cl.endsWith("@duoc.cl") || cl.endsWith("@profesor.duoc.cl")) {
-        beneficios.tortaGratisCumple = true;
-        if (cumple) {
-            // aquí podrías disparar un aviso de cumpleaños
-        }
-    }
-
+    const beneficios = calcularBeneficiosUsuario({ correo, nacimiento, codigo });
     const nuevo = {
-        id: Date.now(),
+        id: run,
+        run: String(run || "").toUpperCase(),
         nombre: String(nombre || "").trim(),
         apellido: String(apellido || "").trim(),
         correo: String(correo || "").trim(),
@@ -128,20 +148,22 @@ function guardarSesion(usuario, recordar = false) {
         beneficios: usuario.beneficios,
         rol: usuario.rol || "Cliente",
         ts: Date.now(),
+        run: usuario.run || usuario.id || '',
+        nacimiento: usuario.nacimiento || '',
     };
     const data = JSON.stringify(payload);
 
-    if (recordar) {
-        localStorage.setItem(LSK_SESION, data); // persiste al cerrar navegador
-    } else {
-        sessionStorage.setItem(LSK_SESION, data); // se borra al cerrar navegador
-    }
+    // Siempre guardar en ambos para consistencia inmediata
+    localStorage.setItem(LSK_SESION, data);
+    sessionStorage.setItem(LSK_SESION, data);
 
     // ⚡ Restaurar carrito guardado del usuario
+    // Siempre restaurar SOLO el carrito del usuario activo
     const carritoGuardado = localStorage.getItem(`carrito_${usuario.id}`);
     if (carritoGuardado) {
         localStorage.setItem("carrito", carritoGuardado);
     } else {
+        // Si no hay carrito guardado, limpiar el carrito global
         localStorage.removeItem("carrito");
     }
 }
@@ -149,17 +171,20 @@ function guardarSesion(usuario, recordar = false) {
 function limpiarSesion() {
     const sesion = leerSesion();
     if (sesion) {
-        // Guardar carrito del usuario antes de cerrar sesión
+        // Guardar SIEMPRE el carrito actual en el usuario antes de cerrar sesión
         const carrito = localStorage.getItem("carrito");
         if (carrito) {
             localStorage.setItem(`carrito_${sesion.id}`, carrito);
+        } else {
+            // Si no hay carrito, eliminar el carrito guardado del usuario
+            localStorage.removeItem(`carrito_${sesion.id}`);
         }
     }
 
     localStorage.removeItem(LSK_SESION);
     sessionStorage.removeItem(LSK_SESION);
 
-    // 🔥 Limpiar carrito visible
+    // Limpiar SIEMPRE el carrito global
     localStorage.removeItem("carrito");
 }
 

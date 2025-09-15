@@ -12,7 +12,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -36,30 +35,20 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
-                                        Cuadradas</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
-                                        Circulares</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
-                                        Individuales</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
-                                        Azúcar</a></li>
-                                <li><a class="dropdown-item"
-                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
-                                </li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
-                                        gluten</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
-                                        Veganos</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
-                                        Especiales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas Cuadradas</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas Circulares</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres Individuales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin Azúcar</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin gluten</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas Especiales</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">Blogs</a></li>
                         <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">Contacto</a></li>
                     </ul>
-
                     <div class="d-flex align-items-center">
                         <div class="nav-item dropdown account-dropdown ms-3">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,16 +59,16 @@
                         </div>
                         <a href="carrito.html" class="nav-link ms-3 position-relative">
                             <i class="bi bi-cart fs-4"></i>
-                            <span id="cart-count"
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         </a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
+
     <main class="container py-4">
-        <div class="row g-4" id="detalle-layout">
+    <div class="row g-4" id="detalle-layout">
             <!-- IZQUIERDA: imagen -->
             <div class="col-lg-4 text-center">
                 <img id="imagen" src="" alt="Imagen del producto" class="img-fluid rounded shadow" />
@@ -87,31 +76,59 @@
 
             <!-- CENTRO: especificaciones -->
             <div class="col-lg-4">
-                <div class="border rounded p-3 h-100">
-                    <h1 class="h4" id="titulo"></h1>
-                    <div id="badgesDetalle" class="d-flex gap-1 flex-wrap mb-3"></div>
-                    <p id="descripcion" class="small text-muted"></p>
-                    <h2 class="h6 mt-3">Especificaciones principales</h2>
-                    <ul class="list-unstyled small" id="specs"></ul>
+                <div class="border rounded p-3 h-100 bg-light-subtle d-flex flex-column justify-content-between detalle-card-central">
+                    <div>
+                        <h1 class="h4 mb-2" id="titulo"></h1>
+                        <div id="badgesDetalle" class="d-flex gap-1 flex-wrap mb-3"></div>
+                        <p id="descripcion" class="small text-muted mb-3"></p>
+                    </div>
+                    <div>
+                        <h2 class="h6 mt-3">¿Por qué elegir este producto?</h2>
+                        <ul class="list-unstyled small mb-3">
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Ingredientes frescos y de calidad</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Receta artesanal exclusiva</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Personalización disponible</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>Entrega rápida y segura</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <!-- DERECHA: compra -->
             <div class="col-lg-4">
-                <div class="border rounded p-3 h-100">
-                    <span class="h4 d-block mb-2" id="precio"></span>
-
-                    <div class="mt-3 d-flex align-items-center gap-2">
-                        <button class="btn btn-outline-secondary" id="menos">−</button>
-                        <input id="qty" type="number" class="form-control text-center" style="max-width:80px" value="1"
-                            min="1" />
-                        <button class="btn btn-outline-secondary" id="mas">+</button>
+                <div class="border rounded p-3 h-100 bg-light-subtle d-flex flex-column justify-content-between detalle-card-compra">
+                    <div>
+                        <span class="h4 d-block mb-2" id="precio"></span>
+                        <div class="mt-3 d-flex align-items-center gap-2">
+                            <button class="btn btn-outline-secondary" id="menos">−</button>
+                            <input id="qty" type="number" class="form-control text-center" style="max-width:80px" value="1" min="1" />
+                            <button class="btn btn-outline-secondary" id="mas">+</button>
+                        </div>
+                        <!-- Input de mensaje personalizado para tortas personalizables -->
+                        <div id="mensajePersonalizadoContainer" class="mb-3" style="display:none;">
+                            <label for="mensajePersonalizado" class="form-label">Mensaje personalizado para la torta:</label>
+                            <input type="text" class="form-control" id="mensajePersonalizado" maxlength="60" placeholder="Escribe tu dedicatoria (opcional)">
+                            <div class="form-text">Máx. 60 caracteres. Aplica solo a tortas personalizables.</div>
+                        </div>
+                        <button id="addCart" class="btn btn-dark w-100 mt-3">
+                            <i class="bi bi-bag-plus"></i> Agregar al Carro
+                        </button>
                     </div>
-
-                    <button id="addCart" class="btn btn-dark w-100 mt-3">
-                        <i class="bi bi-bag-plus"></i> Agregar al Carro
-                    </button>
+                    <div class="mt-4">
+                        <div class="mb-2 small text-muted"><i class="bi bi-shield-check text-success me-1"></i>Compra protegida y garantizada</div>
+                        <div class="mb-2 small text-muted"><i class="bi bi-truck text-primary me-1"></i>Envíos a todo Chile</div>
+                        <div class="mb-2 small text-muted"><i class="bi bi-credit-card-2-front text-warning me-1"></i>Aceptamos tarjetas y transferencias</div>
+                        <div class="mb-2 small text-muted"><i class="bi bi-clock-history text-info me-1"></i>Atención personalizada</div>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Productos Recomendados -->
+        <div class="container my-5">
+            <h2 class="mb-4">También te podría interesar</h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" id="related-products">
+                <!-- Productos relacionados se insertan dinámicamente aquí -->
             </div>
         </div>
     </main>
@@ -125,7 +142,6 @@
     <script src="/js/admin_access.js"></script>
 
 
-    </script>
 </body>
 
 </html>

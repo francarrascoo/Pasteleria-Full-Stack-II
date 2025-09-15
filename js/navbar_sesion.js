@@ -29,6 +29,11 @@
     localStorage.removeItem('carrito');
     if (typeof updateCartCount === 'function') updateCartCount();
 
+    if (window.location.pathname.includes("carrito.html")) {
+      window.location.href = "productos.html";
+    } else if (window.location.pathname.includes("perfil.html")) {
+      window.location.href = "index.html";
+    }
     // Redirige SIEMPRE al home (ruta absoluta)
     window.location.href = '/pages/index.html';
   }
@@ -110,7 +115,7 @@
           Conectado como<br><strong>${sesion.nombre} ${sesion.apellido}</strong>
         </span></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/pages/perfil.html">Mis datos</a></li>
+        <li><a class="dropdown-item" href="/pages/perfil.html">Mi perfil</a></li>
         <li><a class="dropdown-item" href="/pages/pedidos.html">Mis pedidos</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><button class="dropdown-item text-danger" type="button" id="btn-cerrar-sesion">Cerrar sesión</button></li>
@@ -124,7 +129,13 @@
 
         const confirmBtn = modalEl.querySelector('#confirmLogoutBtn');
         confirmBtn.onclick = () => {
-          logout(); // <- limpia y REDIRIGE a /index.html
+          logout();
+          setTimeout(() => {
+            try { modal.hide(); } catch {}
+            renderNavbarSession();
+            // Forzar recarga para limpiar UI en todas las páginas
+            window.location.reload();
+          }, 100);
           // (tras redirect no se ejecuta nada más)
         };
       });

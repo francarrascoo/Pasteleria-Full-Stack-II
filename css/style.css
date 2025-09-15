@@ -1,3 +1,108 @@
+#producto-detalle #descripcion, .detalle-card-central #descripcion {
+    text-align: justify;
+    text-justify: inter-word;
+}
+@media (max-width: 991.98px) {
+    #detalle-layout > .col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    #detalle-layout .border {
+        min-height: unset !important;
+        max-height: unset !important;
+        height: auto !important;
+        padding: 1.25rem 0.75rem !important;
+    }
+    #imagen {
+        height: 220px !important;
+        max-width: 100% !important;
+        margin: 0 auto 1rem auto !important;
+        display: block;
+    }
+}
+
+@media (max-width: 575.98px) {
+    #detalle-layout .border {
+        padding: 1rem 0.5rem !important;
+    }
+    #imagen {
+        height: 160px !important;
+    }
+    .detalle-card-central, .detalle-card-compra {
+        font-size: 0.97rem;
+    }
+}
+/* Altura más baja para las cards principales en detalle si no es personalizable */
+.detalle-bajo .col-lg-4 > .border {
+    min-height: 320px !important;
+    max-height: 370px !important;
+}
+/* Imagen principal cuadrada y uniforme en detalle */
+#imagen {
+    width: 100% !important;
+    max-width: 340px !important;
+    aspect-ratio: 1/1 !important;
+    height: 450px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    background: #f8f9fa !important;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 1rem !important;
+}
+
+.detalle-bajo #imagen {
+    height: 100% !important;
+    min-height: 320px !important;
+    max-height: 370px !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    aspect-ratio: 1/1 !important;
+    display: block;
+    margin: 0 auto;
+}
+#region Forzar uniformidad en productos relacionados
+#related-products .related-img-container {
+    width: 100% !important;
+    aspect-ratio: 1/1 !important;
+    height: 180px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #f8f9fa !important;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    position: relative !important;
+}
+
+#related-products .related-product-img {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 1/1 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    background: #f8f9fa !important;
+    border-radius: 0.5rem 0.5rem 0 0 !important;
+    display: block !important;
+}
+#endregion
+/* Contenedor cuadrado para imágenes relacionadas */
+.related-img-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
 :root {
     --color-background: #ffffff;
     --color-text-primary: #1a1a1a;
@@ -66,6 +171,16 @@ body {
     box-shadow: none !important;
 }
 
+.dropdown-item {
+    font-weight: 300;
+}
+
+.dropdown-item:focus,
+.dropdown-item:active {
+    background-color: var(--accent-main) !important;
+    color: var(--color-background) !important;
+}
+
 @media (min-width: 992px) {
     .navbar-nav .dropdown:hover>.dropdown-menu {
         display: block;
@@ -96,7 +211,6 @@ footer .bi:hover {
     backdrop-filter: blur(6px);
 }
 
-/* Botón principal */
 #loginModal .btn-primary {
     background: var(--accent-main);
     border: none;
@@ -124,20 +238,11 @@ footer .bi:hover {
     border-color: var(--accent-main);
 }
 
-.dropdown-item:focus,
-.dropdown-item:active {
-    background-color: var(--accent-main) !important;
-    color: var(--color-background) !important;
-}
 
 /* ===== MODAL LOGOUT ===== */
 #logoutConfirmModal .modal-content {
     background: color-mix(in oklab, var(--color-background) 92%, transparent);
     backdrop-filter: blur(6px);
-}
-
-#logoutConfirmModal .modal-header {
-    border-bottom: 1px solid var(--accent-main);
 }
 
 #logoutConfirmModal .modal-title {
@@ -257,6 +362,7 @@ footer .bi:hover {
     border: var(--border-soft);
     border-radius: var(--radius-s);
     transition: transform var(--transition), box-shadow var(--transition);
+
 }
 
 .card-img-top {
@@ -266,9 +372,23 @@ footer .bi:hover {
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-soft);
+    /* Sin efecto de levantar */
+    transform: none;
+    box-shadow: none;
 }
+
+/* Botones principales y de acción con color root */
+.btn-warning, .btn-primary, .btn-outline-warning, .btn-outline-primary {
+    background-color: var(--accent-main) !important;
+    border-color: var(--accent-main) !important;
+    color: #fff !important;
+}
+.btn-warning:hover, .btn-primary:hover, .btn-outline-warning:hover, .btn-outline-primary:hover {
+    background-color: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
+    color: #fff !important;
+}
+
 
 .card-title {
     font-size: 1.2rem;
@@ -344,15 +464,64 @@ footer .bi:hover {
 /* --- PRODUCTOS --- */
 
 .filters .btn {
-    color: var(--color-text-secondary);
-    border: var(--accent-main) 0.5px solid;
+    background: #fff !important;
+    color: var(--accent-main) !important;
+    border: 1.5px solid var(--accent-main) !important;
     padding: 0;
+    transition: background 0.2s, color 0.2s;
 }
+
 
 .filters .btn:hover,
 .filters .btn.active {
+    background: var(--accent-main) !important;
+    color: #fff !important;
+    border-color: var(--accent-main) !important;
+}
+
+/* ====== Barra de seguimiento de pedido ====== */
+.tracking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem 0;
+}
+.tracking-bar .step {
+    padding: 0.35em 1.1em;
+    border-radius: 999px;
+    background: #eee;
+    color: #b08d57;
+    font-size: 0.97em;
+    font-weight: 500;
+    border: 1.5px solid #b08d57;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    z-index: 1;
+}
+.tracking-bar .step.active {
     background: var(--accent-main);
-    color: var(--color-background);
+    color: #fff;
+    border-color: var(--accent-main);
+}
+.tracking-bar .step-cancel {
+    background: #f8d7da;
+    color: #a03a5a;
+    border-color: #f5c2c7;
+}
+.tracking-bar .step-cancel.active {
+    background: #a03a5a;
+    color: #fff;
+    border-color: #a03a5a;
+}
+.tracking-bar .bar-sep {
+    flex: 0 0 24px;
+    height: 3px;
+    background: #b08d57;
+    border-radius: 2px;
+    margin: 0 0.1em;
+    opacity: 0.5;
+    z-index: 0;
 }
 
 #shopContent {
@@ -387,7 +556,7 @@ footer .bi:hover {
     font-size: 1rem;
     margin: .5rem 0 0;
     padding: 0 1rem;
-    font-weight: 500;
+    min-height: 2.5rem;
 }
 
 .card-products .code {
@@ -429,7 +598,13 @@ footer .bi:hover {
     font-family: var(--font-title, "Montserrat", sans-serif);
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    padding-bottom: 0;
+    padding-top: 0;
+    min-height: unset;
+    max-width: 100%;
+    /* Reduce el espacio vertical extra */
 }
 
 #producto-detalle img {
@@ -537,7 +712,7 @@ footer .bi:hover {
 
 .tile-all {
     grid-area: E;
-    min-height: clamp(140px, 18vw, 150px);
+    min-height: clamp(140px, 18vw, 250px);
 }
 
 /* Overlay */
@@ -700,3 +875,39 @@ footer .bi:hover {
         padding: 2rem 0;
     }
 }
+
+
+/* --- CARRITO DE COMPRAS --- */
+/* Ocultar las flechas en Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"].cart-qty {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.list-group-item img {
+    width: 40%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .list-group-item img {
+        width: 50%; 
+    }
+}
+
+/* Badge Personalizable (rosa pastel) */
+.badge.text-bg-info {
+    background-color: #f8bbd0 !important; /* rosa pastel */
+    color: #a03a5a !important; /* texto más oscuro para contraste */
+    border: 1px solid #f8bbd0 !important;
+}
+

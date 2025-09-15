@@ -19,10 +19,9 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- Navbar global -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
                 </a>
@@ -70,7 +69,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
                             <i class="bi bi-cart fs-4"></i>
                             <span id="cart-count"
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
@@ -84,21 +83,55 @@
     <main class="container py-4 flex-grow-1">
         <h2 class="mb-4">Confirmación de Pedido</h2>
 
-        <div id="checkout-carrito" class="mb-4"></div>
 
-        <form id="checkoutForm" class="card p-3 shadow-sm">
-            <div class="mb-3">
-                <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
-                <input type="date" id="fechaEntrega" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección de entrega</label>
-                <input type="text" id="direccion" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Confirmar pedido</button>
-        </form>
+                <!-- <div id="checkout-carrito" class="mb-4"></div> -->
+                <div id="checkout-resumen" class="mb-4"></div>
 
-        <div id="boleta" class="mt-4"></div>
+                <form id="checkoutForm" class="card p-3 shadow-sm">
+                        <div class="mb-3">
+                                <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
+                                <input type="date" id="fechaEntrega" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                                <label for="direccionSelect" class="form-label">Dirección de entrega</label>
+                                <div class="input-group">
+                                        <select id="direccionSelect" class="form-select" required></select>
+                                        <button class="btn btn-outline-primary" type="button" id="btnAddDireccion" title="Agregar nueva dirección"><i class="bi bi-plus-circle"></i></button>
+                                </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Confirmar pedido</button>
+                </form>
+
+                <!-- Modal para agregar nueva dirección -->
+                <div class="modal fade" id="addDireccionModal" tabindex="-1" aria-labelledby="addDireccionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addDireccionModalLabel">Agregar nueva dirección</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="formAddDireccion">
+                                    <div class="mb-3">
+                                        <label for="addDireccionLinea1" class="form-label">Dirección</label>
+                                        <input type="text" class="form-control" id="addDireccionLinea1" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="addDireccionRegion" class="form-label">Región</label>
+                                        <select class="form-select" id="addDireccionRegion" required></select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="addDireccionComuna" class="form-label">Comuna</label>
+                                        <select class="form-select" id="addDireccionComuna" required disabled></select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Guardar dirección</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="boleta" class="mt-4"></div>
     </main>
 
     <footer class="container-fluid py-3 border-top">
