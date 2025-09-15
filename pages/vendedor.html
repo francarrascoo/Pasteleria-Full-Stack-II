@@ -2,14 +2,93 @@
 <html lang="es">
 
 <head>
+    <!-- HEAD GLOBAL (TAL CUAL NOS PASASTE) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Vendedor | Pastelería Mil Sabores</title>
+    <title>Pastelería Mil Sabores</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Estilos mínimos del layout admin (no rompen tu CSS) -->
+    <style>
+        :root {
+            --admin-sidebar-w: 260px;
+        }
+
+        .admin-wrap {
+            min-height: calc(100vh - var(--nav-h, 60px));
+            display: grid;
+            grid-template-columns: var(--admin-sidebar-w) 1fr;
+        }
+
+        .admin-sidebar {
+            border-right: 1px solid rgba(0, 0, 0, .08);
+            background: #fff;
+            position: sticky;
+            top: var(--nav-h, 60px);
+            height: calc(100vh - var(--nav-h, 60px));
+            padding: 1rem;
+        }
+
+        .admin-menu .list-group-item {
+            border: 0;
+            border-radius: .6rem;
+            margin: .15rem 0;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .admin-menu .list-group-item.active {
+            background: var(--accent-main, #b08d57);
+            color: #fff;
+        }
+
+        .admin-content {
+            padding: 1.25rem;
+            background: #fafafa;
+        }
+
+        .stat-card .icon {
+            font-size: 1.6rem;
+            opacity: .85;
+        }
+
+        .empty-state {
+            padding: 2rem 1rem;
+            border: 1px dashed #ddd;
+            border-radius: .75rem;
+            text-align: center;
+        }
+
+        .table thead th {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 992px) {
+            .admin-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: static;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- HEADER GLOBAL (TAL CUAL) -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
@@ -75,116 +154,60 @@
         </nav>
 
     </header>
-    <div class="container-fluid">
+
+    <!-- ===== LAYOUT DEL PANEL ===== -->
+    <div class="admin-wrap">
         <!-- Sidebar -->
-        <div class="row">
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#addProduct">
-                                Agregar Producto
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#editProduct">
-                                Editar Producto
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#deleteProduct">
-                                Eliminar Producto
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <aside class="admin-sidebar">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-person-badge"></i><strong>Panel vendedor</strong>
+            </div>
+            <div class="list-group admin-menu">
+                <a href="#" class="list-group-item list-group-item-action active" data-section="agregar"><i
+                        class="bi bi-plus-square"></i> Agregar Producto</a>
+                <a href="#" class="list-group-item list-group-item-action" data-section="editar"><i
+                        class="bi bi-pencil-square"></i> Editar Producto</a>
+                <a href="#" class="list-group-item list-group-item-action" data-section="eliminar"><i
+                        class="bi bi-trash"></i> Eliminar Producto</a>
+            </div>
+        </aside>
 
-            <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
-                <!-- Agregar Producto Form -->
-                <section id="addProduct">
-                    <h2>Agregar Producto</h2>
-                    <form>
-                        <div class="mb-3">
-                            <label for="productName" class="form-label">Nombre del Producto</label>
-                            <input type="text" class="form-control" id="productName" placeholder="Nombre del producto"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productDescription" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="productDescription" rows="3"
-                                placeholder="Descripción del producto" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="productPrice" placeholder="Precio en CLP"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productStock" class="form-label">Stock</label>
-                            <input type="number" class="form-control" id="productStock" placeholder="Cantidad en stock"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productCategory" class="form-label">Categoría</label>
-                            <select class="form-select" id="productCategory" required>
-                                <option value="tortas-cuadradas">Tortas Cuadradas</option>
-                                <option value="tortas-circulares">Tortas Circulares</option>
-                                <option value="postres-individuales">Postres Individuales</option>
-                                <!-- Add more categories as needed -->
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productImage" class="form-label">Imagen del Producto</label>
-                            <input type="file" class="form-control" id="productImage" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
-                    </form>
-                </section>
-
-                <!-- Editar Producto -->
-                <section id="editProduct" class="mt-5">
-                    <h2>Editar Producto</h2>
-                    <div id="productList">
-                        <!-- Dynamically generated product list with edit buttons -->
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Producto 1
-                                <button class="btn btn-warning btn-sm">Editar</button>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Producto 2
-                                <button class="btn btn-warning btn-sm">Editar</button>
-                            </li>
-                            <!-- More products will be listed here -->
-                        </ul>
-                    </div>
-                </section>
-
-                <!-- Eliminar Producto -->
-                <section id="deleteProduct" class="mt-5">
-                    <h2>Eliminar Producto</h2>
-                    <div id="deleteProductList">
-                        <!-- Dynamically generated product list with delete buttons -->
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Producto 1
-                                <button class="btn btn-danger btn-sm">Eliminar</button>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Producto 2
-                                <button class="btn btn-danger btn-sm">Eliminar</button>
-                            </li>
-                            <!-- More products will be listed here -->
-                        </ul>
-                    </div>
-                </section>
-            </main>
-        </div>
+        <!-- Contenido -->
+        <main class="admin-content">
+            <div id="sectionRoot"><!-- aquí renderiza /js/vendedor.js --></div>
+        </main>
     </div>
 
+    <!-- FOOTER GLOBAL (TAL CUAL) -->
+    <footer class="container-fluid py-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
+                        height="40"></a>
+            </div>
+            <div class="nav mb-3 mb-md-0">
+                <a class="nav-link" href="productos.html">Categorias</a>
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+                <a class="nav-link" href="blogs.html">Blogs</a>
+                <a class="nav-link" href="contacto.html">Contacto</a>
+                <a class="nav-link" href="admin.html">Admin</a>
+            </div>
+            <div class="d-flex gap-3">
+                <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS (Bootstrap + tu admin) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendedor.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/navbar_sesion.js"></script>
+    <script src="/js/admin_access.js"></script>
+    <script src="/js/user_store.js"></script>
+
 </body>
 
 </html>
