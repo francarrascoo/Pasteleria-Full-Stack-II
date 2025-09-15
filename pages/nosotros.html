@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastelería Mil Sabores</title>
+    <title>Nosotros | Pastelería Mil Sabores</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -13,11 +13,78 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .container {
+            margin: 0 auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .history-section,
+        .founder-section,
+        .values-section {
+            padding: 30px 15px;
+        }
+
+        .history-section p,
+        .founder-section p,
+        .values-section p,
+        .values-section ul {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        /* Añadir espacio entre texto e imagen */
+        .history-section img,
+        .founder-section img {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            width: 100%;
+            /* Hace que la imagen se ajuste al ancho de su contenedor */
+            max-width: 300px;
+            /* Tamaño máximo de la imagen (puedes ajustarlo a tu preferencia) */
+            margin-left: auto;
+            margin-right: auto;
+            /* Centra la imagen */
+        }
+
+        /* Asegura que el texto tenga espacio con respecto al borde */
+        .history-section,
+        .founder-section {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        /* Para los valores, ajustar el padding */
+        .values-section {
+            padding-top: 30px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+        }
+
+        .cta-section .btn {
+            margin-top: 20px;
+        }
+
+        /* Ajustar el espaciado entre los elementos */
+        .row {
+            margin-bottom: 30px;
+        }
+
+        .col-md-6 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
+
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
             <div class="container-fluid">
@@ -79,9 +146,10 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <div class="parallax parallax-1">
         <div class="hero-content container text-center text-white">
-            <h1 class="display-5 fw-bold">Postres y momentos dulces</h1>
+            <h1 class="display-5 fw-bold">Bienvenidos a Pastelería Mil Sabores</h1>
             <p class="lead">Sabores que celebran cada ocasión</p>
         </div>
         <a href="#frescura" class="scroll-down-arrow">
@@ -89,63 +157,64 @@
         </a>
     </div>
 
-    <h2 class="m-5 text-center" id="frescura">En Pastelería Mil Sabores todo es frescura y calidad</h2>
-    <div class="container my-4">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/torta.png" class="card-img-top" alt="Torta Cuadrada de Chocolate">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title">Torta Cuadrada de Chocolate</h5>
-                        <p class="card-text">Tortas cuadradas</p>
-                    </div>
-                </div>
+    <!-- Historia de la Pastelería -->
+    <section class="history-section">
+        <h2>Nuestra Historia</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    **Pastelería Mil Sabores** fue fundada hace más de **20 años** y se ha consolidado como un referente
+                    en la repostería chilena. En 1995, la pastelería hizo historia al colaborar en la creación de la
+                    **torta más grande del mundo**, un evento que la posicionó a nivel internacional.
+                </p>
+                <p>
+                    Con una **misión clara**: ofrecer **una experiencia dulce y memorable** a cada cliente, Pastelería
+                    Mil Sabores ha mantenido un enfoque en la calidad, la creatividad y la personalización de sus
+                    productos. A lo largo de los años, hemos crecido con un compromiso constante hacia la excelencia.
+                </p>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/tiramisu.jpg" class="card-img-top" alt="Torta Cuadrada de Chocolate">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title">Tiramisú clásico</h5>
-                        <p class="card-text">Postres individuales</p>
-                    </div>
-                </div>
+            <div class="col-md-6">
+                <img src="/img/Nosotros/Tortamasgrande.jpg" alt="Historia de la pastelería" class="img-fluid">
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/brownie.jpg" class="card-img-top" alt="Brownie Sin Gluten">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title">Brownie Sin Gluten</h5>
-                        <p class="card-text">Productos Sin Gluten</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="/img/cheesecake.jpg" class="card-img-top" alt="Cheesecake Sin Azúcar">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title">Cheesecake Sin Azúcar</h5>
-                        <p class="card-text">Productos sin azúcar</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="video-hero">
-        <video class="video-hero-media" autoplay muted loop playsinline>
-            <!-- Reemplaza por tu video (mp4/webm) -->
-            <source src="/img/video_section.mp4" type="video/mp4">
-            <!-- Opcional: webm
-    <source src="img/pasteleria.webm" type="video/webm"> -->
-            Tu navegador no soporta video HTML5.
-        </video>
-
-        <div class="video-hero-caption">
-            <h2>Comienza tu día con</h2>
-            <h1>Dulzura</h1>
         </div>
     </section>
 
+    <!-- Biografía de la Fundadora -->
+    <section class="founder-section">
+        <h2>Conoce a Nuestra Fundadora</h2>
+        <div class="row">
+            <div class="col-md-6 order-md-2">
+                <p>
+                    **María Isabel Pérez**, fundadora de **Pastelería Mil Sabores**, comenzó su carrera en el mundo de
+                    la repostería desde joven. Con el tiempo, su pasión por la cocina y el deseo de ofrecer lo mejor a
+                    sus clientes la llevaron a crear la pastelería que hoy conocemos.
+                </p>
+                <p>
+                    Con una visión clara de calidad y un amor por la tradición, **María Isabel** ha logrado posicionar
+                    la pastelería como un referente en la industria, siendo parte activa en su evolución hacia una
+                    plataforma online que permita a los clientes acceder a sus productos de manera fácil y segura.
+                </p>
+            </div>
+            <div class="col-md-6 order-md-1">
+                <img src="/img/fundadora.jpg" alt="María Isabel Pérez" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestros Valores -->
+    <section class="values-section">
+        <h2>Nuestros Valores</h2>
+        <ul>
+            <li><strong>Calidad:</strong> Nos comprometemos a ofrecer siempre lo mejor en sabor y presentación,
+                utilizando los mejores ingredientes en cada creación.</li>
+            <li><strong>Creatividad:</strong> Fomentamos la innovación en cada uno de nuestros productos, adaptándonos a
+                las tendencias y necesidades de nuestros clientes.</li>
+            <li><strong>Compromiso:</strong> Estamos comprometidos con nuestros clientes, ofreciendo un servicio
+                excepcional y una experiencia de compra memorable.</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
@@ -157,6 +226,7 @@
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
                 <a class="nav-link" href="blogs.html">Blogs</a>
                 <a class="nav-link" href="contacto.html">Contacto</a>
+                <a class="nav-link" href="admin.html">Admin</a>
             </div>
             <div class="d-flex gap-3">
                 <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
@@ -165,55 +235,15 @@
             </div>
         </div>
     </footer>
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4"
-                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
 
-                <div class="modal-body pt-0">
-                    <form id="loginForm" novalidate>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
-                                required>
-                            <div class="invalid-feedback">Ingresa un correo válido.</div>
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="loginPass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
-                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordarme</label>
-                            </div>
-                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                    </form>
-
-                    <p class="text-center small mt-3 mb-0">
-                        ¿No tienes cuenta? <a href="/pages/registro.html">Regístrate</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/user_store.js"></script>
     <script src="/js/navbar_sesion.js"></script>
     <script src="/js/login.js"></script>
+    <script src="/js/index.js"></script>
     <script src="/js/carrito.js"></script>
     <script src="/js/admin_access.js"></script>
-
+    <script src="/js/seed_admin.js"></script>
 
 </body>
 
