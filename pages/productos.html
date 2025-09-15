@@ -21,7 +21,7 @@
 
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
                 </a>
@@ -69,7 +69,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
                             <i class="bi bi-cart fs-4"></i>
                             <span id="cart-count"
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
@@ -82,11 +82,10 @@
 
     <main class="container py-4 flex-grow-1">
         <div class="row g-3">
-            <!-- Filtros -->
             <aside class="col-md-2 d-none d-md-block px-3">
                 <h2 class="h6 mb-3">Filtros</h2>
                 <div class="d-grid gap-2 filters">
-                    <button id="todosBtn" class="btn btn-outline-secondary btn-sm text-start py-1 px-2">Todos</button>
+                    <button id="todosBtn" class="btn btn-primary btn-sm text-start py-1 px-2">Todos</button>
                     <button id="tortasCuadradasBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Tortas
                         Cuadradas</button>
                     <button id="tortasCircularesBtn" class="btn btn-outline-primary btn-sm text-start py-1 px-2">Tortas
@@ -131,8 +130,6 @@
             </section>
         </div>
     </main>
-
-
 
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
@@ -220,8 +217,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/user_store.js"></script>

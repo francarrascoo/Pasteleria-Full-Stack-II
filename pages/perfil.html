@@ -17,11 +17,11 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
                 </a>
@@ -69,7 +69,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
                             <i class="bi bi-cart fs-4"></i>
                             <span id="cart-count"
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
@@ -79,49 +79,182 @@
             </div>
         </nav>
     </header>
-
-    <!-- ====== Main ====== -->
-    <main class="container py-4 flex-grow-1">
-        <h1 class="mb-4">Mi Perfil</h1>
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Información del Usuario</h5>
-                <p class="card-text"><strong>Nombre:</strong> <span id="user-name"></span></p>
-                <p class="card-text"><strong>Email:</strong> <span id="user-email   "></span></p>
-                <p class="card-text"><strong>Dirección:</strong> <span id="user-address"></span></p>
-                <button class="btn btn-primary" id="edit-profile-btn">Editar Perfil</button>
+<main class="container my-5">
+    <h1 class="h3 mb-4 d-flex align-items-center">Mi Perfil</h1>
+    <div class="row g-4">
+        <div class="col-12 col-lg-8 order-1 order-lg-0 mb-4 mb-lg-0">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h5 mb-4"><i class="bi bi-person-vcard me-2"></i>Detalles de la Cuenta</h3>
+                    <div class="mb-4">
+                        <div class="mb-2"><strong>Nombre:</strong> <span id="detailNombre">—</span></div>
+                        <div class="mb-2"><strong>Apellido:</strong> <span id="detailApellido">—</span></div>
+                        <div class="mb-2"><strong>Correo Electrónico:</strong> <span id="detailCorreo">—</span></div>
+                        <div class="mb-2"><strong>RUN:</strong> <span id="detailRun">—</span></div>
+                        <div class="mb-2"><strong>Teléfono:</strong> <span id="detailTelefono">—</span></div>
+                        <div class="mb-2"><strong>Fecha de nacimiento:</strong> <span id="detailNacimiento">—</span></div>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProfileModal"><i class="bi bi-pencil-square me-2"></i>Editar Información</button>
+                    </div>
+                </div>
             </div>
-
-    </main>
-
-    <footer class="container-fluid py-3">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <div class="mb-3 mb-md-0">
-                <a class="navbar-brand" href="index.html">
-                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40" />
-                </a>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h5 mb-4"><i class="bi bi-receipt me-2"></i>Historial de Pedidos</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pedido #</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-body">
+                                <tr id="orders-empty"><td colspan="5" class="text-center text-secondary">Aún nada por acá.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="nav mb-3 mb-md-0">
-                <a class="nav-link" href="productos.html">Categorias</a>
-                <a class="nav-link" href="nosotros.html">Nosotros</a>
-                <a class="nav-link" href="blogs.html">Blogs</a>
-                <a class="nav-link" href="contacto.html">Contacto</a>
-                <a class="nav-link" href="admin.html">Admin</a>
-            </div>
-            <div class="d-flex gap-3">
-                <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
-                <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="h5 mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Direcciones</h3>
+                    <div class="row g-3" id="addresses-container">
+                        <div class="col-12">
+                            <div class="alert alert-secondary" id="addresses-empty" role="alert">Aún no tienes direcciones guardadas.</div>
+                        </div>
+                        <div class="col-12 d-flex">
+                            <button class="btn btn-outline-warning w-100 my-auto" data-bs-toggle="modal" data-bs-target="#addAddressModal"><i class="bi bi-plus-lg"></i> Añadir Nueva Dirección</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/user_store.js"></script>
-    <script src="/js/navbar_sesion.js"></script>
-    <script src="/js/login.js"></script>
-    <script src="/js/index.js"></script>
-    <script src="/js/carrito.js"></script>
+        <div class="col-12 col-lg-4 order-0 order-lg-1">
+            <div class="card p-4 text-center mb-4 mb-lg-0">
+                <div class="profile-avatar mb-3">
+                    <img src="/img/logo.png" alt="Avatar" class="rounded-circle border border-2" style="width:80px;height:80px;background:#f8f9fa;object-fit:cover;">
+                </div>
+                <h2 class="h4" id="profileName">—</h2>
+                <p class="text-secondary mb-1" id="profileEmailText">—</p>
+                <p class="text-secondary mb-1" id="memberSinceText" style="display:none;"><small>Miembro desde: —</small></p>
 
-</body>
-
-</html>
+                <div class="my-3">
+                    <div class="small text-secondary mb-1">Beneficios</div>
+                    <ul class="list-unstyled mb-0" id="profileBenefitsList">
+                        <li class="text-muted">Sin beneficios especiales.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modales para editar perfil y direcciones -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel"><i class="bi bi-pencil-square me-2"></i>Editar Información Personal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm" novalidate>
+                        <div class="mb-3">
+                            <label for="profileFirstName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="profileFirstName" value="" required>
+                            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="profileLastName" value="" required>
+                            <div class="invalid-feedback">Por favor, ingresa tu apellido.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePhone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="profilePhone" value="" pattern="[0-9\-\+\s]{7,15}">
+                            <div class="invalid-feedback">Por favor, ingresa un teléfono válido.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileEmail" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="profileEmail" value="" disabled>
+                            <div class="form-text">El correo no se puede modificar.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" id="saveProfileButton">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAddressModalLabel"><i class="bi bi-geo-alt-fill me-2"></i>Añadir Nueva Dirección</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addAddressForm" novalidate>
+                        <div class="mb-3">
+                            <label for="addAddressLine1" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="addAddressLine1" placeholder="Ej: Av. Siempre Viva 742" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="addAddressRegion" class="form-label">Región</label>
+                                <select class="form-select" id="addAddressRegion" required>
+                                    <option value="">Selecciona…</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una región.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="addAddressCity" class="form-label">Comuna</label>
+                                <select class="form-select" id="addAddressCity" required disabled>
+                                    <option value="">Selecciona…</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una comuna.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" id="saveAddressButton">Guardar Dirección</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="container-fluid py-3 mt-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div class="mb-3 mb-md-0">
+            <a href="index.html" class="navbar-brand"><img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40"></a>
+        </div>
+        <div class="nav mb-3 mb-md-0">
+            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="categorias.html">Categorías</a>
+            <a class="nav-link" href="nosotros.html">Nosotros</a>
+            <a class="nav-link" href="blogs.html">Blogs</a>
+            <a class="nav-link" href="contacto.html">Contacto</a>
+        </div>
+        <div class="d-flex gap-3">
+            <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/user_store.js"></script>
+<script src="/js/navbar_sesion.js"></script>
+<script src="/js/login.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/carrito.js"></script>
+<script src="/js/perfil.js"></script>
+<script src="/js/perfil_dashboard.js"></script>

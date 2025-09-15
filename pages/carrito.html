@@ -22,11 +22,9 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-
-    <!-- ====== Navbar ====== -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
                 </a>
@@ -74,7 +72,7 @@
                             <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3 position-relative">
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
                             <i class="bi bi-cart fs-4"></i>
                             <span id="cart-count"
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
@@ -86,34 +84,38 @@
     </header>
 
 
-    <!-- ====== Main ====== -->
     <main class="container py-4 flex-grow-1">
-        <h2 class="mb-4">Carrito de Compras</h2>
+        <h1 class="h3 mb-3">Carrito de Compras</h1>
 
-        <!-- Lista de productos -->
-        <ul id="carrito-lista" class="list-group mb-3"></ul>
+        <div class="row">
+            <div class="col-lg-9">
+                <ul id="carrito-lista" class="list-group mb-3">
+                    <!-- Los productos se agregarán dinámicamente aquí -->
+                </ul>
+                <!-- Mostrar mensaje cuando el carrito está vacío -->
+                <div id="empty-cart-message" class="alert alert-warning" style="display:none;">
+                    No tienes artículos en tu carrito.
+                </div>
 
-        <!-- Total -->
-        <div class="d-flex justify-content-between align-items-center">
-            <h4>Total:</h4>
-            <h4 id="carrito-total">$0</h4>
-        </div>
+                <!-- Botón para redirigir a productos.html -->
+                <button id="empty-cart-btn" class="btn btn-primary" style="display:none;"
+                    onclick="location.href='productos.html'">
+                    Ir a Productos
+                </button>
+            </div>
 
-        <!-- Botones -->
-        <div class="mt-4 d-flex gap-2 flex-wrap">
-            <a href="productos.html" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Seguir comprando
-            </a>
-            <button id="btnVaciar" class="btn btn-danger">
-                <i class="bi bi-trash"></i> Vaciar carrito
-            </button>
-            <a href="checkout.html" class="btn btn-primary ms-auto">
-                <i class="bi bi-credit-card"></i> Proceder al pago
-            </a>
+            <div class="col-lg-3">
+                <div class="d-flex flex-column">
+                    <div id="pedido-detalles" class="card card-resumen p-3">
+                        <div id="carrito-subtotal" class="mb-2"></div>
+                        <div id="carrito-total" class="fw-bold fs-5 mb-2"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!-- ====== Footer ====== -->
+
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
@@ -135,80 +137,44 @@
             </div>
         </div>
     </footer>
-
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-4"
-                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-
-                <div class="modal-body pt-0">
-                    <form id="loginForm" novalidate>
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com"
-                                required>
-                            <div class="invalid-feedback">Ingresa un correo válido.</div>
-                        </div>
-
-                        <div class="mb-2">
-                            <label for="loginPass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
-                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Recordarme</label>
-                            </div>
-                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                    </form>
-
-                    <p class="text-center small mt-3 mb-0">
-                        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toasts container -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="cart-toast" class="toast align-items-center text-bg-success border-0" role="alert"
-            aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body" id="cart-toast-msg">Producto agregado al carrito</div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Cerrar"></button>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal de confirmación -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
-                <div class="modal-header bg-warning">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title">Confirmar acción</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="confirmModalMsg">
-                    ¿Estás seguro que deseas continuar?
+                    ¿Estás seguro que quieres eliminar este producto?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, continuar</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, eliminar</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal de Advertencia (cuando el carrito está vacío) -->
+    <div class="modal fade" id="emptyCartModal" tabindex="-1" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emptyCartModalLabel">Carrito vacío</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    No puedes proceder al pago porque no hay productos en tu carrito.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

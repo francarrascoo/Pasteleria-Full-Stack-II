@@ -125,9 +125,10 @@
             modal.hide();
         }
 
-        // Actualizar UI opcional
-        updateUserInfoUI();
-        if (typeof renderGreeting === 'function') renderGreeting();
+    // Actualizar UI opcional
+    updateUserInfoUI();
+    if (typeof renderGreeting === 'function') renderGreeting();
+    if (typeof renderNavbarSession === 'function') renderNavbarSession();
     });
 
     if (loginModalEl) {

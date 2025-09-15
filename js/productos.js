@@ -8,7 +8,7 @@ var products = [
         price: 45000,
         img: "/img/torta-cuadrada-chocolate.png",
         category: "tortas-cuadradas",
-        desc: "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas."
+        desc: "Deliciosa torta de chocolate con varias capas de esponjoso bizcocho, rellenas de ganache de chocolate belga y un toque de avellanas tostadas. Decorada con virutas de chocolate y una cobertura brillante, es ideal para los amantes del cacao intenso. Perfecta para celebraciones especiales o para consentirte en cualquier ocasión."
     },
     {
         code: "TC002",
@@ -16,7 +16,7 @@ var products = [
         price: 50000,
         img: "/img/torta-cuadrada-frutas.jpg",
         category: "tortas-cuadradas",
-        desc: "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho."
+        desc: "Una mezcla exquisita de frutas frescas de temporada y crema chantilly natural sobre un suave bizcocho de vainilla. Cada bocado es una explosión de frescura y dulzura, decorada con frutas seleccionadas y glaseado ligero. Ideal para quienes buscan un postre colorido, refrescante y elegante."
     },
     {
         code: "TT001",
@@ -24,7 +24,7 @@ var products = [
         price: 40000,
         img: "/img/torta-circular-vainilla.jpg",
         category: "tortas-circulares",
-        desc: "Bizcocho de vainilla clásico relleno con crema pastelera y glaseado dulce."
+        desc: "Bizcocho de vainilla clásico, suave y aromático, relleno con generosa crema pastelera y cubierto con un glaseado dulce y delicado. Decorada con detalles de chocolate blanco y perlas de azúcar, es una opción tradicional que nunca falla en cumpleaños y reuniones familiares."
     },
     {
         code: "TT002",
@@ -32,7 +32,7 @@ var products = [
         price: 42000,
         img: "/img/torta-circular-manjar.jpg",
         category: "tortas-circulares",
-        desc: "Torta tradicional chilena con manjar y nueces."
+        desc: "Torta tradicional chilena con capas de bizcocho esponjoso, rellenas de abundante manjar artesanal y nueces trozadas. Su cobertura de merengue italiano y decoración con nueces enteras la convierten en un clásico irresistible para los fanáticos del sabor dulce y la textura crujiente."
     },
     {
         code: "PI001",
@@ -40,7 +40,7 @@ var products = [
         price: 5000,
         img: "/img/postre-mousse-chocolate.png",
         category: "postres-individuales",
-        desc: "Postre cremoso y suave, hecho con chocolate de alta calidad."
+        desc: "Postre cremoso y suave, elaborado con chocolate de alta calidad y una textura aireada que se deshace en la boca. Perfecto para los amantes del chocolate, ideal como broche de oro para cualquier comida o celebración. Se sirve frío y decorado con virutas de chocolate y frutos rojos."
     },
     {
         code: "PI002",
@@ -48,7 +48,7 @@ var products = [
         price: 5500,
         img: "/img/postre-tiramisu.jpg",
         category: "postres-individuales",
-        desc: "Postre italiano con capas de café, mascarpone y cacao."
+        desc: "El clásico postre italiano con capas de bizcocho empapado en café, crema de mascarpone y cacao puro. Su sabor equilibrado y textura suave lo convierten en el favorito de quienes buscan un postre sofisticado y reconfortante. Presentado en porciones individuales listas para disfrutar."
     },
     {
         code: "PSA001",
@@ -56,7 +56,7 @@ var products = [
         price: 48000,
         img: "/img/sin-azucar-naranja.png",
         category: "productos-sin-azucar",
-        desc: "Torta ligera y deliciosa, endulzada naturalmente."
+        desc: "Torta ligera y deliciosa, endulzada naturalmente con jugo de naranja y edulcorantes saludables. Su bizcocho esponjoso y su aroma cítrico la hacen perfecta para quienes cuidan su consumo de azúcar sin renunciar al placer de un buen postre."
     },
     {
         code: "PSA002",
@@ -64,7 +64,7 @@ var products = [
         price: 47000,
         img: "/img/sin-azucar-cheesecake.jpg",
         category: "productos-sin-azucar",
-        desc: "Suave y cremoso, perfecto para disfrutar sin culpa."
+        desc: "Cheesecake suave y cremoso, elaborado con queso crema light y endulzado sin azúcar refinada. Su base de galleta integral y su cobertura de frutas frescas lo hacen irresistible y apto para quienes buscan opciones más saludables."
     },
     {
         code: "PT001",
@@ -72,7 +72,7 @@ var products = [
         price: 3000,
         img: "/img/tradicional-empanada-manzana.jpg",
         category: "pasteleria-tradicional",
-        desc: "Pastelería tradicional rellena de manzanas especiadas."
+        desc: "Empanada tradicional rellena de manzanas frescas, canela y pasas, envuelta en una masa dorada y crujiente. Un clásico de la pastelería chilena, ideal para acompañar el té o el café de la tarde."
     },
     {
         code: "PT002",
@@ -80,7 +80,7 @@ var products = [
         price: 6000,
         img: "/img/tradicional-tarta-santiago.png",
         category: "pasteleria-tradicional",
-        desc: "Tarta española hecha con almendras, azúcar y huevos."
+        desc: "Tarta española hecha con almendras molidas, azúcar y huevos, decorada con la tradicional cruz de Santiago en azúcar glas. Su sabor intenso y textura húmeda la convierten en una delicia para los amantes de la repostería europea."
     },
     {
         code: "PG001",
@@ -88,7 +88,7 @@ var products = [
         price: 3500,
         img: "/img/sin-gluten-brownie.jpg",
         category: "productos-sin-gluten",
-        desc: "Brownie denso, perfecto para quienes evitan el gluten."
+        desc: "Brownie denso y húmedo, elaborado sin gluten pero con todo el sabor del chocolate. Ideal para personas celíacas o quienes buscan alternativas más saludables, sin sacrificar el placer de un buen postre."
     },
     {
         code: "PG002",
@@ -96,7 +96,7 @@ var products = [
         price: 3500,
         img: "/img/sin-gluten-pan.jpg",
         category: "productos-sin-gluten",
-        desc: "Suave y esponjoso, ideal para acompañar cualquier comida."
+        desc: "Pan suave y esponjoso, libre de gluten, perfecto para acompañar cualquier comida o preparar deliciosos sándwiches. Su sabor neutro y textura ligera lo hacen apto para toda la familia."
     },
     {
         code: "PV001",
@@ -104,7 +104,7 @@ var products = [
         price: 38000,
         img: "/img/vegana-chocolate.jpg",
         category: "productos-veganos",
-        desc: "Torta húmeda hecha sin productos de origen animal."
+        desc: "Torta húmeda y esponjosa, elaborada sin productos de origen animal. Rellena de crema de chocolate vegana y decorada con frutas frescas o frutos secos. Una opción deliciosa y ética para quienes siguen una dieta vegana."
     },
     {
         code: "PV002",
@@ -112,7 +112,7 @@ var products = [
         price: 4500,
         img: "/img/vegana-galletas.jpg",
         category: "productos-veganos",
-        desc: "Crujientes y sabrosas, una opción vegana saludable."
+        desc: "Galletas crujientes y sabrosas, hechas con avena integral, plátano y chips de chocolate vegano. Son una opción saludable y energética para disfrutar en cualquier momento del día."
     },
     {
         code: "TE001",
@@ -120,7 +120,7 @@ var products = [
         price: 55000,
         img: "/img/especial-cumpleaños.png",
         category: "tortas-especiales",
-        desc: "Personalizable con decoraciones únicas para cumpleaños."
+        desc: "Celebra a lo grande con una torta de cumpleaños totalmente personalizable: elige sabores, colores y decoraciones temáticas. Rellena de crema suave y frutas o chocolate, y decorada con fondant artístico, figuras y mensajes especiales. Sorprende a tus seres queridos con una torta única y deliciosa, hecha a tu medida."
     },
     {
         code: "TE002",
@@ -128,7 +128,7 @@ var products = [
         price: 60000,
         img: "/img/especial-boda.jpeg",
         category: "tortas-especiales",
-        desc: "Elegante y deliciosa, diseñada para bodas."
+        desc: "Elegante torta de boda de varios pisos, elaborada con ingredientes premium y decorada con flores naturales o de azúcar. Rellena de crema de vainilla, frutos rojos o chocolate, según tu preferencia. Un centro de mesa espectacular y delicioso para el día más importante de tu vida."
     }
 ];
 
@@ -145,7 +145,9 @@ const DETALLE_URL = "detalle.html";
 
 function badgesHTML(p) {
     const out = [];
-    if (p.customizable) out.push('<span class="badge text-bg-info">Personalizable</span>');
+    // Detectar si el producto es personalizable por código
+    const personalizables = ["TC001", "TE001", "TE002"];
+    if (personalizables.includes(p.code)) out.push('<span class="badge text-bg-info">Personalizable</span>');
     if (p.category === "productos-sin-azucar") out.push('<span class="badge text-bg-dark">Sin azúcar</span>');
     if (p.category === "productos-sin-gluten") out.push('<span class="badge text-bg-warning">Sin gluten</span>');
     if (p.category === "productos-veganos") out.push('<span class="badge text-bg-success">Vegano</span>');
@@ -216,6 +218,34 @@ function displayProducts(productsToShow) {
         return;
     }
 
+        // Códigos de tortas personalizables
+        const personalizables = ["TC001", "TE001", "TE002"];
+
+        // Modal para mensaje personalizado (solo se crea una vez)
+        let modalMensaje = document.getElementById('modalMensajePersonalizado');
+        if (!modalMensaje) {
+                    const modalHtml = `
+                    <div class="modal fade" id="modalMensajePersonalizado" tabindex="-1" aria-labelledby="modalMensajePersonalizadoLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalMensajePersonalizadoLabel">Mensaje personalizado <span class="text-secondary small">(opcional)</span></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control" id="inputMensajePersonalizado" maxlength="60" placeholder="Ej: ¡Feliz Cumpleaños, Ana! (opcional)">
+                                    <div class="form-text">Puedes dejar este campo vacío si no deseas agregar un mensaje.</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="btnConfirmarMensajePersonalizado">Agregar al carrito</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+                modalMensaje = document.getElementById('modalMensajePersonalizado');
+        }
     productsToShow.forEach((product) => {
         const div = document.createElement("div");
         div.className = "card-products text-start";
@@ -252,9 +282,81 @@ function displayProducts(productsToShow) {
 
         // ✅ Lógica carrito
         const addBtn = div.querySelector("button[data-code]");
+
         addBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            addToCarrito(product);
+            if (personalizables.includes(product.code)) {
+                // Solo mostrar el modal para mensaje personalizado y agregar una unidad
+                function getMensajePersonalizado() {
+                    return new Promise((resolve, reject) => {
+                        const inputMensaje = document.getElementById('inputMensajePersonalizado');
+                        inputMensaje.value = "";
+                        const modalEl = document.getElementById('modalMensajePersonalizado');
+                        const modal = new bootstrap.Modal(modalEl);
+                        let cerrado = false;
+                        const btnConfirmar = document.getElementById('btnConfirmarMensajePersonalizado');
+                        const btnCancelar = modalEl.querySelector('.btn-secondary');
+                        btnConfirmar.onclick = function() {
+                            cerrado = true;
+                            resolve(inputMensaje.value.trim());
+                            modal.hide();
+                        };
+                        btnCancelar.onclick = function() {
+                            cerrado = true;
+                            reject('cancel');
+                            modal.hide();
+                        };
+                        modalEl.addEventListener('hidden.bs.modal', function handler() {
+                            modalEl.removeEventListener('hidden.bs.modal', handler);
+                            if (!cerrado) reject('cancel');
+                        });
+                        setTimeout(() => modal.show(), 100);
+                    });
+                }
+
+                (async () => {
+                    try {
+                        const mensaje = await getMensajePersonalizado();
+                        let carrito = getCart();
+                        const prodCarrito = {
+                            code: product.code,
+                            productName: product.productName,
+                            price: product.price,
+                            img: product.img,
+                            cantidad: 1,
+                            mensaje: mensaje
+                        };
+                        let found = false;
+                        for (let item of carrito) {
+                            if (item.code === prodCarrito.code && (item.mensaje || "") === (prodCarrito.mensaje || "")) {
+                                item.cantidad += 1;
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            carrito.push(prodCarrito);
+                        }
+                        setCart(carrito);
+                        updateCartCount();
+                        // Mostrar modal de confirmación si existe
+                        const modalMsg = document.getElementById("addedModalMsg");
+                        if (modalMsg) {
+                            modalMsg.textContent = `✅ ${product.productName} se agregó al carrito.`;
+                        }
+                        const modalEl = document.getElementById("addedModal");
+                        if (modalEl) {
+                            const modal2 = new bootstrap.Modal(modalEl);
+                            modal2.show();
+                        }
+                    } catch {
+                        // Cancelado, abortar
+                        return;
+                    }
+                })();
+            } else {
+                addToCarrito(product);
+            }
         });
 
         shopContent.append(div);

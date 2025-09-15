@@ -1,9 +1,5 @@
-/* ============================
-   carrito.js — Manejo del Carrito con modal de confirmación
-   ============================ */
 (function () {
     const KEY_CART = "carrito";
-
     const j = (x) => JSON.parse(x || "null");
     const $ = (s, r = document) => r.querySelector(s);
 
@@ -15,41 +11,150 @@
         const carrito = getCart();
         const contenedor = $("#carrito-lista");
         const totalEl = $("#carrito-total");
+        const subtotalEl = $("#carrito-subtotal");
+        const emptyMessageEl = $("#empty-cart-message");
+        const emptyCartBtn = $("#empty-cart-btn");
+        const btnProceedToPayment = $("#proceed-to-payment");
+        const resumenEl = $("#pedido-detalles"); // Contenedor del resumen
 
-        if (contenedor) {
-            contenedor.innerHTML = "";
-            let total = 0;
+        // Obtener los beneficios del usuario
+        const user = leerSesion();  // Leer la sesión para obtener los beneficios
+        const descuento = user ? user.beneficios.descuento : 0;  // Obtener el descuento, si tiene
 
-            carrito.forEach((item, i) => {
-                const subtotal = item.price * item.cantidad;
-                total += subtotal;
+        if (carrito.length === 0) {
+            // Si el carrito está vacío, mostrar el mensaje y el botón para redirigir
+            if (emptyMessageEl) {
+                emptyMessageEl.style.display = "block"; // Mostrar mensaje
+                emptyMessageEl.textContent = "No tienes artículos en tu carrito.";
+            }
 
-                const li = document.createElement("li");
-                li.className = "list-group-item d-flex justify-content-between align-items-center";
-                li.innerHTML = `
-          <div>
-            <strong>${item.productName}</strong><br>
-            <div class="d-flex align-items-center mt-1">
-              <button class="btn btn-sm btn-outline-secondary me-2 btn-decrease" data-index="${i}">-</button>
-              <input type="number" class="form-control form-control-sm text-center cart-qty" data-index="${i}" value="${item.cantidad}" min="1" style="width:60px">
-              <button class="btn btn-sm btn-outline-secondary ms-2 btn-increase" data-index="${i}">+</button>
-            </div>
-          </div>
-          <div>
-            <span>$${subtotal.toLocaleString("es-CL")}</span>
-            <button class="btn btn-sm btn-danger ms-2" data-remove="${i}">
-              <i class="bi bi-trash"></i>
-            </button>
-          </div>
-        `;
-                contenedor.appendChild(li);
-            });
+            if (emptyCartBtn) {
+                emptyCartBtn.style.display = "block"; // Mostrar el botón
+            }
 
-            if (totalEl) totalEl.textContent = `$${total.toLocaleString("es-CL")}`;
-            bindCartEvents();
+            // Limpiar el contenedor de la lista de productos
+            if (contenedor) contenedor.innerHTML = ""; // Limpiar la lista de productos
+
+            // Mostrar un mensaje en lugar de total si el carrito está vacío
+            if (totalEl) {
+                totalEl.innerHTML = "<strong>El carrito está vacío</strong>";
+            }
+
+            // Limpiar el desglose cuando el carrito está vacío
+            if (subtotalEl) {
+                subtotalEl.innerHTML = "";
+            }
+
+            // Ocultar la card de resumen si el carrito está vacío
+            if (resumenEl && resumenEl.closest('.card')) {
+                resumenEl.closest('.card').style.display = 'none';
+            }
+
+            // Ocultar el contador cuando el carrito está vacío
+            updateCartCount();
+
+            return; // Salir de la función para no intentar renderizar los productos
         }
 
-        updateCartCount();
+    // Limpiar el contenedor
+    if (contenedor) contenedor.innerHTML = "";
+        let total = 0;
+
+        // Renderizar productos en el carrito
+        carrito.forEach((item, i) => {
+            // Validar precio
+            let price = (typeof item.price === 'number' && !isNaN(item.price) && item.price >= 0) ? item.price : 0;
+            const subtotal = price * item.cantidad;
+            total += subtotal;
+            if (contenedor) {
+                const li = document.createElement("li");
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
+                // Validar cantidad para el input
+                let cantidadInput = (typeof item.cantidad === 'number' && !isNaN(item.cantidad) && item.cantidad > 0) ? item.cantidad : 1;
+                // Mostrar advertencia si el precio es inválido
+                let priceHtml = price > 0 ? `$${price.toLocaleString('es-CL')}` : `<span class='text-danger'>Precio inválido</span>`;
+                li.innerHTML = `
+
+                        <div class=\"d-flex align-items-center\" style=\"flex-grow: 1;\">
+                                <img src=\"${item.img}\" alt=\"${item.productName}\" class=\"product-img img-fluid rounded-3\">
+                                <span class=\"ms-3 text-truncate\" style=\"flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;\">
+                                    ${item.productName}
+                                    ${item.mensaje ? `<div class='small text-info mt-1'>Mensaje: <b>${item.mensaje}</b></div>` : ""}
+                                    <div class='small'>${priceHtml}</div>
+                                </span>
+                        </div>
+
+            <!-- Incrementador de cantidad y botón de eliminar alineados a la derecha -->
+            <div class=\"d-flex align-items-center ms-auto\">
+                <button class=\"btn btn-sm btn-outline-secondary me-2 btn-decrease\" data-index=\"${i}\">-</button>
+                <input type=\"number\" class=\"form-control form-control-sm text-center cart-qty\" data-index=\"${i}\" value=\"${cantidadInput}\" min=\"1\" style=\"width:60px\">
+                <button class=\"btn btn-sm btn-outline-secondary ms-2 btn-increase\" data-index=\"${i}\">+</button>
+
+                <!-- Botón eliminar -->
+                <button class=\"btn btn-sm btn-danger ms-2\" data-remove=\"${i}\">
+                    <i class=\"bi bi-trash\"></i>
+                </button>
+            </div>
+        `;
+                contenedor.appendChild(li);
+            }
+        });
+
+        // Calcular despacho (por ejemplo, $5000)
+        const despacho = 5000;  // Ejemplo de costo de despacho. Puedes modificarlo según tus necesidades.
+
+        // Mostrar resumen del pedido
+        renderResumenPedido(carrito, total, descuento, despacho);
+
+        // Llamar a la función para manejar eventos del carrito
+        bindCartEvents();
+    }
+
+    // ===== Mostrar resumen del pedido =====
+    function renderResumenPedido(carrito, total, descuento, despacho) {
+    const resumenEl = $("#pedido-detalles");
+    if (!resumenEl) return;
+    // Limpiar el contenedor del resumen
+    resumenEl.innerHTML = "";
+
+        // Calcular el total con descuento
+        const totalConDescuento = total * (1 - descuento / 100);
+
+        // Generar el HTML para el resumen del pedido
+        let resumenHTML = `
+        <h2 class="mb-4">Resumen del Pedido</h2>
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-secondary">Subtotal</span>
+            <span>$${total.toLocaleString("es-CL")}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+            <span class="text-secondary">Despacho</span>
+            <span>$${despacho.toLocaleString("es-CL")}</span>
+        </div>
+    `;
+
+        // Mostrar el descuento solo si existe
+        if (descuento > 0) {
+            resumenHTML += `
+        <div class="d-flex justify-content-between mb-3">
+            <span class="text-secondary">Descuento (${descuento}%)</span>
+            <span>-$${(total * descuento / 100).toLocaleString("es-CL")}</span>
+        </div>
+        `;
+        }
+
+        // Mostrar total después de aplicar el descuento
+        resumenHTML += `
+        <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+            <span>Total</span>
+            <span>$${(totalConDescuento + despacho).toLocaleString("es-CL")}</span>
+        </div>
+        <button id="proceed-to-payment" class="btn btn-primary w-100"><i class="bi bi-credit-card"></i> Proceder al pago</button>
+        <button id="btnVaciar" class="btn btn-danger w-100 mt-2"><i class="bi bi-trash"></i> Vaciar carrito</button>
+    `;
+
+        // Asignar el resumen al contenedor
+        resumenEl.innerHTML = resumenHTML;
     }
 
     // ===== Actualizar contador en el icono
@@ -63,6 +168,11 @@
             badge.textContent = totalItems;
             badge.classList.remove("d-none");
         } else {
+            // Mostrar la card de resumen si hay productos (solo si existe el elemento)
+            const resumenEl = $("#pedido-detalles");
+            if (resumenEl && resumenEl.closest('.card')) {
+                resumenEl.closest('.card').style.display = '';
+            }
             badge.classList.add("d-none");
         }
     }
@@ -105,14 +215,26 @@
     }
 
     // ===== Agregar al carrito (usado desde productos.js)
+
     function addToCarrito(producto) {
         const carrito = getCart();
         const existe = carrito.find((p) => p.code === producto.code);
 
+        // --- Validación y normalización del precio ---
+        let price = producto.price;
+        if (typeof price === 'undefined' && typeof producto.precio !== 'undefined') {
+            price = producto.precio;
+        }
+        price = Number(price);
+        if (isNaN(price) || price <= 0) {
+            showToast('❌ Error: El producto no tiene un precio válido', 'error');
+            return;
+        }
+
         if (existe) {
             existe.cantidad += 1;
         } else {
-            carrito.push({ ...producto, cantidad: 1 });
+            carrito.push({ ...producto, price, cantidad: 1 });
         }
 
         setCart(carrito);
@@ -202,7 +324,34 @@
                     localStorage.removeItem(KEY_CART);
                     renderCarrito();
                     showToast("🗑️ Carrito vaciado", "error");
+                    // Mostrar mensaje y botón para redirigir a productos.html
+                    $("#empty-cart-message").style.display = "block"; // Mostrar mensaje
+                    $("#empty-cart-btn").style.display = "block"; // Mostrar botón
                 });
+            });
+        }
+
+        // Botón para redirigir a productos.html
+        const redirectBtn = $("#empty-cart-btn");
+        if (redirectBtn) {
+            redirectBtn.addEventListener("click", () => {
+                window.location.href = "productos.html"; // Redirigir a productos.html
+            });
+        }
+
+        // Botón proceder al pago
+        const btnProceed = $("#proceed-to-payment");
+        if (btnProceed) {
+            btnProceed.addEventListener("click", (e) => {
+                const carrito = getCart();
+                if (carrito.length === 0) {
+                    e.preventDefault();  // Evitar que se redirija a checkout.html
+                    // Mostrar modal indicando que no hay productos
+                    const emptyCartModal = new bootstrap.Modal(document.getElementById('emptyCartModal'));
+                    emptyCartModal.show();
+                } else {
+                    window.location.href = "checkout.html";
+                }
             });
         }
     }
