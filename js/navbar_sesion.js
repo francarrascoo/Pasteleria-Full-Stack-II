@@ -143,19 +143,49 @@
     if (typeof updateCartCount === 'function') updateCartCount();
   }
 
+  function renderPanelLinks() {
+    // Busca el contenedor del navbar donde van los links (ajusta el selector si es necesario)
+    const nav = document.querySelector('.navbar-nav.mx-auto');
+    if (!nav) return;
+
+    // Elimina enlaces previos de paneles para evitar duplicados
+    nav.querySelectorAll('.nav-item-panel-link').forEach(el => el.remove());
+
+    // Obtén usuario logueado (ajusta según tu lógica)
+    const usuario = JSON.parse(localStorage.getItem('usuario_logueado') || 'null');
+    if (!usuario || !usuario.rol) return;
+
+    // Panel de Admin
+    if (usuario.rol === 'Administrador') {
+        const li = document.createElement('li');
+        li.className = 'nav-item nav-item-panel-link';
+        li.innerHTML = `<a class="nav-link" href="/pages/admin.html"><i class="bi bi-shield-lock"></i> Admin</a>`;
+        nav.appendChild(li);
+    }
+
+    // Panel de Vendedor
+    if (usuario.rol === 'Vendedor') {
+        const li = document.createElement('li');
+        li.className = 'nav-item nav-item-panel-link';
+        li.innerHTML = `<a class="nav-link" href="/pages/vendedor.html"><i class="bi bi-person-badge"></i> Vendedor</a>`;
+        nav.appendChild(li);
+    }
+}
+
   // Exponer por si lo necesitas
   window.renderNavbarSession = renderNavbarSession;
 
   // ===== Init
   document.addEventListener('DOMContentLoaded', () => {
     renderNavbarSession();
+    renderPanelLinks();
 
     // Si cierras modal de login, refrescar menú
     document.getElementById('loginModal')?.addEventListener('hidden.bs.modal', () => renderNavbarSession());
 
     // Cambios en otra pestaña
     window.addEventListener('storage', (e) => {
-      if (e.key === 'usuarioActivo' || e.key === 'sesion') renderNavbarSession();
+      if (e.key === 'usuarioActivo' || e.key === 'sesion' || e.key === 'usuario_logueado') renderNavbarSession();
     });
   });
 })();
