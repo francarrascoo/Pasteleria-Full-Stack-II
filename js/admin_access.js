@@ -115,6 +115,8 @@
                 const s = getSesion();
                 if (s && s.rol === 'Vendedor') {
                     location.href = '/pages/vendedor.html';
+                } else if (s && (s.rol === 'Administrador' || String(s?.correo || s?.email || '').toLowerCase() === ADMIN_EMAIL || s.isAdmin === true)) {
+                    location.href = '/pages/admin.html';
                 }
             }, 0);
         });
