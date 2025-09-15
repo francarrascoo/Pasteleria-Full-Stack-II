@@ -449,7 +449,33 @@
     <script src="/js/blogs.js" type="module"></script>
     <script src="/js/admin_access.js"></script>
 
+    <!-- Sincronización carrusel y lista de noticias -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.getElementById('newsCarousel');
+        const newsList = document.getElementById('newsList');
+        if (!carousel || !newsList) return;
 
+        const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel);
+        const items = Array.from(newsList.querySelectorAll('.list-group-item'));
+
+        // Al hacer click en una noticia, mover el carrusel
+        items.forEach(item => {
+            item.addEventListener('click', function () {
+                const idx = Number(item.getAttribute('data-index'));
+                bsCarousel.to(idx);
+            });
+        });
+
+        // Al cambiar el carrusel, activar la noticia correspondiente
+        carousel.addEventListener('slide.bs.carousel', function (e) {
+            const idx = e.to;
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === idx);
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>
