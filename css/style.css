@@ -1,3 +1,93 @@
+/* --- Global Styles (Fuentes y generales) --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap');
+
+:root {
+    --color-background: #ffffff;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #555555;
+
+    --accent-main: #b08d57;
+    --accent-dark: #6b3e26;
+
+    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --border-soft: 1px solid rgba(0, 0, 0, 0.1);
+
+    --font-main: "Segoe UI", sans-serif;
+
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --transition: 0.3s ease;
+
+    --nav-h: 65px;
+
+    --admin-sidebar-w: 260px;
+}
+
+/* --- vendedor.html --- */
+.admin-wrap {
+    min-height: calc(100vh - var(--nav-h, 60px));
+    display: grid;
+    grid-template-columns: var(--admin-sidebar-w) 1fr;
+}
+
+.admin-sidebar {
+    border-right: 1px solid rgba(0, 0, 0, .08);
+    background: #fff;
+    position: sticky;
+    top: var(--nav-h, 60px);
+    height: calc(100vh - var(--nav-h, 60px));
+    padding: 1rem;
+}
+
+.admin-menu .list-group-item {
+    border: 0;
+    border-radius: .6rem;
+    margin: .15rem 0;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.admin-menu .list-group-item.active {
+    background: var(--accent-main, #b08d57);
+    color: #fff;
+}
+
+.admin-content {
+    padding: 1.25rem;
+    background: #fafafa;
+}
+
+.stat-card .icon {
+    font-size: 1.6rem;
+    opacity: .85;
+}
+
+.empty-state {
+    padding: 2rem 1rem;
+    border: 1px dashed #ddd;
+    border-radius: .75rem;
+    text-align: center;
+}
+
+.table thead th {
+    white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+    .admin-wrap {
+        grid-template-columns: 1fr;
+    }
+    .admin-sidebar {
+        position: static;
+        height: auto;
+    }
+}
+
+/* --- Fin vendedor.html --- */
+
+/* Aquí puedes agregar bloques para otros HTML siguiendo el mismo formato */
+
 #producto-detalle #descripcion, .detalle-card-central #descripcion {
     text-align: justify;
     text-justify: inter-word;
@@ -102,36 +192,6 @@
     justify-content: center;
     background: #f8f9fa;
     border-radius: 0.5rem 0.5rem 0 0;
-}
-:root {
-    --color-background: #ffffff;
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #555555;
-
-    --accent-main: #b08d57;
-    --accent-dark: #6b3e26;
-
-    --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
-    --border-soft: 1px solid rgba(0, 0, 0, 0.1);
-
-    --font-main: "Segoe UI", sans-serif;
-
-    --radius-s: 6px;
-    --radius-m: 10px;
-    --transition: 0.3s ease;
-
-    --nav-h: 65px;
-}
-
-/* --- GENERALES --- */
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: var(--color-background);
-    font-family: var(--font-main);
-    line-height: 1.6;
 }
 
 /* --- NAVBAR --- */
@@ -877,37 +937,63 @@ footer .bi:hover {
 }
 
 
-/* --- CARRITO DE COMPRAS --- */
-/* Ocultar las flechas en Chrome, Safari, Edge */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+/* --- nosotros.html --- */
+.nosotros-container {
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-input[type="number"].cart-qty {
-    -moz-appearance: textfield;
-    -webkit-appearance: none;
-    appearance: none;
+.history-section,
+.founder-section,
+.values-section {
+    padding: 30px 15px;
 }
 
-.list-group-item img {
-    width: 40%;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
+.history-section p,
+.founder-section p,
+.values-section p,
+.values-section ul {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-@media (max-width: 768px) {
-    .list-group-item img {
-        width: 50%; 
-    }
+.history-section img,
+.founder-section img {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Badge Personalizable (rosa pastel) */
-.badge.text-bg-info {
-    background-color: #f8bbd0 !important; /* rosa pastel */
-    color: #a03a5a !important; /* texto más oscuro para contraste */
-    border: 1px solid #f8bbd0 !important;
+.history-section,
+.founder-section {
+    margin-left: 20px;
+    margin-right: 20px;
 }
+
+.values-section {
+    padding-top: 30px;
+}
+
+.cta-section {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px;
+}
+
+.cta-section .btn {
+    margin-top: 20px;
+}
+
+.row {
+    margin-bottom: 30px;
+}
+
+.col-md-6 {
+    margin-bottom: 20px;
+}
+/* --- Fin nosotros.html --- */
 
