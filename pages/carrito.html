@@ -21,210 +21,200 @@
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 
-<header class="sticky-top">
-    <nav class="navbar navbar-expand-lg primary-nav">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
-                            Productos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
-                                    Cuadradas</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
-                                    Circulares</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
-                                    Individuales</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
-                                    Azúcar</a></li>
-                            <li><a class="dropdown-item"
-                                    href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
-                            </li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
-                                    gluten</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
-                                    Veganos</a></li>
-                            <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
-                                    Especiales</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">Blogs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">Contacto</a></li>
-                </ul>
-
-                <div class="d-flex align-items-center">
-                    <div class="nav-item dropdown account-dropdown ms-3">
-                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle fs-4"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
-                        </ul>
-                    </div>
-                    <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
-                        <i class="bi bi-cart fs-4"></i>
-                        <span id="cart-count"
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-
-
-<main class="container py-4 flex-grow-1">
-    <h1 class="h3 mb-3">Carrito de Compras</h1>
-
-    <div class="row">
-        <div class="col-lg-9">
-            <ul id="carrito-lista" class="list-group mb-3">
-                <!-- Los productos se agregarán dinámicamente aquí -->
-            </ul>
-            <!-- Mostrar mensaje cuando el carrito está vacío -->
-            <div id="empty-cart-message" class="alert alert-warning" style="display:none;">
-                No tienes artículos en tu carrito.
-            </div>
-
-            <!-- Botón para redirigir a productos.html -->
-            <button id="empty-cart-btn" class="btn btn-primary" style="display:none;"
-                onclick="location.href='productos.html'">
-                Ir a Productos
-            </button>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="d-flex flex-column">
-                <div id="pedido-detalles" class="card card-resumen p-3">
-                    <div id="carrito-subtotal" class="mb-2"></div>
-                    <div id="carrito-total" class="fw-bold fs-5 mb-2"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-
-
-<footer class="container-fluid py-3">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-        <div class="mb-3 mb-md-0">
-            <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                    height="40"></a>
-        </div>
-        <div class="nav mb-3 mb-md-0">
-            <a class="nav-link" href="productos.html">Categorias</a>
-            <a class="nav-link" href="nosotros.html">Nosotros</a>
-            <a class="nav-link" href="blogs.html">Blogs</a>
-            <a class="nav-link" href="contacto.html">Contacto</a>
-        </div>
-        <div class="d-flex gap-3">
-            <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
-            <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
-        </div>
-    </div>
-</footer>
-<!-- Modal de confirmación -->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmar acción</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="confirmModalMsg">
-                ¿Estás seguro que quieres eliminar este producto?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, eliminar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Advertencia (cuando el carrito está vacío) -->
-<div class="modal fade" id="emptyCartModal" tabindex="-1" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="emptyCartModalLabel">Carrito vacío</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                No puedes proceder al pago porque no hay productos en tu carrito.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Login -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4"
-            style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-
-            <div class="modal-body pt-0">
-                <form id="loginForm" novalidate>
-                    <div class="mb-3">
-                        <label for="loginEmail" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com" required>
-                        <div class="invalid-feedback">Ingresa un correo válido.</div>
-                    </div>
-
-                    <div class="mb-2">
-                        <label for="loginPass" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="loginPass" placeholder="********" required>
-                        <div class="invalid-feedback">La contraseña es obligatoria.</div>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Recordarme</label>
+<body class="d-flex flex-column min-vh-100">
+    <!-- HEADER GLOBAL DE INDEX.HTML -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg primary-nav">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas Cuadradas</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas Circulares</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres Individuales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin Azúcar</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin gluten</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas Especiales</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">Contacto</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <div class="nav-item dropdown account-dropdown ms-3">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle fs-4"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
+                            </ul>
                         </div>
-                        <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
+                            <i class="bi bi-cart fs-4"></i>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                        </a>
                     </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                </form>
+    <main class="container py-4 flex-grow-1">
+        <h1 class="h3 mb-3">Carrito de Compras</h1>
 
-                <p class="text-center small mt-3 mb-0">
-                    ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
-                </p>
+        <div class="row">
+            <div class="col-lg-9">
+                <ul id="carrito-lista" class="list-group mb-3">
+                    <!-- Los productos se agregarán dinámicamente aquí -->
+                </ul>
+                <!-- Mostrar mensaje cuando el carrito está vacío -->
+                <div id="empty-cart-message" class="alert alert-warning" style="display:none;">
+                    No tienes artículos en tu carrito.
+                </div>
+
+                <!-- Botón para redirigir a productos.html -->
+                <button id="empty-cart-btn" class="btn btn-primary" style="display:none;"
+                    onclick="location.href='productos.html'">
+                    Ir a Productos
+                </button>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="d-flex flex-column">
+                    <div id="pedido-detalles" class="card card-resumen p-3">
+                        <div id="carrito-subtotal" class="mb-2"></div>
+                        <div id="carrito-total" class="fw-bold fs-5 mb-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER GLOBAL DE INDEX.HTML -->
+    <footer class="container-fluid py-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40"></a>
+            </div>
+            <div class="nav mb-3 mb-md-0">
+                <a class="nav-link" href="productos.html">Categorias</a>
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+                <a class="nav-link" href="blogs.html">Blogs</a>
+                <a class="nav-link" href="contacto.html">Contacto</a>
+                <a class="nav-link" href="admin.html">Admin</a>
+            </div>
+            <div class="d-flex gap-3">
+                <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="nav-link fs-4"><i class="bi bi-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar acción</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="confirmModalMsg">
+                    ¿Estás seguro que quieres eliminar este producto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmModalOk">Sí, eliminar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Modal de Advertencia (cuando el carrito está vacío) -->
+    <div class="modal fade" id="emptyCartModal" tabindex="-1" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emptyCartModalLabel">Carrito vacío</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    No puedes proceder al pago porque no hay productos en tu carrito.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4"
+                style="backdrop-filter: blur(6px); background: color-mix(in oklab, #ffffff 80%, transparent);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="loginTitle">Iniciar sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="tu@correo.com" required>
+                            <div class="invalid-feedback">Ingresa un correo válido.</div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="loginPass" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="loginPass" placeholder="********" required>
+                            <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Recordarme</label>
+                            </div>
+                            <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+
+                    <p class="text-center small mt-3 mb-0">
+                        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Lógica carrito -->
-<script src="/js/user_store.js"></script>
-<script src="/js/navbar_sesion.js"></script>
-<script src="/js/login.js"></script>
-<script src="/js/carrito.js"></script>
-<script src="/js/admin_access.js"></script>
-<script src="/js/user_store.js"></script>
+    <!-- Lógica carrito -->
+    <script src="/js/user_store.js"></script>
+    <script src="/js/navbar_sesion.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/carrito.js"></script>
+    <script src="/js/admin_access.js"></script>
+    <script src="/js/user_store.js"></script>
 
 </body>
 
