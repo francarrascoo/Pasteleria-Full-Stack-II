@@ -91,19 +91,28 @@
         </a>
     </div>
 
-    <h1 id="titulo-receta"></h1>
-    <div id="detalle-receta"></div>
-    <h2>Editar Receta</h2>
-    <form id="form-editar">
-        <label>Título: <input type="text" id="input-titulo"></label><br>
-        <label>Ingredientes:<br>
-            <textarea id="input-ingredientes" rows="5" cols="40"></textarea>
-        </label><br>
-        <label>Preparación:<br>
-            <textarea id="input-preparacion" rows="5" cols="40"></textarea>
-        </label><br>
-        <button type="submit">Guardar Cambios</button>
-    </form>
+    <div class="container my-5">
+        <div class="row justify-content-center align-items-start">
+            <div class="col-md-7">
+                <h1 id="titulo-receta"></h1>
+                <div id="detalle-receta"></div>
+            </div>
+            <div class="col-md-5 text-center">
+                <img id="imagen-receta" src="" alt="Imagen de la receta" class="img-fluid rounded shadow"
+                    style="max-height:350px;object-fit:cover;">
+                <a href="/pages/blogs.html" class="btn btn-primary mt-4">Volver al blog</a>
+            </div>
+        </div>
+    </div>
+
+       <!-- Recetas de la semana -->
+    <div class="container mb-5">
+        <h2 class="h4 fw-bold mb-4">Otras recetas de la semana</h2>
+        <div class="row g-4" id="otras-recetas-row">
+            <!-- Las tarjetas se llenan por JS -->
+        </div>
+    </div>
+
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
