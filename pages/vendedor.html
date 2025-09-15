@@ -91,13 +91,14 @@
     <!-- HEADER GLOBAL (TAL CUAL) -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg primary-nav">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
-                        class="brand-logo"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" class="brand-logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item dropdown">
@@ -107,21 +108,18 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
-                                        Cuadradas</a>
-                                </li>
+                                        Cuadradas</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
                                         Circulares</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
                                         Individuales</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
-                                        Azúcar</a>
-                                </li>
+                                        Azúcar</a></li>
                                 <li><a class="dropdown-item"
-                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
-                                        Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
-                                        gluten</a>
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
                                 </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
                                         Veganos</a></li>
                                 <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
@@ -138,21 +136,18 @@
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle fs-4"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        Iniciar sesión
-                                    </button>
-                                </li>
-                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
                             </ul>
                         </div>
-                        <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
+                        <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
+                            <i class="bi bi-cart fs-4"></i>
+                            <span id="cart-count"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </nav>
-
     </header>
 
     <!-- ===== LAYOUT DEL PANEL ===== -->
