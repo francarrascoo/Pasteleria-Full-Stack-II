@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor | Pastelería Mil Sabores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg primary-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
+                        class="brand-logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
+                                        Cuadradas</a>
+                                </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
+                                        Circulares</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
+                                        Individuales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
+                                        Azúcar</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería
+                                        Tradicional</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a>
+                                </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
+                                        Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
+                                        Especiales</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">Contacto</a></li>
+                    </ul>
+
+                    <div class="d-flex align-items-center">
+                        <div class="nav-item dropdown account-dropdown ms-3">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle fs-4"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                        Iniciar sesión
+                                    </button>
+                                </li>
+                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                            </ul>
+                        </div>
+                        <a href="carrito.html" class="nav-link ms-3"><i class="bi bi-cart fs-4"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container-fluid">
+        <!-- Sidebar -->
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#addProduct">
+                                Agregar Producto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#editProduct">
+                                Editar Producto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#deleteProduct">
+                                Eliminar Producto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <!-- Agregar Producto Form -->
+                <section id="addProduct">
+                    <h2>Agregar Producto</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Nombre del Producto</label>
+                            <input type="text" class="form-control" id="productName" placeholder="Nombre del producto"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productDescription" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="productDescription" rows="3"
+                                placeholder="Descripción del producto" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productPrice" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="productPrice" placeholder="Precio en CLP"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productStock" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="productStock" placeholder="Cantidad en stock"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productCategory" class="form-label">Categoría</label>
+                            <select class="form-select" id="productCategory" required>
+                                <option value="tortas-cuadradas">Tortas Cuadradas</option>
+                                <option value="tortas-circulares">Tortas Circulares</option>
+                                <option value="postres-individuales">Postres Individuales</option>
+                                <!-- Add more categories as needed -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productImage" class="form-label">Imagen del Producto</label>
+                            <input type="file" class="form-control" id="productImage" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                    </form>
+                </section>
+
+                <!-- Editar Producto -->
+                <section id="editProduct" class="mt-5">
+                    <h2>Editar Producto</h2>
+                    <div id="productList">
+                        <!-- Dynamically generated product list with edit buttons -->
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Producto 1
+                                <button class="btn btn-warning btn-sm">Editar</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Producto 2
+                                <button class="btn btn-warning btn-sm">Editar</button>
+                            </li>
+                            <!-- More products will be listed here -->
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Eliminar Producto -->
+                <section id="deleteProduct" class="mt-5">
+                    <h2>Eliminar Producto</h2>
+                    <div id="deleteProductList">
+                        <!-- Dynamically generated product list with delete buttons -->
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Producto 1
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Producto 2
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
+                            </li>
+                            <!-- More products will be listed here -->
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
