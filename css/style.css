@@ -265,6 +265,24 @@ footer .bi:hover {
     color: var(--accent-main);
 }
 
+.footer-nav-flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.footer-nav-flex .nav-link {
+    margin: 0 0.25rem;
+    white-space: nowrap;
+}
+
+.footer-esquina-floral-img {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin: 0;
+}
+
 /* --- MODAL LOGIN ---*/
 #loginModal .modal-content {
     background: color-mix(in oklab, var(--color-background) 92%, transparent);

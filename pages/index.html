@@ -36,14 +36,23 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="productos.html?filtro=todosBtn">Todos</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas Cuadradas</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas Circulares</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres Individuales</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin Azúcar</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin gluten</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos Veganos</a></li>
-                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas Especiales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCuadradasBtn">Tortas
+                                        Cuadradas</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasCircularesBtn">Tortas
+                                        Circulares</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=postresIndividualesBtn">Postres
+                                        Individuales</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinAzucarBtn">Productos Sin
+                                        Azúcar</a></li>
+                                <li><a class="dropdown-item"
+                                        href="productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a>
+                                </li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=sinGlutenBtn">Productos sin
+                                        gluten</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=veganosBtn">Productos
+                                        Veganos</a></li>
+                                <li><a class="dropdown-item" href="productos.html?filtro=tortasEspecialesBtn">Tortas
+                                        Especiales</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
@@ -60,7 +69,8 @@
                         </div>
                         <a href="carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
                             <i class="bi bi-cart fs-4"></i>
-                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                            <span id="cart-count"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
                         </a>
                     </div>
                 </div>
@@ -139,14 +149,17 @@
     <footer class="container-fluid py-3">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
-                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores" height="40"></a>
+                <a class="navbar-brand" href="index.html"> <img src="/img/logo_titulo.png" alt="Pastelería Mil Sabores"
+                        height="40"></a>
             </div>
-            <div class="nav mb-3 mb-md-0">
+            <div class="footer-nav-flex mb-3 mb-md-0">
+                <img src="/img/Disenio/esquina-de-adorno-floral.jpeg" alt="esquina floral" class="footer-esquina-floral-img" />
                 <a class="nav-link" href="productos.html">Categorias</a>
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
                 <a class="nav-link" href="blogs.html">Blogs</a>
                 <a class="nav-link" href="contacto.html">Contacto</a>
                 <a class="nav-link" href="admin.html">Admin</a>
+                <img src="/img/disenio/esquina-de-adorno-floral.jpeg" alt="esquina floral" class="footer-esquina-floral-img" />
             </div>
             <div class="d-flex gap-3">
                 <a href="#" class="nav-link fs-4"><i class="bi bi-whatsapp"></i></a>
@@ -201,30 +214,30 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
 
-        <script src="/js/user_store.js"></script>
-        <script src="/js/navbar_sesion.js"></script>
-        <script src="/js/login.js"></script>
-        <script src="/js/index.js"></script>
-        <script src="/js/carrito.js"></script>
+
+    <script src="/js/user_store.js"></script>
+    <script src="/js/navbar_sesion.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/carrito.js"></script>
     <script src="/js/admin_access.js"></script>
     <script src="/js/seed_admin.js"></script>
 
-            <script>
-            // Redirigir al detalle al hacer click en producto destacado (usando ?code=...)
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.producto-destacado').forEach(function(card) {
-                    card.style.cursor = 'pointer';
-                    card.addEventListener('click', function() {
-                        const code = card.getAttribute('data-id');
-                        if (code) {
-                            window.location.href = `detalle.html?code=${encodeURIComponent(code)}`;
-                        }
-                    });
+    <script>
+        // Redirigir al detalle al hacer click en producto destacado (usando ?code=...)
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.producto-destacado').forEach(function (card) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function () {
+                    const code = card.getAttribute('data-id');
+                    if (code) {
+                        window.location.href = `detalle.html?code=${encodeURIComponent(code)}`;
+                    }
                 });
             });
-            </script>
+        });
+    </script>
 
 </body>
 
