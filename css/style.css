@@ -1015,3 +1015,41 @@ footer .bi:hover {
 }
 /* --- Fin nosotros.html --- */
 
+/* --- FOOTER NUEVO --- */
+.site-footer {
+    background: var(--color-background);
+    border-top: var(--border-soft);
+    font-size: 0.95rem;
+}
+.site-footer .footer-col-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: .75rem;
+    color: var(--color-text-primary);
+}
+.site-footer .footer-links a {
+    display: block;
+    padding: 2px 0;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color .2s;
+}
+.site-footer .footer-links a:hover {
+    color: var(--accent-main);
+}
+.site-footer .social-icons a {
+    color: var(--accent-main);
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: color .25s, transform .25s;
+}
+.site-footer .social-icons a:hover {
+    color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+@media (max-width: 575.98px) {
+    .site-footer .footer-col-title { margin-top: 1.25rem; }
+}
+
