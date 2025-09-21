@@ -186,8 +186,28 @@
                         </article>
                     </div>
                 </div>
+
+                <!-- Chat comunidad -->
+                <div class="mt-5">
+                    <h3 class="h4 mb-3">Habla con la comunidad</h3>
+                    <div id="chat-comunidad" class="card p-3 mb-3" style="max-height: 340px; overflow-y: auto;"></div>
+                    <button id="btn-ver-mas-chat" class="btn btn-outline-primary d-none">Seguir leyendo</button>
+                </div>
             </div>
         </section>
+
+        <!-- Modal Chat Comunidad -->
+        <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="chatModalLabel">Mensajes de la comunidad</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body pt-0" id="chat-modal-body" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
 
         <!-- NOTICIAS (Carrusel + textos al lado) -->
         <section class="py-5">
@@ -418,6 +438,47 @@
     <script src="/js/blogs.js" type="module"></script>
     <script src="/js/admin_access.js"></script>
     <script src="/js/footer.js"></script>
+    <script>
+    // Chat comunidad demo
+    const mensajesDemo = [
+        {nombre: 'Ana', texto: '¡Me encantó el cheesecake!', img: ''},
+        {nombre: 'Luis', texto: '¿Alguien probó la receta de brownies?', img: ''},
+        {nombre: 'Sofía', texto: 'Recomiendo usar cacao amargo.', img: ''},
+        {nombre: 'Carlos', texto: '¿Dónde compran los ingredientes?', img: ''},
+        {nombre: 'Valentina', texto: 'Suban más recetas veganas!', img: ''},
+        {nombre: 'Pedro', texto: '¿Puedo compartir mi foto?', img: ''},
+        {nombre: 'Marta', texto: 'El tiramisú quedó increíble.', img: ''},
+        {nombre: 'Javier', texto: '¿Cuánto dura el cheesecake en la heladera?', img: ''},
+        {nombre: 'Camila', texto: 'Gracias por la receta!', img: ''},
+        {nombre: 'Tomás', texto: '¿Alguien tiene receta de galletas?', img: ''},
+        // ...puedes agregar más para probar...
+    ];
+    function renderChatPreview() {
+        const chatDiv = document.getElementById('chat-comunidad');
+        chatDiv.innerHTML = '';
+        const maxPreview = 10;
+        mensajesDemo.slice(0, maxPreview).forEach(msg => {
+            chatDiv.innerHTML += `<div class='mb-2'><strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:40px;max-height:40px;border-radius:6px;margin-left:6px;'>` : ''}</div>`;
+        });
+        const btnVerMas = document.getElementById('btn-ver-mas-chat');
+        btnVerMas.classList.toggle('d-none', mensajesDemo.length <= 50);
+    }
+    function renderChatModal() {
+        const modalBody = document.getElementById('chat-modal-body');
+        modalBody.innerHTML = '';
+        mensajesDemo.forEach(msg => {
+            modalBody.innerHTML += `<div class='mb-3'><strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:60px;max-height:60px;border-radius:8px;margin-left:8px;'>` : ''}</div>`;
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        renderChatPreview();
+        document.getElementById('btn-ver-mas-chat').onclick = function() {
+            renderChatModal();
+            var chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
+            chatModal.show();
+        };
+    });
+    </script>
 
     <!-- Sincronización carrusel y lista de noticias -->
     <script>
