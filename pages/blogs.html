@@ -192,6 +192,31 @@
                     <h3 class="h4 mb-3">Habla con la comunidad</h3>
                     <div id="chat-comunidad" class="card p-3 mb-3" style="max-height: 340px; overflow-y: auto;"></div>
                     <button id="btn-ver-mas-chat" class="btn btn-outline-primary d-none">Seguir leyendo</button>
+                    <form id="chat-form" class="mt-3">
+                        <div class="input-group align-items-center">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="chat-categoria-btn" data-bs-toggle="dropdown" aria-expanded="false">Categoría</button>
+                            <ul class="dropdown-menu" id="chat-categoria-menu" aria-labelledby="chat-categoria-btn">
+                                <li><a class="dropdown-item" href="#" data-value="Recetas">Recetas</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="General">General</a></li>
+                                <li><a class="dropdown-item" href="#" data-value="Otros">Otros</a></li>
+                            </ul>
+                            <input type="hidden" id="chat-categoria" value="Recetas">
+                            <input type="text" id="chat-input" class="form-control" placeholder="Escribe tu mensaje..." maxlength="120" required>
+                            <button class="btn btn-primary" type="submit">Enviar</button>
+                            <span id="chat-palabras-contador" class="ms-2 text-secondary small" style="min-width:70px;text-align:right;">0/30</span>
+                        </div>
+                        <div id="chat-palabras-alert" class="form-text text-danger d-none">El mensaje no puede tener más de 30 palabras.</div>
+                        <div id="chat-receta-select" class="mt-2" style="display:none;">
+                            <select id="chat-receta" class="form-select form-select-sm">
+                                <option value="">Selecciona una receta…</option>
+                                <option value="Cheesecake clásico">Cheesecake clásico</option>
+                                <option value="Brownies húmedos en 1 bowl">Brownies húmedos en 1 bowl</option>
+                                <option value="Tiramisú casero">Tiramisú casero</option>
+                            </select>
+                            <div id="chat-receta-alert" class="form-text text-danger d-none">Debes seleccionar una receta.</div>
+                        </div>
+                        <div id="chat-login-alert" class="form-text text-danger d-none">Debes iniciar sesión para escribir en el chat.</div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -440,36 +465,105 @@
     <script src="/js/footer.js"></script>
     <script>
     // Chat comunidad demo
-    const mensajesDemo = [
-        {nombre: 'Ana', texto: '¡Me encantó el cheesecake!', img: ''},
-        {nombre: 'Luis', texto: '¿Alguien probó la receta de brownies?', img: ''},
-        {nombre: 'Sofía', texto: 'Recomiendo usar cacao amargo.', img: ''},
-        {nombre: 'Carlos', texto: '¿Dónde compran los ingredientes?', img: ''},
-        {nombre: 'Valentina', texto: 'Suban más recetas veganas!', img: ''},
-        {nombre: 'Pedro', texto: '¿Puedo compartir mi foto?', img: ''},
-        {nombre: 'Marta', texto: 'El tiramisú quedó increíble.', img: ''},
-        {nombre: 'Javier', texto: '¿Cuánto dura el cheesecake en la heladera?', img: ''},
-        {nombre: 'Camila', texto: 'Gracias por la receta!', img: ''},
-        {nombre: 'Tomás', texto: '¿Alguien tiene receta de galletas?', img: ''},
-        // ...puedes agregar más para probar...
-    ];
-    function renderChatPreview() {
-        const chatDiv = document.getElementById('chat-comunidad');
-        chatDiv.innerHTML = '';
-        const maxPreview = 10;
-        mensajesDemo.slice(0, maxPreview).forEach(msg => {
-            chatDiv.innerHTML += `<div class='mb-2'><strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:40px;max-height:40px;border-radius:6px;margin-left:6px;'>` : ''}</div>`;
-        });
-        const btnVerMas = document.getElementById('btn-ver-mas-chat');
-        btnVerMas.classList.toggle('d-none', mensajesDemo.length <= 50);
+function loadMensajesDemo() {
+    const saved = localStorage.getItem('chatMensajes');
+    let mensajes;
+    if (saved) {
+        try {
+            mensajes = JSON.parse(saved);
+        } catch (e) {}
     }
-    function renderChatModal() {
-        const modalBody = document.getElementById('chat-modal-body');
-        modalBody.innerHTML = '';
-        mensajesDemo.forEach(msg => {
-            modalBody.innerHTML += `<div class='mb-3'><strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:60px;max-height:60px;border-radius:8px;margin-left:8px;'>` : ''}</div>`;
-        });
+    if (!mensajes) {
+        mensajes = [
+            {nombre: 'Ana', texto: '¡Me encantó el cheesecake!', img: ''},
+            {nombre: 'Luis', texto: '¿Alguien probó la receta de brownies?', img: ''},
+            {nombre: 'Sofía', texto: 'Recomiendo usar cacao amargo.', img: ''},
+            {nombre: 'Carlos', texto: '¿Dónde compran los ingredientes?', img: ''},
+            {nombre: 'Valentina', texto: 'Suban más recetas veganas!', img: ''},
+            {nombre: 'Pedro', texto: '¿Puedo compartir mi foto?', img: ''},
+            {nombre: 'Marta', texto: 'El tiramisú quedó increíble.', img: ''},
+            {nombre: 'Javier', texto: '¿Cuánto dura el cheesecake en la heladera?', img: ''},
+            {nombre: 'Camila', texto: 'Gracias por la receta!', img: ''},
+            {nombre: 'Tomás', texto: '¿Alguien tiene receta de galletas?', img: ''},
+        ];
     }
+    // Asignar categoría por defecto si no existe
+    mensajes.forEach(msg => {
+        if (!msg.categoria) msg.categoria = 'General';
+    });
+    return mensajes;
+}
+let mensajesDemo = loadMensajesDemo();
+function saveMensajesDemo() {
+    localStorage.setItem('chatMensajes', JSON.stringify(mensajesDemo));
+}
+function getCategoriaBadgeClass(categoria) {
+    if (categoria === 'Recetas') return 'bg-success';
+    if (categoria === 'General') return 'bg-primary';
+    return 'bg-secondary';
+}
+function renderChatPreview() {
+    const chatDiv = document.getElementById('chat-comunidad');
+    chatDiv.innerHTML = '';
+    const maxPreview = 10;
+    mensajesDemo.slice(0, maxPreview).forEach(msg => {
+        const badgeClass = getCategoriaBadgeClass(msg.categoria);
+        const cat = msg.categoria ? `<span class='badge ${badgeClass} me-1'>${msg.categoria}</span>` : '';
+        const receta = (msg.categoria === 'Recetas' && msg.receta) ? `<span class='badge bg-warning text-dark me-1'>${msg.receta}</span>` : '';
+        chatDiv.innerHTML += `<div class='mb-2'>${cat}${receta}<strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:40px;max-height:40px;border-radius:6px;margin-left:6px;'>` : ''}</div>`;
+    });
+    const btnVerMas = document.getElementById('btn-ver-mas-chat');
+    btnVerMas.classList.toggle('d-none', mensajesDemo.length <= 50);
+}
+function renderChatModal() {
+    const modalBody = document.getElementById('chat-modal-body');
+    modalBody.innerHTML = '';
+    mensajesDemo.forEach(msg => {
+        const badgeClass = getCategoriaBadgeClass(msg.categoria);
+        const cat = msg.categoria ? `<span class='badge ${badgeClass} me-1'>${msg.categoria}</span>` : '';
+        const receta = (msg.categoria === 'Recetas' && msg.receta) ? `<span class='badge bg-warning text-dark me-1'>${msg.receta}</span>` : '';
+        modalBody.innerHTML += `<div class='mb-3'>${cat}${receta}<strong>${msg.nombre}:</strong> ${msg.texto} ${msg.img ? `<img src='${msg.img}' style='max-width:60px;max-height:60px;border-radius:8px;margin-left:8px;'>` : ''}</div>`;
+    });
+}
+function isUserLoggedIn() {
+        // Busca un usuario válido en localStorage
+        for (let key in localStorage) {
+            try {
+                const user = JSON.parse(localStorage.getItem(key));
+                if (user && user.nombre && user.correo) {
+                    return true;
+                }
+            } catch (e) {}
+        }
+        return false;
+    }
+    function getUserName() {
+        for (let key in localStorage) {
+            try {
+                const user = JSON.parse(localStorage.getItem(key));
+                if (user && user.nombre && user.correo) {
+                    return user.nombre;
+                }
+            } catch (e) {}
+        }
+        return 'Usuario';
+    }
+    function updateChatFormState() {
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatAlert = document.getElementById('chat-login-alert');
+        if (!isUserLoggedIn()) {
+            chatInput.disabled = true;
+            chatForm.querySelector('button[type="submit"]').disabled = true;
+            chatAlert.classList.remove('d-none');
+        } else {
+            chatInput.disabled = false;
+            chatForm.querySelector('button[type="submit"]').disabled = false;
+            chatAlert.classList.add('d-none');
+        }
+    }
+    // Permite actualizar el chat desde otros scripts
+    window.updateChatFormState = updateChatFormState;
     document.addEventListener('DOMContentLoaded', function () {
         renderChatPreview();
         document.getElementById('btn-ver-mas-chat').onclick = function() {
@@ -477,6 +571,88 @@
             var chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
             chatModal.show();
         };
+        // Dropdown categoría
+        const categoriaBtn = document.getElementById('chat-categoria-btn');
+        const categoriaInput = document.getElementById('chat-categoria');
+        const recetaSelectDiv = document.getElementById('chat-receta-select');
+        const recetaSelect = document.getElementById('chat-receta');
+        const recetaAlert = document.getElementById('chat-receta-alert');
+        const palabrasAlert = document.getElementById('chat-palabras-alert');
+        const palabrasContador = document.getElementById('chat-palabras-contador');
+        function toggleRecetaSelect() {
+            recetaSelectDiv.style.display = categoriaInput.value === 'Recetas' ? 'block' : 'none';
+        }
+        categoriaBtn.addEventListener('click', function() {
+            // Actualiza el select al abrir el dropdown
+            toggleRecetaSelect();
+        });
+        document.getElementById('chat-categoria-menu').addEventListener('click', function(e) {
+            if (e.target.matches('.dropdown-item')) {
+                e.preventDefault();
+                e.stopPropagation();
+                categoriaBtn.textContent = e.target.textContent;
+                categoriaInput.value = e.target.getAttribute('data-value');
+                toggleRecetaSelect();
+            }
+        });
+        // Mostrar el select correctamente al cargar la página
+        // Seleccionar automáticamente la categoría 'Recetas' al cargar la página
+    categoriaInput.value = 'Recetas';
+    categoriaBtn.textContent = 'Recetas';
+    toggleRecetaSelect();
+        updateChatFormState();
+        document.getElementById('chat-form').onsubmit = function(e) {
+            e.preventDefault();
+            if (!isUserLoggedIn()) return;
+            const nombre = getUserName();
+            const texto = document.getElementById('chat-input').value.trim();
+            const categoria = categoriaInput.value;
+            const receta = categoria === 'Recetas' ? recetaSelect.value : '';
+            const palabras = texto.split(/\s+/).filter(Boolean);
+            if (palabras.length > 30) {
+                palabrasAlert.classList.remove('d-none');
+                document.getElementById('chat-input').classList.add('is-invalid');
+                return;
+            } else {
+                palabrasAlert.classList.add('d-none');
+                document.getElementById('chat-input').classList.remove('is-invalid');
+            }
+            if (categoria === 'Recetas' && !receta) {
+                recetaAlert.classList.remove('d-none');
+                recetaSelect.classList.add('is-invalid');
+                return;
+            } else {
+                recetaAlert.classList.add('d-none');
+                recetaSelect.classList.remove('is-invalid');
+            }
+            if (texto) {
+                mensajesDemo.unshift({nombre, texto, categoria, receta, img: ''});
+                if (mensajesDemo.length > 30) {
+                    mensajesDemo.pop();
+                }
+                saveMensajesDemo();
+                renderChatPreview();
+                document.getElementById('chat-input').value = '';
+                if (categoria === 'Recetas') recetaSelect.value = '';
+            }
+        };
+        const actualizarContadorPalabras = () => {
+            const texto = document.getElementById('chat-input').value.trim();
+            const palabras = texto.split(/\s+/).filter(Boolean);
+            palabrasContador.textContent = `${palabras.length}/30`;
+        };
+        document.getElementById('chat-input').addEventListener('input', function() {
+            actualizarContadorPalabras();
+            const palabras = this.value.trim().split(/\s+/).filter(Boolean);
+            if (palabras.length <= 30) {
+                palabrasAlert.classList.add('d-none');
+                this.classList.remove('is-invalid');
+            }
+        });
+        actualizarContadorPalabras();
+    });
+    window.addEventListener('storage', function() {
+        updateChatFormState();
     });
     </script>
 

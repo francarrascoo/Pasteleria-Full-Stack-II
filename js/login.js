@@ -119,6 +119,11 @@
             guardarSesion(u, !!(rememberMe && rememberMe.checked));
         }
 
+        // Después de guardar el usuario en localStorage y antes de redireccionar
+        if (window.updateChatFormState) {
+            window.updateChatFormState();
+        }
+
         // Cerrar modal
         if (loginModalEl && window.bootstrap?.Modal) {
             const modal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
