@@ -156,7 +156,7 @@
     display: block;
     margin: 0 auto;
 }
-#region Forzar uniformidad en productos relacionados
+#region
 #related-products .related-img-container {
     width: 100% !important;
     aspect-ratio: 1/1 !important;
@@ -1053,3 +1053,58 @@ footer .bi:hover {
     .site-footer .footer-col-title { margin-top: 1.25rem; }
 }
 
+/* Imagen Carrito */
+.product-img  {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    margin-right: 1rem;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse.collapse.show,
+    .navbar-collapse.collapsing {
+        left: 0;
+        right: 0;
+        width: 100vw;
+        position: absolute;
+        top: var(--nav-h, 65px);
+        padding-left: 18px;
+        padding-right: 18px;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    .navbar-nav .dropdown-menu {
+        width: 100vw;
+        left: 0 !important;
+        right: 0 !important;
+        border-radius: 0 0 16px 16px;
+        padding-left: 18px;
+        padding-right: 18px;
+        box-shadow: none;
+        position: static !important;
+    }
+}
+.navbar-collapse.collapsing,
+.navbar-collapse.collapse.show {
+    background: #fff !important;
+    border-radius: 0 0 12px 12px;
+    z-index: 100;
+    transition: none !important;
+}
+/* Ocultar dropdown si no está activo */
+.navbar-nav .dropdown-menu {
+    display: none;
+}
+.navbar-nav .dropdown.show .dropdown-menu {
+    display: block;
+}
+/* Fondo blanco para el menú colapsado de la navbar */
+.navbar-collapse.collapse.show {
+    background: #fff !important;
+    border-radius: 0 0 12px 12px;
+    z-index: 100;
+    transition: none !important;
+}
