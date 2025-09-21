@@ -50,38 +50,21 @@
     form.addEventListener('submit', (e) => {
         limpiarErrores();
 
-        // Validaciones de la guía (login) — correo y password
-        // Correo: requerido, máx 100, dominios permitidos
+        // Solo validar si los campos están vacíos
         if (!email.value) {
             e.preventDefault(); e.stopPropagation();
-            form.classList.add('was-validated');
-            return;
-        }
-        if (String(email.value).length > 100) {
-            e.preventDefault(); e.stopPropagation();
-            email.setCustomValidity("El correo debe tener como máximo 100 caracteres.");
+            email.setCustomValidity("El correo es obligatorio.");
             form.classList.add('was-validated');
             const fb = email.parentElement.querySelector('.invalid-feedback');
-            if (fb) fb.textContent = "El correo debe tener como máximo 100 caracteres.";
+            if (fb) fb.textContent = "El correo es obligatorio.";
             return;
         }
-        if (!emailDominioValido(email.value)) {
+        if (!pass.value) {
             e.preventDefault(); e.stopPropagation();
-            email.setCustomValidity("Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com.");
-            form.classList.add('was-validated');
-            const fb = email.parentElement.querySelector('.invalid-feedback');
-            if (fb) fb.textContent = "Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
-            return;
-        }
-
-        // Password: requerido, 4 a 10 caracteres
-        const pLen = String(pass.value || "").length;
-        if (pLen < 4 || pLen > 10) {
-            e.preventDefault(); e.stopPropagation();
-            pass.setCustomValidity("La contraseña debe tener entre 4 y 10 caracteres.");
+            pass.setCustomValidity("La contraseña es obligatoria.");
             form.classList.add('was-validated');
             const fb = pass.parentElement.querySelector('.invalid-feedback');
-            if (fb) fb.textContent = "La contraseña debe tener entre 4 y 10 caracteres.";
+            if (fb) fb.textContent = "La contraseña es obligatoria.";
             return;
         }
 
@@ -94,7 +77,7 @@
 
         e.preventDefault(); // demo sin backend
 
-        // Buscar usuario
+        // Validar usuario registrado y credenciales
         const u = typeof findUserByEmail === 'function'
             ? findUserByEmail(email.value.trim())
             : null;

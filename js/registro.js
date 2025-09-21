@@ -123,8 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); // manejamos todo con JS
 
         // 1) Validaciones de negocio antes de checkValidity()
-        // RUT: formato y dígito verificador
-        if (!ValidarRun(run.value)) {
+        // RUT: solo formato (sin validar dígito verificador)
+        const rutRegex = /^[0-9]{1,2}(\.[0-9]{3}){2}-[0-9Kk]{1}$/;
+        if (!rutRegex.test(run.value)) {
             setError(run, "El RUN ingresado no es válido. Debe tener formato 1.234.567-8 o 12.345.678-9 (con puntos y guion).");
         } else {
             clearError(run, "Por favor ingresa un RUN válido con puntos y guion.");

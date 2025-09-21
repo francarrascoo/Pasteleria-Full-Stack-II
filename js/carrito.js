@@ -349,9 +349,25 @@
                     // Mostrar modal indicando que no hay productos
                     const emptyCartModal = new bootstrap.Modal(document.getElementById('emptyCartModal'));
                     emptyCartModal.show();
-                } else {
-                    window.location.href = "checkout.html";
+                    return;
                 }
+                // Verificar sesión iniciada
+                if (typeof leerSesion === 'function') {
+                    const sesion = leerSesion();
+                    if (!sesion) {
+                        e.preventDefault();
+                        // Mostrar modal de login si existe
+                        const loginModalEl = document.getElementById('loginModal');
+                        if (loginModalEl) {
+                            const loginModal = new bootstrap.Modal(loginModalEl);
+                            loginModal.show();
+                        } else {
+                            alert('Debes iniciar sesión para proceder al pago.');
+                        }
+                        return;
+                    }
+                }
+                window.location.href = "checkout.html";
             });
         }
     }
