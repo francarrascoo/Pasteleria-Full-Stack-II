@@ -1,11 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Política de Privacidad | Pastelería Mil Sabores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    
+<body class="d-flex flex-column min-vh-100">
+    <!-- HEADER GLOBAL DE INDEX.HTML -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg primary-nav">
+            <div class="container">
+                <a class="navbar-brand" href="/pages/index.html">
+                    <img src="/img/logos/logo_titulo.png" alt="Pastelería Mil Sabores" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/pages/categorias.html" id="navbarDropdown">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=todosBtn">Todos</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=tortasCuadradasBtn">Tortas Cuadradas</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=tortasCircularesBtn">Tortas Circulares</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=postresIndividualesBtn">Postres Individuales</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=sinAzucarBtn">Productos Sin Azúcar</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=pasteleriaTradicionalBtn">Pastelería Tradicional</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=sinGlutenBtn">Productos sin gluten</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=veganosBtn">Productos Veganos</a></li>
+                                <li><a class="dropdown-item" href="/pages/productos.html?filtro=tortasEspecialesBtn">Tortas Especiales</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/nosotros.html">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/blogs.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/pages/contacto.html">Contacto</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <div class="nav-item dropdown account-dropdown ms-3">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle fs-4"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" id="account-menu">
+                            </ul>
+                        </div>
+                        <a href="/pages/carrito.html" class="nav-link ms-3 position-relative" style="margin-right: 16px;">
+                            <i class="bi bi-cart fs-4"></i>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container py-5">
+        <h1 class="mb-4">Política de Privacidad</h1>
+        <section class="mb-5">
+            <p>En Pastelería Mil Sabores valoramos y protegemos la privacidad de nuestros usuarios. A continuación, te explicamos cómo recopilamos, usamos y protegemos tu información personal.</p>
+            <h2 class="h4 mt-4">1. Información que recopilamos</h2>
+            <p>Recopilamos información personal que tú nos proporcionas al registrarte, realizar compras, contactarnos o interactuar con nuestro sitio web. Esto puede incluir nombre, correo electrónico, dirección, teléfono y datos de pago.</p>
+            <h2 class="h4 mt-4">2. Uso de la información</h2>
+            <p>Utilizamos tu información para procesar pedidos, responder consultas, mejorar nuestros servicios y enviarte información relevante sobre productos, promociones y novedades.</p>
+            <h2 class="h4 mt-4">3. Protección de datos</h2>
+            <p>Implementamos medidas de seguridad para proteger tu información personal contra accesos no autorizados, alteraciones o divulgaciones. Solo el personal autorizado puede acceder a tus datos.</p>
+            <h2 class="h4 mt-4">4. Compartir información</h2>
+            <p>No compartimos tu información personal con terceros, salvo por requerimiento legal o para procesar pagos y entregas a través de proveedores de servicios confiables.</p>
+            <h2 class="h4 mt-4">5. Cookies y tecnologías similares</h2>
+            <p>Utilizamos cookies para mejorar la experiencia de navegación y analizar el uso del sitio. Puedes configurar tu navegador para rechazar cookies, aunque esto podría afectar el funcionamiento del sitio.</p>
+            <h2 class="h4 mt-4">6. Derechos del usuario</h2>
+            <p>Tienes derecho a acceder, rectificar o eliminar tu información personal. Para ejercer estos derechos, contáctanos a través de nuestro formulario de <a href="/pages/contacto.html">Contacto</a>.</p>
+            <h2 class="h4 mt-4">7. Cambios en la política</h2>
+            <p>Nos reservamos el derecho de modificar esta política en cualquier momento. Te recomendamos revisarla periódicamente para estar informado sobre cómo protegemos tu información.</p>
+            <h2 class="h4 mt-4">8. Contacto</h2>
+            <p>Si tienes dudas o inquietudes sobre nuestra política de privacidad, escríbenos a través de nuestro formulario de <a href="/pages/contacto.html">Contacto</a>.</p>
+        </section>
+    </main>
+    <!-- FOOTER GLOBAL DE INDEX.HTML -->
+    <div id="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/footer.js"></script>
+
+    <script>
+        (function(){
+            const yEl = document.getElementById('year');
+            if (yEl) yEl.textContent = new Date().getFullYear();
+        })();
+    </script>
 </body>
 </html>
