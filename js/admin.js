@@ -123,7 +123,7 @@
         // Fallback local
         const limpiarRut = (rut) => String(rut || '').trim().toUpperCase().replace(/[^0-9K]/g, '');
         function dvRut(numero) { let M = 0, S = 1; for (; numero; numero = Math.floor(numero / 10))S = (S + numero % 10 * (9 - M++ % 6)) % 11; return S ? String(S - 1) : 'K' }
-        function validarRut(rut) { const r = limpiarRut(rut); if (r.length < 7 || r.length > 9) return false; const c = r.slice(0, -1), dv = r.slice(-1); if (!/^\d+$/.test(c)) return false; return dvRut(Number(c)) === dv }
+        function validarRut(rut) { const r = limpiarRut(rut); if (r.length < 7 || r.length > 9) return false; const c = r.slice(0, -1), dv = r.slice(-1); if (!/^\d+$/.test(cuerpo)) return false; return dvRut(Number(c)) === dv }
         function validarEmailPermitido(email) { const e = String(email || '').toLowerCase(); return ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'].some(dom => e.endsWith(dom)) }
 
         const loadUsuarios = () => JSON.parse(localStorage.getItem('usuarios') || '[]');
@@ -194,25 +194,25 @@
 
     <div class="row g-3 mb-3">
       <div class="col-12 col-md-6 col-xl-3">
-        <div class="card stat-card h-100"><div class="card-body d-flex justify-content-between align-items-center">
+        <div class="card stat-card h-100 dashboard-productos-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">
           <div><div class="text-secondary small">Productos totales</div><div class="fs-4 fw-semibold">${catalogo.length}</div></div>
           <i class="bi bi-box-seam icon"></i>
         </div></div>
       </div>
       <div class="col-12 col-md-6 col-xl-3">
-        <div class="card stat-card h-100"><div class="card-body d-flex justify-content-between align-items-center">
+        <div class="card stat-card h-100 dashboard-stockbajo-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">
           <div><div class="text-secondary small">Stock bajo</div><div class="fs-4 fw-semibold">${bajo}</div></div>
           <i class="bi bi-exclamation-triangle icon"></i>
         </div></div>
       </div>
       <div class="col-12 col-md-6 col-xl-3">
-        <div class="card stat-card h-100"><div class="card-body d-flex justify-content-between align-items-center">
+        <div class="card stat-card h-100 dashboard-unidadesvendidas-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">
           <div><div class="text-secondary small">Unidades vendidas (mes)</div><div class="fs-4 fw-semibold">${totalUnidMes}</div></div>
           <i class="bi bi-graph-up-arrow icon"></i>
         </div></div>
       </div>
       <div class="col-12 col-md-6 col-xl-3">
-        <div class="card stat-card h-100"><div class="card-body d-flex justify-content-between align-items-center">
+        <div class="card stat-card h-100 dashboard-ticketpromedio-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">
           <div><div class="text-secondary small">Ticket promedio</div><div class="fs-5 fw-semibold">${CLP(ticket)}</div></div>
           <i class="bi bi-receipt icon"></i>
         </div></div>
@@ -221,7 +221,7 @@
 
     <div class="row g-3">
       <div class="col-12 col-md-3">
-        <div class="card h-100"><div class="card-body">
+        <div class="card h-100 dashboard-usuarios-card" style="cursor:pointer;"><div class="card-body">
           <div class="text-secondary small">Usuarios</div>
           <div class="fs-3 fw-semibold">${usuarios.length}</div>
           <div class="small mt-2 text-secondary">Admins: ${admins} • Vendedores: ${vendedores} • Clientes: ${clientes}</div>
@@ -301,6 +301,42 @@
                 msg.textContent = e.message || 'No se pudo crear el vendedor.';
             }
         }, false);
+
+        // Hacer clickeable el card de productos totales
+        const productosCard = document.querySelector('.dashboard-productos-card');
+        if (productosCard) {
+            productosCard.addEventListener('click', () => {
+                showSection('productos');
+            });
+        }
+        // Hacer clickeable el card de stock bajo
+        const stockBajoCard = document.querySelector('.dashboard-stockbajo-card');
+        if (stockBajoCard) {
+            stockBajoCard.addEventListener('click', () => {
+                showSection('productos');
+            });
+        }
+        // Hacer clickeable el card de unidades vendidas (mes)
+        const unidadesVendidasCard = document.querySelector('.dashboard-unidadesvendidas-card');
+        if (unidadesVendidasCard) {
+            unidadesVendidasCard.addEventListener('click', () => {
+                showSection('reportes');
+            });
+        }
+        // Hacer clickeable el card de ticket promedio
+        const ticketPromedioCard = document.querySelector('.dashboard-ticketpromedio-card');
+        if (ticketPromedioCard) {
+            ticketPromedioCard.addEventListener('click', () => {
+                showSection('ordenes');
+            });
+        }
+        // Hacer clickeable el card de usuarios
+        const usuariosCard = document.querySelector('.dashboard-usuarios-card');
+        if (usuariosCard) {
+            usuariosCard.addEventListener('click', () => {
+                showSection('usuarios');
+            });
+        }
     }
 
 
