@@ -169,8 +169,9 @@
         const ventas = loadVentas();
         const usuarios = ensureUsuariosConRol();
 
-        const umbral = (p) => Number.isFinite(p.stockCritico) ? p.stockCritico : 5;
-        const bajo = catalogo.filter(p => Number(p.stock || 0) <= umbral(p)).length;
+  // Mostrar productos con stock 5 o menos
+  const productosStockBajo = catalogo.filter(p => Number(p.stock || 0) <= 5);
+  const bajo = productosStockBajo.length;
 
         const today = new Date();
         const yyyymm = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
@@ -200,10 +201,16 @@
         </div></div>
       </div>
       <div class="col-12 col-md-6 col-xl-3">
-        <div class="card stat-card h-100 dashboard-stockbajo-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">
-          <div><div class="text-secondary small">Stock bajo</div><div class="fs-4 fw-semibold">${bajo}</div></div>
-          <i class="bi bi-exclamation-triangle icon"></i>
-        </div></div>
+        <div class="card stat-card h-100 dashboard-stockbajo-card" style="cursor:pointer;">
+          <div class="card-body">
+            <div class="text-secondary small">Stock bajo (≤ 5)</div>
+            <div class="fs-4 fw-semibold mb-2">${bajo}</div>
+            <ul class="list-unstyled mb-0" style="max-height:120px;overflow-y:auto;">
+              ${productosStockBajo.length === 0 ? '<li class="text-muted small">Sin productos críticos</li>' : productosStockBajo.map(p => `<li>${p.nombre || p.name || 'Producto'} <span class="badge bg-danger">${p.stock}</span></li>`).join('')}
+            </ul>
+            <i class="bi bi-exclamation-triangle icon position-absolute end-0 bottom-0 m-3"></i>
+          </div>
+        </div>
       </div>
       <div class="col-12 col-md-6 col-xl-3">
         <div class="card stat-card h-100 dashboard-unidadesvendidas-card" style="cursor:pointer;"><div class="card-body d-flex justify-content-between align-items-center">

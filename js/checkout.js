@@ -159,6 +159,15 @@ const updateCartCount = () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Establecer min en fechaEntrega
+  const fechaInput = document.getElementById("fechaEntrega");
+  if (fechaInput) {
+    const hoy = new Date();
+    const yyyy = hoy.getFullYear();
+    const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dd = String(hoy.getDate()).padStart(2, '0');
+    fechaInput.min = `${yyyy}-${mm}-${dd}`;
+  }
   // const hasCart = renderCart(); // Ya no se muestra la tabla
   renderResumen();
   renderDirecciones();
@@ -196,6 +205,12 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
     renderDirecciones();
+    // Seleccionar la última dirección agregada automáticamente
+    const usuarioActual = getUser();
+    if (usuarioActual && usuarioActual.direcciones && usuarioActual.direcciones.length) {
+      const select = document.getElementById("direccionSelect");
+      if (select) select.value = String(usuarioActual.direcciones.length - 1);
+    }
     const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("addDireccionModal"));
     modal.hide();
   });
@@ -210,7 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
       direccion = user.direcciones[dirSelect.value];
       direccion = `${direccion.linea1}, ${direccion.comuna}, ${direccion.region}`;
     } else {
-      return alert("Debes seleccionar o agregar una dirección de entrega");
+      const direccionModalEl = document.getElementById("direccionModal");
+      if (direccionModalEl) {
+        const direccionModal = new bootstrap.Modal(direccionModalEl);
+        direccionModal.show();
+      }
+      return;
     }
     let carrito = getCart();
     // Guardar el id de usuario en cada producto del carrito para filtrar luego
@@ -234,6 +254,19 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     pedidos.push(pedido);
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    // Descontar stock de los productos comprados
+    try {
+      const catalogo = JSON.parse(localStorage.getItem("catalogo") || "[]");
+      pedido.carrito.forEach(item => {
+        const prod = catalogo.find(p => p.id === item.id);
+        if (prod && typeof prod.stock === "number") {
+          prod.stock = Math.max(0, prod.stock - (item.cantidad || 1));
+        }
+      });
+      localStorage.setItem("catalogo", JSON.stringify(catalogo));
+    } catch {}
+
     localStorage.removeItem("carrito");
     updateCartCount();
     // Mostrar modal de confirmación
