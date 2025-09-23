@@ -3,7 +3,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    const producto = products.find(p => p.code === code);
+    // Obtener catálogo actualizado si existe en localStorage
+    let catalogo = [];
+    try { catalogo = JSON.parse(localStorage.getItem("catalogo")) || []; } catch {}
+    let producto = (catalogo.length ? catalogo : products).find(p => p.code === code);
 
     if (!producto) {
         document.getElementById("producto-detalle").innerHTML =
@@ -44,10 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("detalle-layout").classList.add("detalle-bajo");
     }
 
-    // Lógica contador de cantidad
+    // Mostrar stock y lógica contador de cantidad
     const inputQty = document.getElementById("qty");
     const btnMenos = document.getElementById("menos");
     const btnMas = document.getElementById("mas");
+    const stockSpan = document.getElementById("stockDetalle");
+    let btnAddCart = document.getElementById("addCart");
+    let stock = typeof producto.stock === "number" ? producto.stock : 0;
+    if (stockSpan) {
+        stockSpan.textContent = `Stock: ${stock}`;
+        stockSpan.className = stock > 0 ? "badge bg-info text-dark ms-2" : "badge bg-danger text-light ms-2";
+    }
     if (inputQty && btnMenos && btnMas) {
         btnMenos.addEventListener("click", () => {
             let val = parseInt(inputQty.value, 10) || 1;
@@ -55,16 +65,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         btnMas.addEventListener("click", () => {
             let val = parseInt(inputQty.value, 10) || 1;
-            inputQty.value = val + 1;
+            if (val < stock) inputQty.value = val + 1;
         });
         inputQty.addEventListener("input", () => {
             let val = parseInt(inputQty.value, 10);
             if (isNaN(val) || val < 1) inputQty.value = 1;
+            if (val > stock) inputQty.value = stock;
         });
+        // Deshabilitar input si no hay stock
+        inputQty.disabled = stock === 0;
+    }
+    // Deshabilitar botón agregar al carrito si no hay stock
+    if (btnAddCart) {
+        btnAddCart.disabled = stock === 0;
+        if (stock === 0) {
+            btnAddCart.textContent = "Sin stock";
+        }
     }
 
     // Lógica botón agregar al carrito
-    const btnAddCart = document.getElementById("addCart");
+    // Solo usar la variable ya definida
     if (btnAddCart) {
         btnAddCart.addEventListener("click", async () => {
             const qtyInput = document.getElementById("qty");

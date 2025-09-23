@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <ul class="list-unstyled footer-links">
                         <li><a href="/pages/contacto.html">Contacto</a></li>
                         <li><a href="/pages/pedidos.html">Mis pedidos</a></li>
-                        <li><a href="#" title="Próximamente">Preguntas frecuentes</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-2">

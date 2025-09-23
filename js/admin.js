@@ -515,8 +515,8 @@
     }
 
 
-    function renderOrdenes() {
-        const ordenes = loadOrdenes().filter(o => isSameDay(o.tsISO || o.fecha));
+  function renderOrdenes() {
+    const ordenes = loadOrdenes();
         const itemsHTML = (it = []) => it.map(x => {
             const id = x.productId ?? x.code ?? '';
             const qty = Number(x.qty || x.cantidad || 0);
@@ -529,7 +529,7 @@
         <td>${timeHHMM(o.tsISO || o.fecha)}</td>
         <td>${o.usuarioCorreo || o.email || '—'}</td>
         <td class="text-end">${CLP(Number(o.total || 0))}</td>
-        <td class="text-end">${(o.items || []).reduce((a, x) => a + Number(x.qty || x.cantidad || 0), 0)}</td>
+          <td class="text-end">${((o.items || o.carrito || []).reduce((a, x) => a + Number(x.qty || x.cantidad || 0), 0))}</td>
         <td class="text-end">
           <button class="btn btn-sm btn-outline-secondary" data-order="${o.id}">Ver</button>
         </td>
@@ -962,13 +962,63 @@
         root.addEventListener('click', (ev) => {
             const btn = ev.target.closest('[data-del]');
             if (!btn) return;
-            const id = Number(btn.getAttribute('data-del'));
-            const u = usuarios.find(x => Number(x.id) === id);
+            const idAttr = btn.getAttribute('data-del');
+            let u = usuarios.find(x => String(x.id) === idAttr || String(x.rut) === idAttr);
             if (!u || isProtected(u)) return;
-            if (!confirm(`¿Eliminar la cuenta de ${u.nombre || ''} (${u.correo})? Esta acción no se puede deshacer.`)) return;
-            usuarios = usuarios.filter(x => Number(x.id) !== id);
-            save();
-            refreshAll();
+
+            // Verificar si el usuario tiene órdenes
+            const ordenes = loadOrdenes();
+            const tieneOrdenes = ordenes.some(o => String(o.usuarioId) === String(u.id) || String(o.usuarioCorreo) === String(u.correo));
+
+            // Modal de confirmación
+            let modal = document.getElementById('confirmDeleteUserModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.className = 'modal fade';
+                modal.id = 'confirmDeleteUserModal';
+                modal.tabIndex = -1;
+                document.body.appendChild(modal);
+            }
+            modal.innerHTML = `
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Confirmar eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                  </div>
+                  <div class="modal-body">
+                    ${tieneOrdenes
+                      ? `<div class='text-danger mb-2'><i class='bi bi-exclamation-triangle'></i> No se puede eliminar este usuario porque tiene órdenes registradas.</div>`
+                      : `¿Eliminar la cuenta de <strong>${u.nombre || ''}</strong> (${u.correo})? Esta acción no se puede deshacer.`}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    ${!tieneOrdenes ? `<button type="button" class="btn btn-danger" id="confirmDeleteUserBtn">Eliminar</button>` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+            const bsModal = new bootstrap.Modal(modal);
+            bsModal.show();
+
+            // Eliminar listener previo si existe
+            const oldBtn = document.getElementById('confirmDeleteUserBtn');
+            if (oldBtn) {
+                oldBtn.onclick = null;
+            }
+            // Agregar listener para eliminar usuario solo si no tiene órdenes
+            modal.addEventListener('shown.bs.modal', function handler() {
+                const confirmBtn = document.getElementById('confirmDeleteUserBtn');
+                if (confirmBtn) {
+                    confirmBtn.onclick = function() {
+                        usuarios = usuarios.filter(x => String(x.id) !== idAttr && String(x.rut) !== idAttr);
+                        save();
+                        bsModal.hide();
+                        setTimeout(() => window.location.reload(), 500);
+                    };
+                }
+                modal.removeEventListener('shown.bs.modal', handler);
+            });
         });
 
         // filtros de usuarios (clientes)
