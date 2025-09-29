@@ -129,7 +129,20 @@ const renderResumen = () => {
 };
 
 function renderDirecciones() {
-  const user = getUser();
+  // Sincroniza usuario activo con lista de usuarios antes de mostrar direcciones
+  let user = getUser();
+  let usuarios = [];
+  try { usuarios = JSON.parse(localStorage.getItem("usuarios")) || []; } catch {}
+  if (user && user.id) {
+    const idx = usuarios.findIndex(u => u.id === user.id);
+    if (idx !== -1) {
+      user = usuarios[idx];
+      // Actualiza usuarioActivo en local/sessionStorage si hay cambios
+      const data = JSON.stringify(user);
+      localStorage.setItem("usuarioActivo", data);
+      sessionStorage.setItem("usuarioActivo", data);
+    }
+  }
   const select = document.getElementById("direccionSelect");
   select.innerHTML = "";
   let direcciones = (user && user.direcciones) ? user.direcciones : [];
@@ -159,6 +172,15 @@ const updateCartCount = () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Establecer min en fechaEntrega
+  const fechaInput = document.getElementById("fechaEntrega");
+  if (fechaInput) {
+    const hoy = new Date();
+    const yyyy = hoy.getFullYear();
+    const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dd = String(hoy.getDate()).padStart(2, '0');
+    fechaInput.min = `${yyyy}-${mm}-${dd}`;
+  }
   // const hasCart = renderCart(); // Ya no se muestra la tabla
   renderResumen();
   renderDirecciones();
@@ -196,6 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
     renderDirecciones();
+    // Seleccionar la última dirección agregada automáticamente
+    const usuarioActual = getUser();
+    if (usuarioActual && usuarioActual.direcciones && usuarioActual.direcciones.length) {
+      const select = document.getElementById("direccionSelect");
+      if (select) select.value = String(usuarioActual.direcciones.length - 1);
+    }
     const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById("addDireccionModal"));
     modal.hide();
   });
@@ -210,7 +238,12 @@ document.addEventListener("DOMContentLoaded", () => {
       direccion = user.direcciones[dirSelect.value];
       direccion = `${direccion.linea1}, ${direccion.comuna}, ${direccion.region}`;
     } else {
-      return alert("Debes seleccionar o agregar una dirección de entrega");
+      const direccionModalEl = document.getElementById("direccionModal");
+      if (direccionModalEl) {
+        const direccionModal = new bootstrap.Modal(direccionModalEl);
+        direccionModal.show();
+      }
+      return;
     }
     let carrito = getCart();
     // Guardar el id de usuario en cada producto del carrito para filtrar luego
@@ -232,8 +265,34 @@ document.addEventListener("DOMContentLoaded", () => {
       total: carrito.reduce((acc, p) => acc + p.price * p.cantidad, 0),
       creado: new Date().toISOString()
     };
+
     pedidos.push(pedido);
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    // Guardar también en ordenes para el admin
+    const ordenes = JSON.parse(localStorage.getItem("ordenes") || "[]");
+    ordenes.push({
+      ...pedido,
+      usuarioId: user && user.id ? user.id : null,
+      usuarioRut: user && user.rut ? user.rut : null,
+      usuarioNombre: user && user.nombre ? user.nombre : null,
+      usuarioCorreo: user && user.correo ? user.correo : null
+    });
+    localStorage.setItem("ordenes", JSON.stringify(ordenes));
+
+    // Descontar stock de los productos comprados
+    try {
+      const catalogo = JSON.parse(localStorage.getItem("catalogo") || "[]");
+      pedido.carrito.forEach(item => {
+        // Buscar por id o code
+        const prod = catalogo.find(p => (p.id && p.id === item.id) || (p.code && p.code === item.code));
+        if (prod && typeof prod.stock === "number") {
+          prod.stock = Math.max(0, prod.stock - (item.cantidad || 1));
+        }
+      });
+      localStorage.setItem("catalogo", JSON.stringify(catalogo));
+    } catch {}
+
     localStorage.removeItem("carrito");
     updateCartCount();
     // Mostrar modal de confirmación
